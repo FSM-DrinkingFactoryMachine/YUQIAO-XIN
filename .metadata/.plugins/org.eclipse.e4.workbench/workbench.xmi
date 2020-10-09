@@ -239,7 +239,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_A3UCEAoLEeuSTL6gNVglBA" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_A3aIsAoLEeuSTL6gNVglBA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_ActJyQoLEeuSTL6gNVglBA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_y4VsIAoSEeur35yfiYs7qw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_ActJyQoLEeuSTL6gNVglBA"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_A3UCEQoLEeuSTL6gNVglBA" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -267,9 +267,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_A3UpJQoLEeuSTL6gNVglBA" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_A3b94AoLEeuSTL6gNVglBA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_AcrUmwoLEeuSTL6gNVglBA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_y4akoAoSEeur35yfiYs7qw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_AcrUmwoLEeuSTL6gNVglBA"/>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_fzohkAoREeuSTL6gNVglBA" elementId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"/>
+      <children xsi:type="menu:ToolBar" xmi:id="_fzohkAoREeuSTL6gNVglBA" elementId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" visible="false">
+        <tags>Draggable</tags>
+      </children>
       <children xsi:type="menu:ToolBar" xmi:id="_A3UpJgoLEeuSTL6gNVglBA" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_A3VQMAoLEeuSTL6gNVglBA" elementId="group.editor" toBeRendered="false"/>
@@ -578,7 +580,7 @@
     <bindings xmi:id="_Adw5qQoLEeuSTL6gNVglBA" keySequence="ALT+COMMAND+CTRL+D Q" command="_Acvl-QoLEeuSTL6gNVglBA">
       <tags>platform:cocoa</tags>
     </bindings>
-    <bindings xmi:id="_Aec2IwoLEeuSTL6gNVglBA" keySequence="COMMAND+CTRL+F" command="_Aec2IQoLEeuSTL6gNVglBA"/>
+    <bindings xmi:id="_youi0QoSEeur35yfiYs7qw" keySequence="COMMAND+CTRL+F" command="_Aec2IQoLEeuSTL6gNVglBA"/>
   </bindingTables>
   <bindingTables xmi:id="_AdaUVgoLEeuSTL6gNVglBA" elementId="org.eclipse.cdt.ui.cEditorScope" bindingContext="_Ac2TpwoLEeuSTL6gNVglBA">
     <bindings xmi:id="_AdaUVwoLEeuSTL6gNVglBA" keySequence="CTRL+TAB" command="_AcwNGwoLEeuSTL6gNVglBA">
@@ -1038,7 +1040,7 @@
     <bindings xmi:id="_Adw5pwoLEeuSTL6gNVglBA" keySequence="ALT+CR" command="_Acl09woLEeuSTL6gNVglBA"/>
   </bindingTables>
   <bindingTables xmi:id="_AeddMgoLEeuSTL6gNVglBA" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_Ab5RbgoLEeuSTL6gNVglBA">
-    <bindings xmi:id="_AeddMwoLEeuSTL6gNVglBA" keySequence="M1+W" command="_AeddMAoLEeuSTL6gNVglBA"/>
+    <bindings xmi:id="_yovJ4AoSEeur35yfiYs7qw" keySequence="M1+W" command="_AeddMAoLEeuSTL6gNVglBA"/>
   </bindingTables>
   <bindingTables xmi:id="_A6X9IQoLEeuSTL6gNVglBA" bindingContext="_A6X9IAoLEeuSTL6gNVglBA"/>
   <bindingTables xmi:id="_A6YkMQoLEeuSTL6gNVglBA" bindingContext="_A6YkMAoLEeuSTL6gNVglBA"/>
