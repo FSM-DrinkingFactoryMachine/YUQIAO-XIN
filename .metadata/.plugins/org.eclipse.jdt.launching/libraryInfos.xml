@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/openjdk-15/Contents/Home" version="15"/>
+<libraryInfo home="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/openjdk-14.0.2/Contents/Home" version="14.0.2"/>
+<libraryInfo home="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home" version="1.8.0_265">
+<bootpath>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/resources.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/rt.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/sunrsasign.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/jsse.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/jce.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/charsets.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/jfr.jar"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="/Users/zhaoyuqiao/Library/Java/Extensions"/>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/ext"/>
+<entry path="/Library/Java/Extensions"/>
+<entry path="/Network/Library/Java/Extensions"/>
+<entry path="/System/Library/Java/Extensions"/>
+<entry path="/usr/lib/java"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home" version="1.8.0_201">
+<bootpath>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/resources.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/rt.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/sunrsasign.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/jsse.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/jce.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/charsets.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/jfr.jar"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="/Users/zhaoyuqiao/Library/Java/Extensions"/>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/ext"/>
+<entry path="/Library/Java/Extensions"/>
+<entry path="/Network/Library/Java/Extensions"/>
+<entry path="/System/Library/Java/Extensions"/>
+<entry path="/usr/lib/java"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
