@@ -44,6 +44,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.theFSM.setDeal(false);
 		theMachine.theFSM.setBiip(false);
+		theMachine.drinkType="Coffee";
 	}
 
 
@@ -81,7 +82,7 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
-	private String drinkType = "Coffee";
+	protected String drinkType = "Coffee";
 	private double count = 0;
 	private int currentProgress=0;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
