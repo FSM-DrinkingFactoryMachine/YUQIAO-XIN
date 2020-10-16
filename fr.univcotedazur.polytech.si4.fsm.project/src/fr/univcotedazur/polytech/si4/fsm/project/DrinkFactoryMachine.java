@@ -25,6 +25,7 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.DrinkFactoryMachineStatemachine;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFactoryMachineStatemachine.SCInterfaceListener;
 
@@ -88,8 +89,10 @@ public class DrinkFactoryMachine extends JFrame {
 	private JPanel contentPane;
 	private String drinkType = "Coffee";
 	private double count = 0;
+	private int currentProgress=0;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
+	
 	/**
 	 * @wbp.nonvisual location=311,475
 	 */
@@ -219,6 +222,18 @@ public class DrinkFactoryMachine extends JFrame {
 		progressBar.setBackground(Color.white);
 		progressBar.setBounds(12, 254, 622, 26);
 		contentPane.add(progressBar);
+		ActionListener every5=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(currentProgress<100)
+                    currentProgress++;
+                progressBar.setValue(currentProgress);
+            }
+        };
+        Timer timer1=new Timer(100,every5);
+        timer1.start();
+        if(currentProgress==100)
+            timer1.stop();
 
 		JSlider sugarSlider = new JSlider();
 		sugarSlider.setValue(1);
