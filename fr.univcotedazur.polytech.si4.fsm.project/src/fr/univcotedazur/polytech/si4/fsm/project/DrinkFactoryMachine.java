@@ -42,21 +42,12 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoResetRaised() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoChangeRaised() {
-		// TODO Auto-generated method stub
-		
+		theMachine.theFSM.setDeal(false);
+		theMachine.theFSM.setBiip(false);
 	}
 
 
-	@Override
-	public void onDoCountRaised() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void onDoPrepareRaised() {
@@ -74,8 +65,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
+		theMachine.theFSM.setDeal(false);
 		
 	}
+
+
 
 	
 }
@@ -169,7 +163,7 @@ public class DrinkFactoryMachine extends JFrame {
 		coffeeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Drink_Btn();
+				theFSM.raiseSelect_Type_Btn();
 				drinkType = "Coffee";	
 			}
 		});
@@ -184,7 +178,7 @@ public class DrinkFactoryMachine extends JFrame {
 		expressoButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Drink_Btn();
+				theFSM.raiseSelect_Type_Btn();
 				drinkType = "Expresso";	
 			}
 		});
@@ -197,7 +191,7 @@ public class DrinkFactoryMachine extends JFrame {
 		teaButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Drink_Btn();
+				theFSM.raiseSelect_Type_Btn();
 				drinkType = "Tea";	
 			}
 		});
@@ -210,7 +204,7 @@ public class DrinkFactoryMachine extends JFrame {
 		soupButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Drink_Btn();
+				theFSM.raiseSelect_Type_Btn();
 				drinkType = "Soup";	
 			}
 		});

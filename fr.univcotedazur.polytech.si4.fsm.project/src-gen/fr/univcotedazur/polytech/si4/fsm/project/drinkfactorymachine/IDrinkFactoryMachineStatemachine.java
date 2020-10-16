@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
 	
-		public void raiseSelect_Drink_Btn();
+		public void raiseSelect_Type_Btn();
 		
 		public void raisePay_coins_Btn();
 		
@@ -26,10 +26,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoReset();
 		
-		public boolean isRaisedDoChange();
-		
-		public boolean isRaisedDoCount();
-		
 		public boolean isRaisedDoPrepare();
 		
 		public boolean isRaisedDoModify();
@@ -42,8 +38,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 	public interface SCInterfaceListener {
 	
 		public void onDoResetRaised();
-		public void onDoChangeRaised();
-		public void onDoCountRaised();
 		public void onDoPrepareRaised();
 		public void onDoModifyRaised();
 		public void onDoCaculateRaised();
