@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -24,9 +25,59 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.DrinkFactoryMachineStatemachine;
+import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFactoryMachineStatemachine.SCInterfaceListener;
 
-import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachinesatemachine.DrinkFactoryMachineSateMachineStatemachine;
-import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachinesatemachine.IDrinkFactoryMachineSateMachineStatemachine;
+
+
+
+
+class DrinkFactoryMachineImplementation implements SCInterfaceListener {
+	DrinkFactoryMachine theMachine;
+	public DrinkFactoryMachineImplementation(DrinkFactoryMachine dfm) {
+    	theMachine = dfm; 
+    }
+
+	@Override
+	public void onDoResetRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoChangeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onDoCountRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoPrepareRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onDoModifyRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoCaculateRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}
 
 public class DrinkFactoryMachine extends JFrame {
 
@@ -35,8 +86,10 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
-	private String type = "";
-	protected DrinkFactoryMachineSateMachineStatemachine theFSM;
+	private String drinkType = "Coffee";
+	private double count = 0;
+	private HashMap<String,Double> prices = new HashMap<String,Double>();
+	protected DrinkFactoryMachineStatemachine theFSM;
 	/**
 	 * @wbp.nonvisual location=311,475
 	 */
@@ -62,6 +115,20 @@ public class DrinkFactoryMachine extends JFrame {
 	 * Create the frame.
 	 */
 	public DrinkFactoryMachine() {
+		theFSM = new DrinkFactoryMachineStatemachine();
+		TimerService timer = new TimerService();
+		theFSM.setTimer(timer);
+	    theFSM.init();
+	    theFSM.enter();
+		theFSM.getSCInterface().getListeners().add(
+                new DrinkFactoryMachineImplementation(this)
+				);
+		
+		prices.put("Coffee", 0.5);
+		prices.put("Tea", 0.5);
+		prices.put("Expresso", 0.5);
+		prices.put("Soup", 0.5);
+		prices.put("Iced Tea", 1.0);
 		
 		setForeground(Color.DARK_GRAY);
 		setFont(new Font("Cantarell", Font.BOLD, 22));
@@ -98,8 +165,8 @@ public class DrinkFactoryMachine extends JFrame {
 		coffeeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				doStop();
-				
+				theFSM.raiseSelect_Drink_Btn();
+				drinkType = "Coffee";	
 			}
 		});
 		
@@ -110,18 +177,39 @@ public class DrinkFactoryMachine extends JFrame {
 		expressoButton.setBackground(Color.DARK_GRAY);
 		expressoButton.setBounds(12, 71, 96, 25);
 		contentPane.add(expressoButton);
+		expressoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseSelect_Drink_Btn();
+				drinkType = "Expresso";	
+			}
+		});
 
 		JButton teaButton = new JButton("Tea");
 		teaButton.setForeground(Color.DARK_GRAY);
 		teaButton.setBackground(Color.DARK_GRAY);
 		teaButton.setBounds(12, 108, 96, 25);
 		contentPane.add(teaButton);
+		teaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseSelect_Drink_Btn();
+				drinkType = "Tea";	
+			}
+		});
 
 		JButton soupButton = new JButton("Soup");
 		soupButton.setForeground(Color.DARK_GRAY);
 		soupButton.setBackground(Color.DARK_GRAY);
 		soupButton.setBounds(12, 145, 96, 25);
 		contentPane.add(soupButton);
+		soupButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseSelect_Drink_Btn();
+				drinkType = "Soup";	
+			}
+		});
 
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
@@ -185,21 +273,21 @@ public class DrinkFactoryMachine extends JFrame {
 		contentPane.add(icedTeaButton);
 
 		JLabel lblSugar = new JLabel("Sugar");
-		lblSugar.setForeground(Color.DARK_GRAY);
+		lblSugar.setForeground(Color.white);
 		lblSugar.setBackground(Color.DARK_GRAY);
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSugar.setBounds(380, 34, 44, 15);
 		contentPane.add(lblSugar);
 
 		JLabel lblSize = new JLabel("Size");
-		lblSize.setForeground(Color.DARK_GRAY);
+		lblSize.setForeground(Color.white);
 		lblSize.setBackground(Color.DARK_GRAY);
 		lblSize.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSize.setBounds(380, 113, 44, 15);
 		contentPane.add(lblSize);
 
 		JLabel lblTemperature = new JLabel("Temperature");
-		lblTemperature.setForeground(Color.DARK_GRAY);
+		lblTemperature.setForeground(Color.white);
 		lblTemperature.setBackground(Color.DARK_GRAY);
 		lblTemperature.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTemperature.setBounds(363, 173, 96, 15);
@@ -215,17 +303,38 @@ public class DrinkFactoryMachine extends JFrame {
 		money50centsButton.setForeground(Color.DARK_GRAY);
 		money50centsButton.setBackground(Color.DARK_GRAY);
 		panel.add(money50centsButton);
+		money50centsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raisePay_coins_Btn();
+				count += 0.5;
+			}
+		});
 
 		JButton money25centsButton = new JButton("0.25 €");
 		money25centsButton.setForeground(Color.DARK_GRAY);
 		money25centsButton.setBackground(Color.DARK_GRAY);
 		panel.add(money25centsButton);
-
+		money25centsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raisePay_coins_Btn();
+				count += 0.25;
+			}
+		});
+		
 		JButton money10centsButton = new JButton("0.10 €");
 		money10centsButton.setForeground(Color.DARK_GRAY);
 		money10centsButton.setBackground(Color.DARK_GRAY);
 		panel.add(money10centsButton);
-
+		money10centsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raisePay_coins_Btn();
+				count += 0.1;
+			}
+		});
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.DARK_GRAY);
 		panel_1.setBounds(538, 154, 96, 40);
