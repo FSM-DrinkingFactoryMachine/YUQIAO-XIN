@@ -28,8 +28,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoPrepare();
 		
-		public boolean isRaisedDoModify();
-		
 		public boolean isRaisedDoCaculate();
 		
 	public List<SCInterfaceListener> getListeners();
@@ -39,7 +37,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 	
 		public void onDoResetRaised();
 		public void onDoPrepareRaised();
-		public void onDoModifyRaised();
 		public void onDoCaculateRaised();
 		}
 	

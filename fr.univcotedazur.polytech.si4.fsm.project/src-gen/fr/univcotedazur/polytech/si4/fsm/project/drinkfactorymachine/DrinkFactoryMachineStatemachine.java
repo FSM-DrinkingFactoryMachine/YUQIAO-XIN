@@ -160,24 +160,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean doModify;
-		
-		
-		public boolean isRaisedDoModify() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doModify;
-			}
-		}
-		
-		protected void raiseDoModify() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doModify = true;
-				for (SCInterfaceListener listener : listeners) {
-					listener.onDoModifyRaised();
-				}
-			}
-		}
-		
 		private boolean doCaculate;
 		
 		
@@ -208,7 +190,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		
 		doReset = false;
 		doPrepare = false;
-		doModify = false;
 		doCaculate = false;
 		}
 		
@@ -497,10 +478,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public synchronized boolean isRaisedDoPrepare() {
 		return sCInterface.isRaisedDoPrepare();
-	}
-	
-	public synchronized boolean isRaisedDoModify() {
-		return sCInterface.isRaisedDoModify();
 	}
 	
 	public synchronized boolean isRaisedDoCaculate() {
@@ -857,8 +834,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.modify_Slider) {
 				exitSequence_main_region_StateSelect_Modify_drink_ModifyDrink();
-				sCInterface.raiseDoModify();
-				
 				enterSequence_main_region_StateSelect_Modify_drink_ModifyDrink_default();
 			} else {
 				did_transition = false;

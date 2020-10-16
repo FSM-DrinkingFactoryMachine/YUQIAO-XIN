@@ -45,6 +45,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.theFSM.setDeal(false);
 		theMachine.theFSM.setBiip(false);
 		theMachine.drinkType="Coffee";
+		theMachine.sugarSlider.setValue(1);
 	}
 
 
@@ -57,11 +58,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	}
 
 
-	@Override
-	public void onDoModifyRaised() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onDoCaculateRaised() {
@@ -82,8 +78,12 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
+	protected JLabel messagesToUser, lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature;
+	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
+	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
+						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
 	protected String drinkType = "Coffee";
-	private double count = 0;
+	protected double count = 0;
 	private int currentProgress=0;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
@@ -141,7 +141,7 @@ public class DrinkFactoryMachine extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel messagesToUser = new JLabel("<html>This is<br>place to communicate <br> with the user");
+		messagesToUser = new JLabel("<html>This is<br>place to communicate <br> with the user");
 		messagesToUser.setForeground(Color.white);
 		messagesToUser.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
@@ -150,13 +150,13 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setBounds(126, 34, 165, 175);
 		contentPane.add(messagesToUser);
 
-		JLabel lblCoins = new JLabel("Coins");
+		lblCoins = new JLabel("Coins");
 		lblCoins.setForeground(Color.white);
 		lblCoins.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoins.setBounds(538, 12, 44, 15);
 		contentPane.add(lblCoins);
 
-		JButton coffeeButton = new JButton("Coffee");
+		coffeeButton = new JButton("Coffee");
 		coffeeButton.setForeground(Color.DARK_GRAY);
 		coffeeButton.setBackground(Color.white);
 		coffeeButton.setBounds(12, 34, 96, 25);
@@ -171,7 +171,7 @@ public class DrinkFactoryMachine extends JFrame {
 		
 		
 
-		JButton expressoButton = new JButton("Expresso");
+		expressoButton = new JButton("Expresso");
 		expressoButton.setForeground(Color.DARK_GRAY);
 		expressoButton.setBackground(Color.white);
 		expressoButton.setBounds(12, 71, 96, 25);
@@ -184,7 +184,7 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 
-		JButton teaButton = new JButton("Tea");
+		teaButton = new JButton("Tea");
 		teaButton.setForeground(Color.DARK_GRAY);
 		teaButton.setBackground(Color.white);
 		teaButton.setBounds(12, 108, 96, 25);
@@ -197,7 +197,7 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 
-		JButton soupButton = new JButton("Soup");
+		soupButton = new JButton("Soup");
 		soupButton.setForeground(Color.DARK_GRAY);
 		soupButton.setBackground(Color.white);
 		soupButton.setBounds(12, 145, 96, 25);
@@ -230,7 +230,7 @@ public class DrinkFactoryMachine extends JFrame {
         if(currentProgress==100)
             timer1.stop();
 
-		JSlider sugarSlider = new JSlider();
+		sugarSlider = new JSlider();
 		sugarSlider.setValue(1);
 		sugarSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sugarSlider.setBackground(Color.DARK_GRAY);
@@ -242,7 +242,7 @@ public class DrinkFactoryMachine extends JFrame {
 		sugarSlider.setBounds(301, 51, 200, 36);
 		contentPane.add(sugarSlider);
 
-		JSlider sizeSlider = new JSlider();
+		sizeSlider = new JSlider();
 		sizeSlider.setPaintTicks(true);
 		sizeSlider.setValue(1);
 		sizeSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -254,7 +254,7 @@ public class DrinkFactoryMachine extends JFrame {
 		sizeSlider.setBounds(301, 125, 200, 36);
 		contentPane.add(sizeSlider);
 
-		JSlider temperatureSlider = new JSlider();
+		temperatureSlider = new JSlider();
 		temperatureSlider.setPaintLabels(true);
 		temperatureSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		temperatureSlider.setValue(2);
@@ -277,27 +277,28 @@ public class DrinkFactoryMachine extends JFrame {
 
 		contentPane.add(temperatureSlider);
 
-		JButton icedTeaButton = new JButton("Iced Tea");
+		icedTeaButton = new JButton("Iced Tea");
 		icedTeaButton.setForeground(Color.DARK_GRAY);
 		icedTeaButton.setBackground(Color.white);
 		icedTeaButton.setBounds(12, 182, 96, 25);
 		contentPane.add(icedTeaButton);
 
-		JLabel lblSugar = new JLabel("Sugar");
+		lblSugar = new JLabel("Sugar");
 		lblSugar.setForeground(Color.white);
 		lblSugar.setBackground(Color.white);
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSugar.setBounds(380, 34, 44, 15);
 		contentPane.add(lblSugar);
 
-		JLabel lblSize = new JLabel("Size");
+		lblSize = new JLabel("Size");
 		lblSize.setForeground(Color.white);
 		lblSize.setBackground(Color.white);
 		lblSize.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSize.setBounds(380, 113, 44, 15);
 		contentPane.add(lblSize);
+		
 
-		JLabel lblTemperature = new JLabel("Temperature");
+		lblTemperature = new JLabel("Temperature");
 		lblTemperature.setForeground(Color.white);
 		lblTemperature.setBackground(Color.white);
 		lblTemperature.setHorizontalAlignment(SwingConstants.CENTER);
@@ -310,7 +311,7 @@ public class DrinkFactoryMachine extends JFrame {
 		panel.setBounds(538, 25, 96, 97);
 		contentPane.add(panel);
 
-		JButton money50centsButton = new JButton("0.50 €");
+		money50centsButton = new JButton("0.50 €");
 		money50centsButton.setForeground(Color.DARK_GRAY);
 		money50centsButton.setBackground(Color.white);
 		panel.add(money50centsButton);
@@ -322,7 +323,7 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 
-		JButton money25centsButton = new JButton("0.25 €");
+		money25centsButton = new JButton("0.25 €");
 		money25centsButton.setForeground(Color.DARK_GRAY);
 		money25centsButton.setBackground(Color.white);
 		panel.add(money25centsButton);
@@ -334,7 +335,7 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 		
-		JButton money10centsButton = new JButton("0.10 €");
+		money10centsButton = new JButton("0.10 €");
 		money10centsButton.setForeground(Color.DARK_GRAY);
 		money10centsButton.setBackground(Color.white);
 		panel.add(money10centsButton);
@@ -351,12 +352,12 @@ public class DrinkFactoryMachine extends JFrame {
 		panel_1.setBounds(538, 154, 96, 40);
 		contentPane.add(panel_1);
 
-		JButton nfcBiiiipButton = new JButton("biiip");
+		nfcBiiiipButton = new JButton("biiip");
 		nfcBiiiipButton.setForeground(Color.DARK_GRAY);
 		nfcBiiiipButton.setBackground(Color.white);
 		panel_1.add(nfcBiiiipButton);
 
-		JLabel lblNfc = new JLabel("NFC");
+		lblNfc = new JLabel("NFC");
 		lblNfc.setForeground(Color.white);
 		lblNfc.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNfc.setBounds(541, 139, 41, 15);
@@ -366,7 +367,7 @@ public class DrinkFactoryMachine extends JFrame {
 		separator.setBounds(12, 292, 622, 15);
 		contentPane.add(separator);
 
-		JButton addCupButton = new JButton("Add cup");
+		addCupButton = new JButton("Add cup");
 		addCupButton.setForeground(Color.DARK_GRAY);
 		addCupButton.setBackground(Color.white);
 		addCupButton.setBounds(45, 336, 96, 25);
@@ -378,7 +379,7 @@ public class DrinkFactoryMachine extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		JLabel labelForPictures = new JLabel(new ImageIcon(myPicture));
+		labelForPictures = new JLabel(new ImageIcon(myPicture));
 		labelForPictures.setBounds(175, 319, 286, 260);
 		contentPane.add(labelForPictures);
 
@@ -387,7 +388,7 @@ public class DrinkFactoryMachine extends JFrame {
 		panel_2.setBounds(538, 217, 96, 33);
 		contentPane.add(panel_2);
 
-		JButton cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancel");
 		cancelButton.setForeground(Color.DARK_GRAY);
 		cancelButton.setBackground(Color.white);
 		panel_2.add(cancelButton);
