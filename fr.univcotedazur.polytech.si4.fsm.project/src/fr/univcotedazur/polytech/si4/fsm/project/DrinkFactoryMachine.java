@@ -104,6 +104,7 @@ public class DrinkFactoryMachine extends JFrame {
 				try {
 					DrinkFactoryMachine frame = new DrinkFactoryMachine();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -223,7 +224,7 @@ public class DrinkFactoryMachine extends JFrame {
 		sugarSlider.setValue(1);
 		sugarSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sugarSlider.setBackground(Color.DARK_GRAY);
-		sugarSlider.setForeground(Color.DARK_GRAY);
+		sugarSlider.setForeground(Color.white);
 		sugarSlider.setPaintTicks(true);
 		sugarSlider.setMinorTickSpacing(1);
 		sugarSlider.setMajorTickSpacing(1);
@@ -236,7 +237,7 @@ public class DrinkFactoryMachine extends JFrame {
 		sizeSlider.setValue(1);
 		sizeSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sizeSlider.setBackground(Color.DARK_GRAY);
-		sizeSlider.setForeground(Color.DARK_GRAY);
+		sizeSlider.setForeground(Color.white);
 		sizeSlider.setMinorTickSpacing(1);
 		sizeSlider.setMaximum(2);
 		sizeSlider.setMajorTickSpacing(1);
@@ -248,7 +249,7 @@ public class DrinkFactoryMachine extends JFrame {
 		temperatureSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		temperatureSlider.setValue(2);
 		temperatureSlider.setBackground(Color.DARK_GRAY);
-		temperatureSlider.setForeground(Color.DARK_GRAY);
+		temperatureSlider.setForeground(Color.white);
 		temperatureSlider.setPaintTicks(true);
 		temperatureSlider.setMajorTickSpacing(1);
 		temperatureSlider.setMaximum(3);
