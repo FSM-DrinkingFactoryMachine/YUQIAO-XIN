@@ -147,19 +147,19 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
-		messagesToUser.setBackground(Color.DARK_GRAY);
+		messagesToUser.setBackground(Color.white);
 		messagesToUser.setBounds(126, 34, 165, 175);
 		contentPane.add(messagesToUser);
 
 		JLabel lblCoins = new JLabel("Coins");
-		lblCoins.setForeground(Color.DARK_GRAY);
+		lblCoins.setForeground(Color.white);
 		lblCoins.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoins.setBounds(538, 12, 44, 15);
 		contentPane.add(lblCoins);
 
 		JButton coffeeButton = new JButton("Coffee");
 		coffeeButton.setForeground(Color.DARK_GRAY);
-		coffeeButton.setBackground(Color.DARK_GRAY);
+		coffeeButton.setBackground(Color.white);
 		coffeeButton.setBounds(12, 34, 96, 25);
 		contentPane.add(coffeeButton);
 		coffeeButton.addActionListener(new ActionListener() {
@@ -174,7 +174,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton expressoButton = new JButton("Expresso");
 		expressoButton.setForeground(Color.DARK_GRAY);
-		expressoButton.setBackground(Color.DARK_GRAY);
+		expressoButton.setBackground(Color.white);
 		expressoButton.setBounds(12, 71, 96, 25);
 		contentPane.add(expressoButton);
 		expressoButton.addActionListener(new ActionListener() {
@@ -187,7 +187,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton teaButton = new JButton("Tea");
 		teaButton.setForeground(Color.DARK_GRAY);
-		teaButton.setBackground(Color.DARK_GRAY);
+		teaButton.setBackground(Color.white);
 		teaButton.setBounds(12, 108, 96, 25);
 		contentPane.add(teaButton);
 		teaButton.addActionListener(new ActionListener() {
@@ -200,7 +200,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton soupButton = new JButton("Soup");
 		soupButton.setForeground(Color.DARK_GRAY);
-		soupButton.setBackground(Color.DARK_GRAY);
+		soupButton.setBackground(Color.white);
 		soupButton.setBounds(12, 145, 96, 25);
 		contentPane.add(soupButton);
 		soupButton.addActionListener(new ActionListener() {
@@ -215,7 +215,7 @@ public class DrinkFactoryMachine extends JFrame {
 		progressBar.setStringPainted(true);
 		progressBar.setValue(10);
 		progressBar.setForeground(Color.LIGHT_GRAY);
-		progressBar.setBackground(Color.DARK_GRAY);
+		progressBar.setBackground(Color.white);
 		progressBar.setBounds(12, 254, 622, 26);
 		contentPane.add(progressBar);
 
@@ -268,27 +268,27 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton icedTeaButton = new JButton("Iced Tea");
 		icedTeaButton.setForeground(Color.DARK_GRAY);
-		icedTeaButton.setBackground(Color.DARK_GRAY);
+		icedTeaButton.setBackground(Color.white);
 		icedTeaButton.setBounds(12, 182, 96, 25);
 		contentPane.add(icedTeaButton);
 
 		JLabel lblSugar = new JLabel("Sugar");
 		lblSugar.setForeground(Color.white);
-		lblSugar.setBackground(Color.DARK_GRAY);
+		lblSugar.setBackground(Color.white);
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSugar.setBounds(380, 34, 44, 15);
 		contentPane.add(lblSugar);
 
 		JLabel lblSize = new JLabel("Size");
 		lblSize.setForeground(Color.white);
-		lblSize.setBackground(Color.DARK_GRAY);
+		lblSize.setBackground(Color.white);
 		lblSize.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSize.setBounds(380, 113, 44, 15);
 		contentPane.add(lblSize);
 
 		JLabel lblTemperature = new JLabel("Temperature");
 		lblTemperature.setForeground(Color.white);
-		lblTemperature.setBackground(Color.DARK_GRAY);
+		lblTemperature.setBackground(Color.white);
 		lblTemperature.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTemperature.setBounds(363, 173, 96, 15);
 		contentPane.add(lblTemperature);
@@ -301,7 +301,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton money50centsButton = new JButton("0.50 €");
 		money50centsButton.setForeground(Color.DARK_GRAY);
-		money50centsButton.setBackground(Color.DARK_GRAY);
+		money50centsButton.setBackground(Color.white);
 		panel.add(money50centsButton);
 		money50centsButton.addActionListener(new ActionListener() {
 			@Override
@@ -313,7 +313,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton money25centsButton = new JButton("0.25 €");
 		money25centsButton.setForeground(Color.DARK_GRAY);
-		money25centsButton.setBackground(Color.DARK_GRAY);
+		money25centsButton.setBackground(Color.white);
 		panel.add(money25centsButton);
 		money25centsButton.addActionListener(new ActionListener() {
 			@Override
@@ -325,7 +325,7 @@ public class DrinkFactoryMachine extends JFrame {
 		
 		JButton money10centsButton = new JButton("0.10 €");
 		money10centsButton.setForeground(Color.DARK_GRAY);
-		money10centsButton.setBackground(Color.DARK_GRAY);
+		money10centsButton.setBackground(Color.white);
 		panel.add(money10centsButton);
 		money10centsButton.addActionListener(new ActionListener() {
 			@Override
@@ -342,11 +342,11 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton nfcBiiiipButton = new JButton("biiip");
 		nfcBiiiipButton.setForeground(Color.DARK_GRAY);
-		nfcBiiiipButton.setBackground(Color.DARK_GRAY);
+		nfcBiiiipButton.setBackground(Color.white);
 		panel_1.add(nfcBiiiipButton);
 
 		JLabel lblNfc = new JLabel("NFC");
-		lblNfc.setForeground(Color.DARK_GRAY);
+		lblNfc.setForeground(Color.white);
 		lblNfc.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNfc.setBounds(541, 139, 41, 15);
 		contentPane.add(lblNfc);
@@ -357,7 +357,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton addCupButton = new JButton("Add cup");
 		addCupButton.setForeground(Color.DARK_GRAY);
-		addCupButton.setBackground(Color.DARK_GRAY);
+		addCupButton.setBackground(Color.white);
 		addCupButton.setBounds(45, 336, 96, 25);
 		contentPane.add(addCupButton);
 
@@ -378,7 +378,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setForeground(Color.DARK_GRAY);
-		cancelButton.setBackground(Color.DARK_GRAY);
+		cancelButton.setBackground(Color.white);
 		panel_2.add(cancelButton);
 
 		// listeners

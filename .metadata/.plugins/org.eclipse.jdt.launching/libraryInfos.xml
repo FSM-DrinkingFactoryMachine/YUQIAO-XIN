@@ -48,4 +48,23 @@
 <entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/endorsed"/>
 </endorsedDirs>
 </libraryInfo>
+<libraryInfo home="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215" version="1.8.0_201">
+<bootpath>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\resources.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\rt.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\sunrsasign.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\jsse.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\jce.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\charsets.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\jfr.jar"/>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\yokindu\yakindu-sctpro\features\com.yakindu.jre8.win32.x86_64_1.8.201.201903151215\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
 </libraryInfos>
