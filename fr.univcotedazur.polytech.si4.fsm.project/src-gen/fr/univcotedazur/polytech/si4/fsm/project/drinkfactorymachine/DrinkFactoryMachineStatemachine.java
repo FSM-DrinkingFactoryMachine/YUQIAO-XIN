@@ -229,7 +229,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 	}
 	
-	public void setDeal(boolean value) {
+	protected void setDeal(boolean value) {
 		synchronized(DrinkFactoryMachineStatemachine.this) {
 			this.deal = value;
 		}
@@ -244,7 +244,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 	}
 	
-	public void setBiip(boolean value) {
+	protected void setBiip(boolean value) {
 		synchronized(DrinkFactoryMachineStatemachine.this) {
 			this.biip = value;
 		}
