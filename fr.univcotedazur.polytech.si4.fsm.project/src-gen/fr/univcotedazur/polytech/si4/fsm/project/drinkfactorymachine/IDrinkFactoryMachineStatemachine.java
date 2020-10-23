@@ -16,23 +16,13 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseType2_btn();
 		
-		public void raiseType3_btn();
-		
-		public void raiseType4_btn();
-		
-		public void raiseType5_btn();
-		
 		public void raiseSli1_btn();
 		
 		public void raiseSli2_btn();
 		
 		public void raiseSli3_btn();
 		
-		public void raisePay_10();
-		
-		public void raisePay_50();
-		
-		public void raisePay_25();
+		public void raisePay_coins();
 		
 		public void raiseNfc_btn();
 		
@@ -60,6 +50,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoRefund();
 		
+		public boolean isRaisedDoShowPricePay();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -75,6 +67,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoStoreInfoRaised();
 		public void onDoChangePriceRaised();
 		public void onDoRefundRaised();
+		public void onDoShowPricePayRaised();
 		}
 	
 	public SCInterface getSCInterface();

@@ -52,60 +52,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean type3_btn;
-		
-		
-		public void raiseType3_btn() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							type3_btn = true;
-							singleCycle();
-						}
-					}
-				);
-				runCycle();
-			}
-		}
-		
-		private boolean type4_btn;
-		
-		
-		public void raiseType4_btn() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							type4_btn = true;
-							singleCycle();
-						}
-					}
-				);
-				runCycle();
-			}
-		}
-		
-		private boolean type5_btn;
-		
-		
-		public void raiseType5_btn() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							type5_btn = true;
-							singleCycle();
-						}
-					}
-				);
-				runCycle();
-			}
-		}
-		
 		private boolean sli1_btn;
 		
 		
@@ -160,52 +106,16 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean pay_10;
+		private boolean pay_coins;
 		
 		
-		public void raisePay_10() {
+		public void raisePay_coins() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
 				inEventQueue.add(
 					new Runnable() {
 						@Override
 						public void run() {
-							pay_10 = true;
-							singleCycle();
-						}
-					}
-				);
-				runCycle();
-			}
-		}
-		
-		private boolean pay_50;
-		
-		
-		public void raisePay_50() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							pay_50 = true;
-							singleCycle();
-						}
-					}
-				);
-				runCycle();
-			}
-		}
-		
-		private boolean pay_25;
-		
-		
-		public void raisePay_25() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				inEventQueue.add(
-					new Runnable() {
-						@Override
-						public void run() {
-							pay_25 = true;
+							pay_coins = true;
 							singleCycle();
 						}
 					}
@@ -448,18 +358,31 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean doShowPricePay;
+		
+		
+		public boolean isRaisedDoShowPricePay() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doShowPricePay;
+			}
+		}
+		
+		protected void raiseDoShowPricePay() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doShowPricePay = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoShowPricePayRaised();
+				}
+			}
+		}
+		
 		protected void clearEvents() {
 			type1_btn = false;
 			type2_btn = false;
-			type3_btn = false;
-			type4_btn = false;
-			type5_btn = false;
 			sli1_btn = false;
 			sli2_btn = false;
 			sli3_btn = false;
-			pay_10 = false;
-			pay_50 = false;
-			pay_25 = false;
+			pay_coins = false;
 			nfc_btn = false;
 			cancle_btn = false;
 			addCup_Btn = false;
@@ -476,6 +399,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doStoreInfo = false;
 		doChangePrice = false;
 		doRefund = false;
+		doShowPricePay = false;
 		}
 		
 	}
@@ -765,18 +689,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseType2_btn();
 	}
 	
-	public synchronized void raiseType3_btn() {
-		sCInterface.raiseType3_btn();
-	}
-	
-	public synchronized void raiseType4_btn() {
-		sCInterface.raiseType4_btn();
-	}
-	
-	public synchronized void raiseType5_btn() {
-		sCInterface.raiseType5_btn();
-	}
-	
 	public synchronized void raiseSli1_btn() {
 		sCInterface.raiseSli1_btn();
 	}
@@ -789,16 +701,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseSli3_btn();
 	}
 	
-	public synchronized void raisePay_10() {
-		sCInterface.raisePay_10();
-	}
-	
-	public synchronized void raisePay_50() {
-		sCInterface.raisePay_50();
-	}
-	
-	public synchronized void raisePay_25() {
-		sCInterface.raisePay_25();
+	public synchronized void raisePay_coins() {
+		sCInterface.raisePay_coins();
 	}
 	
 	public synchronized void raiseNfc_btn() {
@@ -853,6 +757,10 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoRefund();
 	}
 	
+	public synchronized boolean isRaisedDoShowPricePay() {
+		return sCInterface.isRaisedDoShowPricePay();
+	}
+	
 	/* Entry action for state 'state_initial'. */
 	private void entryAction_main_region_state_initial() {
 		sCInterface.raiseDoReset();
@@ -860,7 +768,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'state_1'. */
 	private void entryAction_main_region_state_1() {
-		timer.setTimer(this, 0, (4 * 1000), false);
+		timer.setTimer(this, 0, (45 * 1000), false);
 	}
 	
 	/* Entry action for state 'state_nfc'. */
@@ -873,6 +781,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Entry action for state 'state_caculate'. */
 	private void entryAction_main_region_state_1_r6_state_caculate() {
 		timer.setTimer(this, 2, 1, false);
+		
+		sCInterface.raiseDoShowPricePay();
 	}
 	
 	/* Entry action for state 'state_refund1'. */
@@ -1333,69 +1243,30 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 								enterSequence_main_region_state_1_r6_default();
 								react();
 							} else {
-								if (sCInterface.type3_btn) {
+								if (sCInterface.nfc_btn) {
 									exitSequence_main_region_state_initial();
-									sCInterface.raiseDoChangeType();
-									
 									entryAction_main_region_state_1();
-									enterSequence_main_region_state_1_r1_state_type_default();
+									enterSequence_main_region_state_1_r1_default();
 									enterSequence_main_region_state_1_r2_default();
 									enterSequence_main_region_state_1_r3_default();
 									enterSequence_main_region_state_1_r4_default();
+									enterSequence_main_region_state_1_r5_state_nfc_default();
 									enterSequence_main_region_state_1_r6_default();
 									react();
 								} else {
-									if (sCInterface.nfc_btn) {
+									if (sCInterface.pay_coins) {
 										exitSequence_main_region_state_initial();
+										sCInterface.raiseDoCaculate();
+										
 										entryAction_main_region_state_1();
 										enterSequence_main_region_state_1_r1_default();
 										enterSequence_main_region_state_1_r2_default();
 										enterSequence_main_region_state_1_r3_default();
 										enterSequence_main_region_state_1_r4_default();
-										enterSequence_main_region_state_1_r5_state_nfc_default();
-										enterSequence_main_region_state_1_r6_default();
+										enterSequence_main_region_state_1_r6_state_caculate_default();
 										react();
 									} else {
-										if (sCInterface.pay_10) {
-											exitSequence_main_region_state_initial();
-											setPay(getPay() + 0.1);
-											
-											entryAction_main_region_state_1();
-											enterSequence_main_region_state_1_r1_default();
-											enterSequence_main_region_state_1_r2_default();
-											enterSequence_main_region_state_1_r3_default();
-											enterSequence_main_region_state_1_r4_default();
-											enterSequence_main_region_state_1_r6_state_caculate_default();
-											react();
-										} else {
-											if (sCInterface.pay_50) {
-												exitSequence_main_region_state_initial();
-												setPay(getPay() + 0.5);
-												
-												entryAction_main_region_state_1();
-												enterSequence_main_region_state_1_r1_default();
-												enterSequence_main_region_state_1_r2_default();
-												enterSequence_main_region_state_1_r3_default();
-												enterSequence_main_region_state_1_r4_default();
-												enterSequence_main_region_state_1_r6_state_caculate_default();
-												react();
-											} else {
-												if (sCInterface.pay_25) {
-													exitSequence_main_region_state_initial();
-													setPay(getPay() + 0.25);
-													
-													entryAction_main_region_state_1();
-													enterSequence_main_region_state_1_r1_default();
-													enterSequence_main_region_state_1_r2_default();
-													enterSequence_main_region_state_1_r3_default();
-													enterSequence_main_region_state_1_r4_default();
-													enterSequence_main_region_state_1_r6_state_caculate_default();
-													react();
-												} else {
-													did_transition = false;
-												}
-											}
-										}
+										did_transition = false;
 									}
 								}
 							}
@@ -1414,9 +1285,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.pay_50) {
+			if (sCInterface.pay_coins) {
 				exitSequence_main_region_state_1();
-				setPay(getPay() + 0.5);
+				sCInterface.raiseDoCaculate();
 				
 				entryAction_main_region_state_1();
 				enterSequence_main_region_state_1_r1_default();
@@ -1426,9 +1297,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				enterSequence_main_region_state_1_r6_state_caculate_default();
 				react();
 			} else {
-				if (sCInterface.pay_25) {
+				if (sCInterface.type1_btn) {
 					exitSequence_main_region_state_1();
-					setPay(getPay() + 0.25);
+					sCInterface.raiseDoChangePrice();
 					
 					entryAction_main_region_state_1();
 					enterSequence_main_region_state_1_r1_default();
@@ -1438,9 +1309,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					enterSequence_main_region_state_1_r6_state_caculate_default();
 					react();
 				} else {
-					if (sCInterface.pay_10) {
+					if (sCInterface.type2_btn) {
 						exitSequence_main_region_state_1();
-						setPay(getPay() + 0.1);
+						sCInterface.raiseDoChangePrice();
 						
 						entryAction_main_region_state_1();
 						enterSequence_main_region_state_1_r1_default();
@@ -1450,7 +1321,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 						enterSequence_main_region_state_1_r6_state_caculate_default();
 						react();
 					} else {
-						if (sCInterface.type1_btn) {
+						if (sCInterface.sli2_btn) {
 							exitSequence_main_region_state_1();
 							sCInterface.raiseDoChangePrice();
 							
@@ -1462,192 +1333,88 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 							enterSequence_main_region_state_1_r6_state_caculate_default();
 							react();
 						} else {
-							if (sCInterface.type3_btn) {
+							if (sCInterface.type2_btn) {
 								exitSequence_main_region_state_1();
-								sCInterface.raiseDoChangePrice();
+								sCInterface.raiseDoChangeType();
 								
 								entryAction_main_region_state_1();
-								enterSequence_main_region_state_1_r1_default();
+								enterSequence_main_region_state_1_r1_state_type_default();
 								enterSequence_main_region_state_1_r2_default();
 								enterSequence_main_region_state_1_r3_default();
 								enterSequence_main_region_state_1_r4_default();
-								enterSequence_main_region_state_1_r6_state_caculate_default();
+								enterSequence_main_region_state_1_r6_default();
 								react();
 							} else {
-								if (sCInterface.type2_btn) {
+								if (sCInterface.sli1_btn) {
 									exitSequence_main_region_state_1();
-									sCInterface.raiseDoChangePrice();
+									sCInterface.raiseDoModify1();
 									
 									entryAction_main_region_state_1();
 									enterSequence_main_region_state_1_r1_default();
-									enterSequence_main_region_state_1_r2_default();
+									enterSequence_main_region_state_1_r2_state_sli1_default();
 									enterSequence_main_region_state_1_r3_default();
 									enterSequence_main_region_state_1_r4_default();
-									enterSequence_main_region_state_1_r6_state_caculate_default();
+									enterSequence_main_region_state_1_r6_default();
 									react();
 								} else {
 									if (sCInterface.sli2_btn) {
 										exitSequence_main_region_state_1();
-										sCInterface.raiseDoChangePrice();
+										sCInterface.raiseDoModify2();
 										
 										entryAction_main_region_state_1();
 										enterSequence_main_region_state_1_r1_default();
 										enterSequence_main_region_state_1_r2_default();
-										enterSequence_main_region_state_1_r3_default();
+										enterSequence_main_region_state_1_r3_state_sli2_default();
 										enterSequence_main_region_state_1_r4_default();
-										enterSequence_main_region_state_1_r6_state_caculate_default();
+										enterSequence_main_region_state_1_r6_default();
 										react();
 									} else {
-										if (sCInterface.type2_btn) {
+										if (sCInterface.sli3_btn) {
 											exitSequence_main_region_state_1();
-											sCInterface.raiseDoChangeType();
+											sCInterface.raiseDoModify3();
 											
 											entryAction_main_region_state_1();
-											enterSequence_main_region_state_1_r1_state_type_default();
+											enterSequence_main_region_state_1_r1_default();
 											enterSequence_main_region_state_1_r2_default();
 											enterSequence_main_region_state_1_r3_default();
-											enterSequence_main_region_state_1_r4_default();
+											enterSequence_main_region_state_1_r4_state_sli3_default();
 											enterSequence_main_region_state_1_r6_default();
 											react();
 										} else {
-											if (sCInterface.type3_btn) {
+											if (timeEvents[0]) {
 												exitSequence_main_region_state_1();
-												sCInterface.raiseDoChangeType();
-												
-												entryAction_main_region_state_1();
-												enterSequence_main_region_state_1_r1_state_type_default();
-												enterSequence_main_region_state_1_r2_default();
-												enterSequence_main_region_state_1_r3_default();
-												enterSequence_main_region_state_1_r4_default();
-												enterSequence_main_region_state_1_r6_default();
+												enterSequence_main_region_state_initial_default();
 												react();
 											} else {
-												if (sCInterface.type4_btn) {
+												if (sCInterface.nfc_btn) {
 													exitSequence_main_region_state_1();
-													sCInterface.raiseDoChangeType();
-													
 													entryAction_main_region_state_1();
-													enterSequence_main_region_state_1_r1_state_type_default();
+													enterSequence_main_region_state_1_r1_default();
 													enterSequence_main_region_state_1_r2_default();
 													enterSequence_main_region_state_1_r3_default();
 													enterSequence_main_region_state_1_r4_default();
+													enterSequence_main_region_state_1_r5_state_nfc_default();
 													enterSequence_main_region_state_1_r6_default();
 													react();
 												} else {
-													if (sCInterface.sli1_btn) {
+													if (sCInterface.cancle_btn) {
 														exitSequence_main_region_state_1();
-														sCInterface.raiseDoModify1();
-														
-														entryAction_main_region_state_1();
-														enterSequence_main_region_state_1_r1_default();
-														enterSequence_main_region_state_1_r2_state_sli1_default();
-														enterSequence_main_region_state_1_r3_default();
-														enterSequence_main_region_state_1_r4_default();
-														enterSequence_main_region_state_1_r6_default();
+														enterSequence_main_region_state_refund1_default();
 														react();
 													} else {
-														if (sCInterface.sli2_btn) {
+														if (sCInterface.type1_btn) {
 															exitSequence_main_region_state_1();
-															sCInterface.raiseDoModify2();
+															sCInterface.raiseDoChangeType();
 															
 															entryAction_main_region_state_1();
-															enterSequence_main_region_state_1_r1_default();
+															enterSequence_main_region_state_1_r1_state_type_default();
 															enterSequence_main_region_state_1_r2_default();
-															enterSequence_main_region_state_1_r3_state_sli2_default();
+															enterSequence_main_region_state_1_r3_default();
 															enterSequence_main_region_state_1_r4_default();
 															enterSequence_main_region_state_1_r6_default();
 															react();
 														} else {
-															if (sCInterface.sli3_btn) {
-																exitSequence_main_region_state_1();
-																sCInterface.raiseDoModify3();
-																
-																entryAction_main_region_state_1();
-																enterSequence_main_region_state_1_r1_default();
-																enterSequence_main_region_state_1_r2_default();
-																enterSequence_main_region_state_1_r3_default();
-																enterSequence_main_region_state_1_r4_state_sli3_default();
-																enterSequence_main_region_state_1_r6_default();
-																react();
-															} else {
-																if (timeEvents[0]) {
-																	exitSequence_main_region_state_1();
-																	enterSequence_main_region_state_initial_default();
-																	react();
-																} else {
-																	if (sCInterface.nfc_btn) {
-																		exitSequence_main_region_state_1();
-																		entryAction_main_region_state_1();
-																		enterSequence_main_region_state_1_r1_default();
-																		enterSequence_main_region_state_1_r2_default();
-																		enterSequence_main_region_state_1_r3_default();
-																		enterSequence_main_region_state_1_r4_default();
-																		enterSequence_main_region_state_1_r5_state_nfc_default();
-																		enterSequence_main_region_state_1_r6_default();
-																		react();
-																	} else {
-																		if (sCInterface.cancle_btn) {
-																			exitSequence_main_region_state_1();
-																			enterSequence_main_region_state_refund1_default();
-																			react();
-																		} else {
-																			if (sCInterface.type1_btn) {
-																				exitSequence_main_region_state_1();
-																				sCInterface.raiseDoChangeType();
-																				
-																				entryAction_main_region_state_1();
-																				enterSequence_main_region_state_1_r1_state_type_default();
-																				enterSequence_main_region_state_1_r2_default();
-																				enterSequence_main_region_state_1_r3_default();
-																				enterSequence_main_region_state_1_r4_default();
-																				enterSequence_main_region_state_1_r6_default();
-																				react();
-																			} else {
-																				if (sCInterface.type5_btn) {
-																					exitSequence_main_region_state_1();
-																					sCInterface.raiseDoChangeType();
-																					
-																					entryAction_main_region_state_1();
-																					enterSequence_main_region_state_1_r1_state_type_default();
-																					enterSequence_main_region_state_1_r2_default();
-																					enterSequence_main_region_state_1_r3_default();
-																					enterSequence_main_region_state_1_r4_default();
-																					enterSequence_main_region_state_1_r6_default();
-																					react();
-																				} else {
-																					if (sCInterface.type4_btn) {
-																						exitSequence_main_region_state_1();
-																						sCInterface.raiseDoChangePrice();
-																						
-																						entryAction_main_region_state_1();
-																						enterSequence_main_region_state_1_r1_default();
-																						enterSequence_main_region_state_1_r2_default();
-																						enterSequence_main_region_state_1_r3_default();
-																						enterSequence_main_region_state_1_r4_default();
-																						enterSequence_main_region_state_1_r6_state_caculate_default();
-																						react();
-																					} else {
-																						if (sCInterface.type5_btn) {
-																							exitSequence_main_region_state_1();
-																							sCInterface.raiseDoChangePrice();
-																							
-																							entryAction_main_region_state_1();
-																							enterSequence_main_region_state_1_r1_default();
-																							enterSequence_main_region_state_1_r2_default();
-																							enterSequence_main_region_state_1_r3_default();
-																							enterSequence_main_region_state_1_r4_default();
-																							enterSequence_main_region_state_1_r6_state_caculate_default();
-																							react();
-																						} else {
-																							did_transition = false;
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
+															did_transition = false;
 														}
 													}
 												}

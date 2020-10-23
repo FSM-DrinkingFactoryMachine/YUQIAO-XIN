@@ -23,7 +23,7 @@
         <outgoingTransitions xmi:id="_9m2tgBT4EeuRZ9CkzOJKCg" specification="sli1_btn/raise doModify1" target="__lVeUBT2Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="__WjJgBT4EeuRZ9CkzOJKCg" specification="sli2_btn/raise doModify2" target="_BeYDkBT3Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_BixwgBT5EeuRZ9CkzOJKCg" specification="sli3_btn/raise doModify3" target="_BzUY0BT3Eeuhf6sncyleXQ"/>
-        <outgoingTransitions xmi:id="_anlm4BT7EeuRZ9CkzOJKCg" specification="after 45s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
+        <outgoingTransitions xmi:id="_anlm4BT7EeuRZ9CkzOJKCg" specification="after 4s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_juPz8BT8EeuRZ9CkzOJKCg" specification="nfc_btn" target="_GKTAIBT3Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_WSd5YBT-EeuRZ9CkzOJKCg" specification="cancle_btn" target="_N6zyQBT7EeuRZ9CkzOJKCg"/>
         <outgoingTransitions xmi:id="_s8Df8BT_EeuRZ9CkzOJKCg" specification="type1_btn&#xA;/raise doChangeType" target="_3cGGUBT2Eeuhf6sncyleXQ"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;&#xA;&#xA;out event doReset&#xA;out event doPrepare&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doShowPricePay&#xA;&#xA;internal:&#xA;var pay:real=0&#xA;var price:real=0&#xA;" name="DrinkFactoryMachine">
+  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_10 &#xA;in event pay_50 &#xA;in event pay_25 &#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;&#xA;&#xA;out event doReset&#xA;out event doPrepare&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doShowPricePay&#xA;&#xA;internal:&#xA;var pay:real=0&#xA;var price:real=0&#xA;" name="DrinkFactoryMachine">
     <regions xmi:id="_Gs7fsAoNEeuSTL6gNVglBA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TsRz4BT2Eeuhf6sncyleXQ">
         <outgoingTransitions xmi:id="_W42dkBT2Eeuhf6sncyleXQ" specification="" target="_UERdIBT2Eeuhf6sncyleXQ"/>
@@ -23,7 +23,7 @@
         <outgoingTransitions xmi:id="_9m2tgBT4EeuRZ9CkzOJKCg" specification="sli1_btn/raise doModify1" target="__lVeUBT2Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="__WjJgBT4EeuRZ9CkzOJKCg" specification="sli2_btn/raise doModify2" target="_BeYDkBT3Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_BixwgBT5EeuRZ9CkzOJKCg" specification="sli3_btn/raise doModify3" target="_BzUY0BT3Eeuhf6sncyleXQ"/>
-        <outgoingTransitions xmi:id="_anlm4BT7EeuRZ9CkzOJKCg" specification="after 45s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
+        <outgoingTransitions xmi:id="_anlm4BT7EeuRZ9CkzOJKCg" specification="after 4s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_juPz8BT8EeuRZ9CkzOJKCg" specification="nfc_btn" target="_GKTAIBT3Eeuhf6sncyleXQ"/>
         <outgoingTransitions xmi:id="_WSd5YBT-EeuRZ9CkzOJKCg" specification="cancle_btn" target="_N6zyQBT7EeuRZ9CkzOJKCg"/>
         <outgoingTransitions xmi:id="_s8Df8BT_EeuRZ9CkzOJKCg" specification="type1_btn&#xA;/raise doChangeType" target="_3cGGUBT2Eeuhf6sncyleXQ"/>
@@ -408,7 +408,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgHcQoNEeuSTL6gNVglBA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_GtEpoQoNEeuSTL6gNVglBA" fontName="Verdana" fillColor="16448250" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgugAoNEeuSTL6gNVglBA" x="488" y="640" width="2552" height="1721"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgugAoNEeuSTL6gNVglBA" x="496" y="604" width="2552" height="1721"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_GtzpcwoNEeuSTL6gNVglBA" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_Gt0QgAoNEeuSTL6gNVglBA" type="StatechartName">
@@ -685,11 +685,11 @@
     <edges xmi:id="_J-6AkRT_EeuRZ9CkzOJKCg" type="Transition" element="_J-6AkBT_EeuRZ9CkzOJKCg" source="_zVm4cBT-EeuRZ9CkzOJKCg" target="_UESrQBT2Eeuhf6sncyleXQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_J-6noBT_EeuRZ9CkzOJKCg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_J-6noRT_EeuRZ9CkzOJKCg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_J-6nohT_EeuRZ9CkzOJKCg" x="49" y="-857"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_J-6nohT_EeuRZ9CkzOJKCg" x="72" y="-857"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_J-6AkhT_EeuRZ9CkzOJKCg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_J-6AlBT_EeuRZ9CkzOJKCg" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_J-6AkxT_EeuRZ9CkzOJKCg" points="[43, 0, 757, 794]$[1019, 0, 1733, 794]$[1019, -922, 1733, -128]$[-741, -922, -27, -128]$[-741, -854, -27, -60]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_J-6AkxT_EeuRZ9CkzOJKCg" points="[43, 0, 757, 794]$[1019, 0, 1733, 794]$[1019, -923, 1733, -129]$[-694, -923, 20, -129]$[-694, -854, 20, -60]"/>
     </edges>
     <edges xmi:id="_s8FVIBT_EeuRZ9CkzOJKCg" type="Transition" element="_s8Df8BT_EeuRZ9CkzOJKCg" source="_aKSZIBT2Eeuhf6sncyleXQ" target="_WcTDdRUBEeuRZ9CkzOJKCg">
       <children xsi:type="notation:DecorationNode" xmi:id="_s8FVJBT_EeuRZ9CkzOJKCg" type="TransitionExpression">
