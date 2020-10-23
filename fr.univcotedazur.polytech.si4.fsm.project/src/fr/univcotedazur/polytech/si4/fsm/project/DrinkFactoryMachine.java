@@ -43,7 +43,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoResetRaised() {
 		// TODO Auto-generated method stub
 		
-		theMachine.drinkType="Coffee";
+		theMachine.drinkType="";
 		theMachine.sugarSlider.setValue(1);
 	}
 
@@ -65,6 +65,66 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 	}
 
+	@Override
+	public void onDoChangeTypeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoModify1Raised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoModify2Raised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoModify3Raised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoStoreInfoRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoChangePriceRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoRefundRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoShowPricePayRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoShowTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoResetTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	
@@ -81,8 +141,7 @@ public class DrinkFactoryMachine extends JFrame {
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
-	protected String drinkType = "Coffee";
-	protected double count = 0;
+	protected String drinkType = "";
 	private int currentProgress=0;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
@@ -163,7 +222,7 @@ public class DrinkFactoryMachine extends JFrame {
 		coffeeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Type_Btn();
+				theFSM.raiseType1_btn();
 				drinkType = "Coffee";	
 			}
 		});
@@ -178,7 +237,7 @@ public class DrinkFactoryMachine extends JFrame {
 		expressoButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Type_Btn();
+				theFSM.raiseType1_btn();
 				drinkType = "Expresso";	
 			}
 		});
@@ -191,10 +250,12 @@ public class DrinkFactoryMachine extends JFrame {
 		teaButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Type_Btn();
+				theFSM.raiseType1_btn();
 				drinkType = "Tea";	
 			}
 		});
+		
+		
 
 		soupButton = new JButton("Soup");
 		soupButton.setForeground(Color.DARK_GRAY);
@@ -204,8 +265,20 @@ public class DrinkFactoryMachine extends JFrame {
 		soupButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseSelect_Type_Btn();
+				theFSM.raiseType2_btn();
 				drinkType = "Soup";	
+			}
+		});
+		icedTeaButton = new JButton("Iced Tea");
+		icedTeaButton.setForeground(Color.DARK_GRAY);
+		icedTeaButton.setBackground(Color.white);
+		icedTeaButton.setBounds(12, 182, 96, 25);
+		contentPane.add(icedTeaButton);
+		icedTeaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseType1_btn();
+				drinkType = "Icde Tea";	
 			}
 		});
 
@@ -276,11 +349,7 @@ public class DrinkFactoryMachine extends JFrame {
 
 		contentPane.add(temperatureSlider);
 
-		icedTeaButton = new JButton("Iced Tea");
-		icedTeaButton.setForeground(Color.DARK_GRAY);
-		icedTeaButton.setBackground(Color.white);
-		icedTeaButton.setBounds(12, 182, 96, 25);
-		contentPane.add(icedTeaButton);
+		
 
 		lblSugar = new JLabel("Sugar");
 		lblSugar.setForeground(Color.white);
@@ -317,8 +386,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money50centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raisePay_coins_Btn();
-				count += 0.5;
+				theFSM.raisePay_coins();
+				
 			}
 		});
 
@@ -329,8 +398,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money25centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raisePay_coins_Btn();
-				count += 0.25;
+				theFSM.raisePay_coins();
+				
 			}
 		});
 		
@@ -341,8 +410,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money10centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raisePay_coins_Btn();
-				count += 0.1;
+				theFSM.raisePay_coins();
+				
 			}
 		});
 		

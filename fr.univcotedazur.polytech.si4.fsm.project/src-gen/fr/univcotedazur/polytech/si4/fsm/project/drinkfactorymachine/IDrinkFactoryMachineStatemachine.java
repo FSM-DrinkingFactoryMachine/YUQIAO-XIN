@@ -52,6 +52,18 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoShowPricePay();
 		
+		public boolean isRaisedDoShowTime();
+		
+		public boolean isRaisedDoResetTime();
+		
+		public double getPay();
+		
+		public void setPay(double value);
+		
+		public double getPrice();
+		
+		public void setPrice(double value);
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -68,6 +80,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoChangePriceRaised();
 		public void onDoRefundRaised();
 		public void onDoShowPricePayRaised();
+		public void onDoShowTimeRaised();
+		public void onDoResetTimeRaised();
 		}
 	
 	public SCInterface getSCInterface();
