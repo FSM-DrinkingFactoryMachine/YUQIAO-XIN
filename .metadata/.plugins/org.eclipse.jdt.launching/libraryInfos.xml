@@ -25,6 +25,7 @@
 <entry path="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-1.8.0_265/Contents/Home/jre/lib/endorsed"/>
 </endorsedDirs>
 </libraryInfo>
+<libraryInfo home="/Users/zhaoyuqiao/Library/Java/JavaVirtualMachines/corretto-11.0.8/Contents/Home" version="11.0.8"/>
 <libraryInfo home="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home" version="1.8.0_201">
 <bootpath>
 <entry path="/Applications/YAKINDU SCTPRO.app/Contents/Eclipse/features/com.yakindu.jre8.macosx.x86_64_1.8.201.201903151215/jre/Contents/Home/lib/resources.jar"/>

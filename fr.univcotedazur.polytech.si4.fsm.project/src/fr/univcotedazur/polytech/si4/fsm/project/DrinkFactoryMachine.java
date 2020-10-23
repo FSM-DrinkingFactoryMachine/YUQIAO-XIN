@@ -42,8 +42,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoResetRaised() {
 		// TODO Auto-generated method stub
-		theMachine.theFSM.setDeal(false);
-		theMachine.theFSM.setBiip(false);
+		
 		theMachine.drinkType="Coffee";
 		theMachine.sugarSlider.setValue(1);
 	}
@@ -62,7 +61,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		theMachine.theFSM.setDeal(false);
+		
 		
 	}
 

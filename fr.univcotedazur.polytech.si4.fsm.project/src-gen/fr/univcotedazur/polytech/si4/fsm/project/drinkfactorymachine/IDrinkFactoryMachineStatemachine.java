@@ -12,23 +12,53 @@ import java.util.concurrent.LinkedBlockingQueue;
 public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
 	
-		public void raiseSelect_Type_Btn();
+		public void raiseType1_btn();
 		
-		public void raisePay_coins_Btn();
+		public void raiseType2_btn();
 		
-		public void raiseNFC_Btn();
+		public void raiseType3_btn();
 		
-		public void raiseCancle_Btn();
+		public void raiseType4_btn();
+		
+		public void raiseType5_btn();
+		
+		public void raiseSli1_btn();
+		
+		public void raiseSli2_btn();
+		
+		public void raiseSli3_btn();
+		
+		public void raisePay_10();
+		
+		public void raisePay_50();
+		
+		public void raisePay_25();
+		
+		public void raiseNfc_btn();
+		
+		public void raiseCancle_btn();
 		
 		public void raiseAddCup_Btn();
-		
-		public void raiseModify_Slider();
 		
 		public boolean isRaisedDoReset();
 		
 		public boolean isRaisedDoPrepare();
 		
 		public boolean isRaisedDoCaculate();
+		
+		public boolean isRaisedDoChangeType();
+		
+		public boolean isRaisedDoModify1();
+		
+		public boolean isRaisedDoModify2();
+		
+		public boolean isRaisedDoModify3();
+		
+		public boolean isRaisedDoStoreInfo();
+		
+		public boolean isRaisedDoChangePrice();
+		
+		public boolean isRaisedDoRefund();
 		
 	public List<SCInterfaceListener> getListeners();
 	}
@@ -38,6 +68,13 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoResetRaised();
 		public void onDoPrepareRaised();
 		public void onDoCaculateRaised();
+		public void onDoChangeTypeRaised();
+		public void onDoModify1Raised();
+		public void onDoModify2Raised();
+		public void onDoModify3Raised();
+		public void onDoStoreInfoRaised();
+		public void onDoChangePriceRaised();
+		public void onDoRefundRaised();
 		}
 	
 	public SCInterface getSCInterface();

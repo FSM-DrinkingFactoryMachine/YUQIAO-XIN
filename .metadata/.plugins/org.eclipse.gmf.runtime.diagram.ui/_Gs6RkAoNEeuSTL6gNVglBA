@@ -1,7 +1,7 @@
-#Thu Oct 15 11:32:38 CEST 2020
-viewport.x=564
+#Fri Oct 23 08:19:42 CEST 2020
 rulergrid.snaptogeometry=true
-zoom=1.0
+viewport.x=63
+zoom=0.75
 print.margin.right=0.5
 rulergrid.rulerunit=1
 rulergrid.snaptogrid=true
@@ -17,4 +17,4 @@ rulergrid.gridlevel=true
 print.margin.top=0.5
 print.useMillim=true
 print.usePortrait=true
-viewport.y=230
+viewport.y=128
