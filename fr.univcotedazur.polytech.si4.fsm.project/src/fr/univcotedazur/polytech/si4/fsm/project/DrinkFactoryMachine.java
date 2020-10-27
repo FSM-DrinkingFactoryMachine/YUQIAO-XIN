@@ -44,7 +44,21 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 		theMachine.drinkType="";
+		theMachine.nfcInfo="";
+		theMachine.pay=0;
 		theMachine.sugarSlider.setValue(1);
+		theMachine.sizeSlider.setValue(1);
+		theMachine.temperatureSlider.setValue(2);
+		theMachine.progressBar.setValue(0);
+		theMachine.currentProgress=0;
+		theMachine.theFSM.setPay(0);
+		theMachine.theFSM.setPrice(0);
+		theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
+		theMachine.timer1.stop();
+		
+		
+		
+		
 	}
 
 
@@ -61,8 +75,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		
-		
+		theMachine.theFSM.setPay(theMachine.pay);
 	}
 
 	@Override
@@ -141,8 +154,11 @@ public class DrinkFactoryMachine extends JFrame {
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
-	protected String drinkType = "";
-	private int currentProgress=0;
+	protected String drinkType = "",nfcInfo="";
+	protected int currentProgress=0;
+	protected JProgressBar progressBar;
+	protected double pay = 0.0;
+	protected Timer timer1;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	
@@ -167,7 +183,11 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 	}
-
+	public double getPrice(String type) {
+		if(prices.containsKey(type))
+			return prices.get(type);
+		return 0;
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -199,7 +219,7 @@ public class DrinkFactoryMachine extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		messagesToUser = new JLabel("<html>This is<br>place to communicate <br> with the user");
+		messagesToUser = new JLabel("<html>Hello Sir/Lady<br>Please choose the drink");
 		messagesToUser.setForeground(Color.white);
 		messagesToUser.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
@@ -282,25 +302,26 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
-		progressBar.setValue(10);
+		progressBar.setValue(0);
 		progressBar.setForeground(Color.LIGHT_GRAY);
 		progressBar.setBackground(Color.white);
 		progressBar.setBounds(12, 254, 622, 26);
 		contentPane.add(progressBar);
-		ActionListener every5=new ActionListener() {
+		ActionListener every10=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(currentProgress<100)
-                    currentProgress++;
+                    currentProgress+=10;
                 progressBar.setValue(currentProgress);
             }
         };
-        Timer timer1=new Timer(100,every5);
+        timer1=new Timer(1000,every10);
         timer1.start();
         if(currentProgress==100)
             timer1.stop();
+        	
 
 		sugarSlider = new JSlider();
 		sugarSlider.setValue(1);
@@ -386,8 +407,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money50centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pay+=0.5;
 				theFSM.raisePay_coins();
-				
 			}
 		});
 
@@ -398,8 +419,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money25centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pay+=0.25;
 				theFSM.raisePay_coins();
-				
 			}
 		});
 		
@@ -410,8 +431,8 @@ public class DrinkFactoryMachine extends JFrame {
 		money10centsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pay+=0.1;
 				theFSM.raisePay_coins();
-				
 			}
 		});
 		
@@ -460,6 +481,12 @@ public class DrinkFactoryMachine extends JFrame {
 		cancelButton.setForeground(Color.DARK_GRAY);
 		cancelButton.setBackground(Color.white);
 		panel_2.add(cancelButton);
+		cancelButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				theFSM.raiseCancle_btn();
+			}
+		});
 
 		// listeners
 		addCupButton.addMouseListener(new MouseAdapter() {
