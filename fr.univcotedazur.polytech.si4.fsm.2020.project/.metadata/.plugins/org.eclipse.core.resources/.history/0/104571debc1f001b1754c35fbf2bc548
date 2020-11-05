@@ -180,7 +180,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoShowDrinkRaised() {
 		// TODO Auto-generated method stub
-		if(theMachine.isOwnCup==false)
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/gobeletPolluant.jpg"));
 	}
 
@@ -206,7 +205,6 @@ public class DrinkFactoryMachine extends JFrame {
 	protected double pay = 0.0;
 	protected Timer timer1;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
-	protected boolean isOwnCup=false;
 	protected DrinkFactoryMachineStatemachine theFSM;
 	
 	/**
@@ -547,7 +545,6 @@ public class DrinkFactoryMachine extends JFrame {
 		addCupButton.setBackground(Color.white);
 		addCupButton.setBounds(70, 550, 150, 40);
 		contentPane.add(addCupButton);
-		
 
 		BufferedImage myPicture = null;
 		try {
@@ -586,7 +583,6 @@ public class DrinkFactoryMachine extends JFrame {
 				} catch (IOException ee) {
 					ee.printStackTrace();
 				}
-				isOwnCup=true;
 				labelForPictures.setIcon(new ImageIcon(myPicture));
 			}
 		});

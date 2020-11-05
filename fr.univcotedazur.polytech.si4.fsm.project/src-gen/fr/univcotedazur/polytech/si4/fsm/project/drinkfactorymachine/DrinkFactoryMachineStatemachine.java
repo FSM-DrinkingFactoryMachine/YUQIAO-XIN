@@ -412,6 +412,24 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean doShowDrink;
+		
+		
+		public boolean isRaisedDoShowDrink() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doShowDrink;
+			}
+		}
+		
+		protected void raiseDoShowDrink() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doShowDrink = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoShowDrinkRaised();
+				}
+			}
+		}
+		
 		private double pay;
 		
 		public synchronized double getPay() {
@@ -466,6 +484,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doShowPricePay = false;
 		doShowTime = false;
 		doResetTime = false;
+		doShowDrink = false;
 		}
 		
 	}
@@ -817,6 +836,10 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoResetTime();
 	}
 	
+	public synchronized boolean isRaisedDoShowDrink() {
+		return sCInterface.isRaisedDoShowDrink();
+	}
+	
 	public synchronized double getPay() {
 		return sCInterface.getPay();
 	}
@@ -872,6 +895,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.setTimer(this, 3, 1, false);
 		
 		timer.setTimer(this, 4, 1, false);
+		
+		sCInterface.raiseDoShowDrink();
 	}
 	
 	/* Entry action for state 'state_prepare'. */

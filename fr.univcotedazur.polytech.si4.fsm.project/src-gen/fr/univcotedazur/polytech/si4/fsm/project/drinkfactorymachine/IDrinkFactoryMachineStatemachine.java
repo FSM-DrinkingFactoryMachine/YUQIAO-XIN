@@ -56,6 +56,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoResetTime();
 		
+		public boolean isRaisedDoShowDrink();
+		
 		public double getPay();
 		
 		public void setPay(double value);
@@ -82,6 +84,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoShowPricePayRaised();
 		public void onDoShowTimeRaised();
 		public void onDoResetTimeRaised();
+		public void onDoShowDrinkRaised();
 		}
 	
 	public SCInterface getSCInterface();
