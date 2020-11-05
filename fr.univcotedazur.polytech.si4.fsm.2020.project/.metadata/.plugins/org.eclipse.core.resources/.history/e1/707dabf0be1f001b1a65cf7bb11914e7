@@ -166,15 +166,14 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoShowTimeRaised() {
 		// TODO Auto-generated method stub
-		theMachine.myTimer.restart();
+		theMachine.myTimer.start();
 	}
 
 	@Override
 	public void onDoResetTimeRaised() {
 		// TODO Auto-generated method stub
 		theMachine.secs=45;
-		theMachine.myTimer.stop();
-		
+		theMachine.myTimer.start();
 	}
 
 	@Override
