@@ -25,6 +25,8 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.*;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.DrinkFactoryMachineStatemachine;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFactoryMachineStatemachine.SCInterfaceListener;
@@ -261,8 +263,8 @@ public class DrinkFactoryMachine extends JFrame {
 		coffeeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				drinkType = "Coffee";
 				theFSM.raiseType1_btn();
-				drinkType = "Coffee";	
 			}
 		});
 		
@@ -277,8 +279,8 @@ public class DrinkFactoryMachine extends JFrame {
 		expressoButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseType1_btn();
 				drinkType = "Expresso";	
+				theFSM.raiseType1_btn();	
 			}
 		});
 
@@ -291,8 +293,8 @@ public class DrinkFactoryMachine extends JFrame {
 		teaButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				drinkType = "Tea";
 				theFSM.raiseType1_btn();
-				drinkType = "Tea";	
 			}
 		});
 		
@@ -307,8 +309,8 @@ public class DrinkFactoryMachine extends JFrame {
 		soupButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				drinkType = "Soup";
 				theFSM.raiseType2_btn();
-				drinkType = "Soup";	
 			}
 		});
 		icedTeaButton = new JButton("Iced Tea");
@@ -320,8 +322,8 @@ public class DrinkFactoryMachine extends JFrame {
 		icedTeaButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theFSM.raiseType1_btn();
 				drinkType = "Iced Tea";	
+				theFSM.raiseType1_btn();
 			}
 		});
 
@@ -347,7 +349,11 @@ public class DrinkFactoryMachine extends JFrame {
 		sugarSlider.setMaximum(4);
 		sugarSlider.setBounds(480, 80, 320, 55);
 		contentPane.add(sugarSlider);
-	
+		sugarSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli1_btn();
+		      }
+		});
 
 		sizeSlider = new JSlider();
 		sizeSlider.setPaintTicks(true);
@@ -360,6 +366,11 @@ public class DrinkFactoryMachine extends JFrame {
 		sizeSlider.setMajorTickSpacing(1);
 		sizeSlider.setBounds(480, 210, 320, 55);
 		contentPane.add(sizeSlider);
+		sizeSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli2_btn();
+		      }
+		});
 
 		temperatureSlider = new JSlider();
 		temperatureSlider.setPaintLabels(true);
@@ -371,6 +382,11 @@ public class DrinkFactoryMachine extends JFrame {
 		temperatureSlider.setMajorTickSpacing(1);
 		temperatureSlider.setMaximum(3);
 		temperatureSlider.setBounds(480, 340, 320, 85);
+		temperatureSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli3_btn();
+		      }
+		});
 
 		Hashtable<Integer, JLabel> temperatureTable = new Hashtable<Integer, JLabel>();
 		temperatureTable.put(0, new JLabel("20°C"));
