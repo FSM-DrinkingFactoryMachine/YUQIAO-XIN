@@ -55,7 +55,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.currentProgress=0;
 		theMachine.theFSM.setPay(0);
 		theMachine.theFSM.setPrice(0);
-		//theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
+		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Please choose the drink");
 		theMachine.timer1.stop();
 		
 	}
@@ -89,8 +89,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.theFSM.setPay(theMachine.pay);
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.pay);
-		System.out.println(theMachine.pay);
-		System.out.print(theMachine.theFSM.getPrice());
 	}
 
 	@Override
@@ -134,15 +132,21 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
 		if(!theMachine.drinkType.equals("")) {
-			if(theMachine.sizeSlider.getValue()==0)
+			if(theMachine.sizeSlider.getValue()==0) {
 				theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
-				else if(theMachine.sugarSlider.getValue()==1)
+				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+			}
+				else if(theMachine.sugarSlider.getValue()==1) {
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.1);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+				}
 				else 
+				{
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.3);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
 		
 		}
-
+		}
 	}
 
 	@Override
@@ -185,7 +189,7 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
-	protected JLabel messagesToUser, lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature;
+	protected JLabel messagesToUser, messagesToUser1,lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature;
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
@@ -261,8 +265,20 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
 		messagesToUser.setBackground(Color.white);
-		messagesToUser.setBounds(200, 50, 250, 300);
+		messagesToUser.setBounds(200, 50, 250, 150);
 		contentPane.add(messagesToUser);
+		
+		messagesToUser1 = new JLabel("the price is: ");
+		messagesToUser1.setFont(new Font("Arial",Font.BOLD,20));
+		messagesToUser1.setForeground(Color.white);
+		messagesToUser1.setHorizontalAlignment(SwingConstants.LEFT);
+		messagesToUser1.setVerticalAlignment(SwingConstants.TOP);
+		messagesToUser1.setToolTipText("message to the user");
+		messagesToUser1.setBackground(Color.white);
+		messagesToUser1.setBounds(200, 220, 250, 150);
+		contentPane.add(messagesToUser1);
+		
+		
 
 		lblCoins = new JLabel("Coins");
 		lblCoins.setFont(new Font("Arial",Font.BOLD,20));
