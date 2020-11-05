@@ -136,15 +136,21 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
 		if(!theMachine.drinkType.equals("")) {
-			if(theMachine.sizeSlider.getValue()==0)
+			if(theMachine.sizeSlider.getValue()==0) {
 				theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
-				else if(theMachine.sugarSlider.getValue()==1)
+				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+			}
+				else if(theMachine.sugarSlider.getValue()==1) {
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.1);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+				}
 				else 
+				{
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.3);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
 		
 		}
-
+		}
 	}
 
 	@Override
@@ -183,6 +189,15 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 	}
 
+	@Override
+	public void onDoShowDrinkRaised() {
+		// TODO Auto-generated method stub
+		if(theMachine.isOwnCup==false)
+		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/gobeletPolluant.jpg"));
+		else
+			theMachine.labelForPictures.setIcon(new ImageIcon("./picts/ownCup.jpg"));	
+	}
+
 
 
 	
@@ -195,7 +210,7 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
-	protected JLabel messagesToUser, lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature, timeValue;
+	protected JLabel messagesToUser, messagesToUser1,lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature, timeValue;
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
@@ -204,6 +219,7 @@ public class DrinkFactoryMachine extends JFrame {
 	protected JProgressBar progressBar;
 	protected double pay = 0.0;
 	protected Timer timer1,myTimer;
+	protected boolean isOwnCup=false;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	
@@ -280,6 +296,17 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setBounds(200, 50, 250, 150);
 		contentPane.add(messagesToUser);
 		
+
+		messagesToUser1 = new JLabel("the price is: ");
+		messagesToUser1.setFont(new Font("Arial",Font.BOLD,20));
+		messagesToUser1.setForeground(Color.white);
+		messagesToUser1.setHorizontalAlignment(SwingConstants.LEFT);
+		messagesToUser1.setVerticalAlignment(SwingConstants.TOP);
+		messagesToUser1.setToolTipText("message to the user");
+		messagesToUser1.setBackground(Color.white);
+		messagesToUser1.setBounds(200, 220, 250, 150);
+		contentPane.add(messagesToUser1);
+
 		timeValue = new JLabel("time rest: ");
 		timeValue.setFont(new Font("Arial",Font.BOLD,20));
 		timeValue.setForeground(Color.white);
@@ -288,7 +315,6 @@ public class DrinkFactoryMachine extends JFrame {
 		timeValue.setBackground(Color.white);
 		timeValue.setBounds(200, 220, 250, 150);
 		contentPane.add(timeValue);
-
 		lblCoins = new JLabel("Coins");
 		lblCoins.setFont(new Font("Arial",Font.BOLD,20));
 		lblCoins.setForeground(Color.white);
@@ -588,6 +614,7 @@ public class DrinkFactoryMachine extends JFrame {
 				} catch (IOException ee) {
 					ee.printStackTrace();
 				}
+				isOwnCup=true;
 				labelForPictures.setIcon(new ImageIcon(myPicture));
 			}
 		});
