@@ -53,11 +53,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.currentProgress=0;
 		theMachine.theFSM.setPay(0);
 		theMachine.theFSM.setPrice(0);
-		theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
-		theMachine.timer1.stop();
-		
-		
-		
+		//theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
+		//theMachine.timer1.stop();
 		
 	}
 
@@ -67,6 +64,18 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoPrepareRaised() {
 		// TODO Auto-generated method stub
+		ActionListener every10=new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(theMachine.currentProgress<100)
+                    theMachine.currentProgress+=10;
+                theMachine.progressBar.setValue(theMachine.currentProgress);
+            }
+        };
+        theMachine.timer1=new Timer(1500,every10);
+        theMachine.timer1.start();
+        if(theMachine.currentProgress==100)
+            theMachine.timer1.stop();
 		
 	}
 
@@ -81,31 +90,38 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoChangeTypeRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>you have choosed the drink of "+theMachine.drinkType);
 		
 	}
 
 	@Override
 	public void onDoModify1Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade sweetness of your drink is "+theMachine.sugarSlider.getValue());
 	}
 
 	@Override
 	public void onDoModify2Raised() {
 		// TODO Auto-generated method stub
+		if(theMachine.sizeSlider.getValue()==0)
+			theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the small cup.");
+			else if(theMachine.sugarSlider.getValue()==1)
+				theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the middle cup.");
+			else 
+				theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the large cup.");
 		
 	}
 
 	@Override
 	public void onDoModify3Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("Dear Sir/Lady,the temperature of your drink is "+theMachine.temperatureSlider.getValue());
 	}
 
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("Dear Sir/Lady,your bank card is successfully recogniezd");
 	}
 
 	@Override
@@ -212,32 +228,35 @@ public class DrinkFactoryMachine extends JFrame {
 		setBackground(Color.DARK_GRAY);
 		setTitle("Drinking Factory Machine");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 650);
-		contentPane = new JPanel();
+		setSize(1000,1100);
+		contentPane = new JPanel(null);
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setContentPane(contentPane);//添加
+		//contentPane.setLayout(null);
 
 		messagesToUser = new JLabel("<html>Hello Sir/Lady<br>Please choose the drink");
+		messagesToUser.setFont(new Font("Arial",Font.BOLD,20));
 		messagesToUser.setForeground(Color.white);
 		messagesToUser.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
 		messagesToUser.setBackground(Color.white);
-		messagesToUser.setBounds(126, 34, 165, 175);
+		messagesToUser.setBounds(200, 50, 250, 300);
 		contentPane.add(messagesToUser);
 
 		lblCoins = new JLabel("Coins");
+		lblCoins.setFont(new Font("Arial",Font.BOLD,20));
 		lblCoins.setForeground(Color.white);
 		lblCoins.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCoins.setBounds(538, 12, 44, 15);
+		lblCoins.setBounds(840, 20, 65, 20);
 		contentPane.add(lblCoins);
 
 		coffeeButton = new JButton("Coffee");
+		coffeeButton.setFont(new Font("Arial",Font.BOLD,20));
 		coffeeButton.setForeground(Color.DARK_GRAY);
 		coffeeButton.setBackground(Color.white);
-		coffeeButton.setBounds(12, 34, 96, 25);
+		coffeeButton.setBounds(20, 50, 150, 40);
 		contentPane.add(coffeeButton);
 		coffeeButton.addActionListener(new ActionListener() {
 			@Override
@@ -250,9 +269,10 @@ public class DrinkFactoryMachine extends JFrame {
 		
 
 		expressoButton = new JButton("Expresso");
+		expressoButton.setFont(new Font("Arial",Font.BOLD,20));
 		expressoButton.setForeground(Color.DARK_GRAY);
 		expressoButton.setBackground(Color.white);
-		expressoButton.setBounds(12, 71, 96, 25);
+		expressoButton.setBounds(20, 110, 150, 40);
 		contentPane.add(expressoButton);
 		expressoButton.addActionListener(new ActionListener() {
 			@Override
@@ -263,9 +283,10 @@ public class DrinkFactoryMachine extends JFrame {
 		});
 
 		teaButton = new JButton("Tea");
+		teaButton.setFont(new Font("Arial",Font.BOLD,20));
 		teaButton.setForeground(Color.DARK_GRAY);
 		teaButton.setBackground(Color.white);
-		teaButton.setBounds(12, 108, 96, 25);
+		teaButton.setBounds(20, 170, 150, 40);
 		contentPane.add(teaButton);
 		teaButton.addActionListener(new ActionListener() {
 			@Override
@@ -278,9 +299,10 @@ public class DrinkFactoryMachine extends JFrame {
 		
 
 		soupButton = new JButton("Soup");
+		soupButton.setFont(new Font("Arial",Font.BOLD,20));
 		soupButton.setForeground(Color.DARK_GRAY);
 		soupButton.setBackground(Color.white);
-		soupButton.setBounds(12, 145, 96, 25);
+		soupButton.setBounds(20, 230, 150, 40);
 		contentPane.add(soupButton);
 		soupButton.addActionListener(new ActionListener() {
 			@Override
@@ -290,37 +312,28 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 		icedTeaButton = new JButton("Iced Tea");
+		icedTeaButton.setFont(new Font("Arial",Font.BOLD,20));
 		icedTeaButton.setForeground(Color.DARK_GRAY);
 		icedTeaButton.setBackground(Color.white);
-		icedTeaButton.setBounds(12, 182, 96, 25);
+		icedTeaButton.setBounds(20, 300, 150, 40);
 		contentPane.add(icedTeaButton);
 		icedTeaButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				theFSM.raiseType1_btn();
-				drinkType = "Icde Tea";	
+				drinkType = "Iced Tea";	
 			}
 		});
 
 		progressBar = new JProgressBar();
+		progressBar.setFont(new Font("Arial",Font.BOLD,20));
 		progressBar.setStringPainted(true);
 		progressBar.setValue(0);
 		progressBar.setForeground(Color.LIGHT_GRAY);
 		progressBar.setBackground(Color.white);
-		progressBar.setBounds(12, 254, 622, 26);
+		progressBar.setBounds(20, 450, 960, 40);
 		contentPane.add(progressBar);
-		ActionListener every10=new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(currentProgress<100)
-                    currentProgress+=10;
-                progressBar.setValue(currentProgress);
-            }
-        };
-        timer1=new Timer(1000,every10);
-        timer1.start();
-        if(currentProgress==100)
-            timer1.stop();
+		
         	
 
 		sugarSlider = new JSlider();
@@ -332,8 +345,9 @@ public class DrinkFactoryMachine extends JFrame {
 		sugarSlider.setMinorTickSpacing(1);
 		sugarSlider.setMajorTickSpacing(1);
 		sugarSlider.setMaximum(4);
-		sugarSlider.setBounds(301, 51, 200, 36);
+		sugarSlider.setBounds(480, 80, 320, 55);
 		contentPane.add(sugarSlider);
+	
 
 		sizeSlider = new JSlider();
 		sizeSlider.setPaintTicks(true);
@@ -344,7 +358,7 @@ public class DrinkFactoryMachine extends JFrame {
 		sizeSlider.setMinorTickSpacing(1);
 		sizeSlider.setMaximum(2);
 		sizeSlider.setMajorTickSpacing(1);
-		sizeSlider.setBounds(301, 125, 200, 36);
+		sizeSlider.setBounds(480, 210, 320, 55);
 		contentPane.add(sizeSlider);
 
 		temperatureSlider = new JSlider();
@@ -356,7 +370,7 @@ public class DrinkFactoryMachine extends JFrame {
 		temperatureSlider.setPaintTicks(true);
 		temperatureSlider.setMajorTickSpacing(1);
 		temperatureSlider.setMaximum(3);
-		temperatureSlider.setBounds(301, 188, 200, 54);
+		temperatureSlider.setBounds(480, 340, 320, 85);
 
 		Hashtable<Integer, JLabel> temperatureTable = new Hashtable<Integer, JLabel>();
 		temperatureTable.put(0, new JLabel("20°C"));
@@ -373,34 +387,38 @@ public class DrinkFactoryMachine extends JFrame {
 		
 
 		lblSugar = new JLabel("Sugar");
+		lblSugar.setFont(new Font("Arial",Font.BOLD,20));
 		lblSugar.setForeground(Color.white);
 		lblSugar.setBackground(Color.white);
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSugar.setBounds(380, 34, 44, 15);
+		lblSugar.setBounds(620, 50, 65, 25);
 		contentPane.add(lblSugar);
 
 		lblSize = new JLabel("Size");
+		lblSize.setFont(new Font("Arial",Font.BOLD,20));
 		lblSize.setForeground(Color.white);
 		lblSize.setBackground(Color.white);
 		lblSize.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSize.setBounds(380, 113, 44, 15);
+		lblSize.setBounds(620, 180, 65, 25);
 		contentPane.add(lblSize);
 		
 
 		lblTemperature = new JLabel("Temperature");
+		lblTemperature.setFont(new Font("Arial",Font.BOLD,20));
 		lblTemperature.setForeground(Color.white);
 		lblTemperature.setBackground(Color.white);
 		lblTemperature.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTemperature.setBounds(363, 173, 96, 15);
+		lblTemperature.setBounds(580, 310, 145, 25);
 		contentPane.add(lblTemperature);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
 		lblCoins.setLabelFor(panel);
-		panel.setBounds(538, 25, 96, 97);
+		panel.setBounds(830, 40, 145, 150);
 		contentPane.add(panel);
 
 		money50centsButton = new JButton("0.50 €");
+		money50centsButton.setFont(new Font("Arial",Font.BOLD,20));
 		money50centsButton.setForeground(Color.DARK_GRAY);
 		money50centsButton.setBackground(Color.white);
 		panel.add(money50centsButton);
@@ -413,6 +431,7 @@ public class DrinkFactoryMachine extends JFrame {
 		});
 
 		money25centsButton = new JButton("0.25 €");
+		money25centsButton.setFont(new Font("Arial",Font.BOLD,20));
 		money25centsButton.setForeground(Color.DARK_GRAY);
 		money25centsButton.setBackground(Color.white);
 		panel.add(money25centsButton);
@@ -425,6 +444,7 @@ public class DrinkFactoryMachine extends JFrame {
 		});
 		
 		money10centsButton = new JButton("0.10 €");
+		money10centsButton.setFont(new Font("Arial",Font.BOLD,20));
 		money10centsButton.setForeground(Color.DARK_GRAY);
 		money10centsButton.setBackground(Color.white);
 		panel.add(money10centsButton);
@@ -438,28 +458,31 @@ public class DrinkFactoryMachine extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.DARK_GRAY);
-		panel_1.setBounds(538, 154, 96, 40);
+		panel_1.setBounds(830, 230, 145, 60);
 		contentPane.add(panel_1);
 
 		nfcBiiiipButton = new JButton("biiip");
+		nfcBiiiipButton.setFont(new Font("Arial",Font.BOLD,20));
 		nfcBiiiipButton.setForeground(Color.DARK_GRAY);
 		nfcBiiiipButton.setBackground(Color.white);
 		panel_1.add(nfcBiiiipButton);
 
 		lblNfc = new JLabel("NFC");
+		lblNfc.setFont(new Font("Arial",Font.BOLD,20));
 		lblNfc.setForeground(Color.white);
 		lblNfc.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNfc.setBounds(541, 139, 41, 15);
+		lblNfc.setBounds(825, 210, 90, 25);
 		contentPane.add(lblNfc);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(12, 292, 622, 15);
+		separator.setBounds(20, 440, 935, 20);
 		contentPane.add(separator);
 
 		addCupButton = new JButton("Add cup");
+		addCupButton.setFont(new Font("Arial",Font.BOLD,20));
 		addCupButton.setForeground(Color.DARK_GRAY);
 		addCupButton.setBackground(Color.white);
-		addCupButton.setBounds(45, 336, 96, 25);
+		addCupButton.setBounds(70, 550, 150, 40);
 		contentPane.add(addCupButton);
 
 		BufferedImage myPicture = null;
@@ -469,15 +492,16 @@ public class DrinkFactoryMachine extends JFrame {
 			e.printStackTrace();
 		}
 		labelForPictures = new JLabel(new ImageIcon(myPicture));
-		labelForPictures.setBounds(175, 319, 286, 260);
+		labelForPictures.setBounds(270, 525, 450, 400);
 		contentPane.add(labelForPictures);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.DARK_GRAY);
-		panel_2.setBounds(538, 217, 96, 33);
+		panel_2.setBounds(830, 330, 145, 50);
 		contentPane.add(panel_2);
 
 		cancelButton = new JButton("Cancel");
+		cancelButton.setFont(new Font("Arial",Font.BOLD,20));
 		cancelButton.setForeground(Color.DARK_GRAY);
 		cancelButton.setBackground(Color.white);
 		panel_2.add(cancelButton);
