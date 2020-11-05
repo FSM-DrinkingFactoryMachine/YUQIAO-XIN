@@ -66,6 +66,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoPrepareRaised() {
 		// TODO Auto-generated method stub
+	
 		ActionListener every10=new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +88,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
 		theMachine.theFSM.setPay(theMachine.pay);
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.pay);
 	}
 
 	@Override
@@ -106,30 +108,39 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoModify2Raised() {
 		// TODO Auto-generated method stub
 		if(theMachine.sizeSlider.getValue()==0)
-			theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the small cup.");
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the small cup.");
 			else if(theMachine.sugarSlider.getValue()==1)
-				theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the middle cup.");
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the middle cup.");
 			else 
-				theMachine.messagesToUser.setText("Dear Sir/Lady,you have choosed the large cup.");
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the large cup.");
 		
 	}
 
 	@Override
 	public void onDoModify3Raised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("Dear Sir/Lady,the temperature of your drink is "+theMachine.temperatureSlider.getValue());
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is "+theMachine.temperatureSlider.getValue());
 	}
 
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("Dear Sir/Lady,your bank card is successfully recogniezd");
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
 	}
 
 	@Override
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
+		if(!theMachine.drinkType.equals("")) {
+			if(theMachine.sizeSlider.getValue()==0)
+				theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
+				else if(theMachine.sugarSlider.getValue()==1)
+					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.1);
+				else 
+					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.3);
 		
+		}
+
 	}
 
 	@Override
@@ -482,6 +493,12 @@ public class DrinkFactoryMachine extends JFrame {
 		nfcBiiiipButton.setForeground(Color.DARK_GRAY);
 		nfcBiiiipButton.setBackground(Color.white);
 		panel_1.add(nfcBiiiipButton);
+		nfcBiiiipButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseNfc_btn();;
+			}
+		});
 
 		lblNfc = new JLabel("NFC");
 		lblNfc.setFont(new Font("Arial",Font.BOLD,20));
