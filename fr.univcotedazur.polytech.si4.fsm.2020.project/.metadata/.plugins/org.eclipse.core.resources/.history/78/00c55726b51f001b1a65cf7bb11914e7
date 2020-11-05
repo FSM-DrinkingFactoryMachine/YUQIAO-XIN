@@ -56,7 +56,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.theFSM.setPay(0);
 		theMachine.theFSM.setPrice(0);
 		//theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
-		theMachine.timer1.stop();
+		//theMachine.timer1.stop();
 		
 	}
 
@@ -89,8 +89,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.theFSM.setPay(theMachine.pay);
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.pay);
-		System.out.println(theMachine.pay);
-		System.out.print(theMachine.theFSM.getPrice());
 	}
 
 	@Override

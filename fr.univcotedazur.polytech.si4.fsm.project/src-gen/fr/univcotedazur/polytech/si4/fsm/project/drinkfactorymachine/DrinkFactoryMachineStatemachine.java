@@ -479,6 +479,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_initial,
 		main_region_state_1,
 		main_region_state_1_r1_state_type,
+		main_region_state_1_r1_changePrice,
 		main_region_state_1_r2_state_sli1,
 		main_region_state_1_r3_state_sli2,
 		main_region_state_1_r4_state_sli3,
@@ -566,6 +567,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				break;
 			case main_region_state_1_r1_state_type:
 				main_region_state_1_r1_state_type_react(true);
+				break;
+			case main_region_state_1_r1_changePrice:
+				main_region_state_1_r1_changePrice_react(true);
 				break;
 			case main_region_state_1_r2_state_sli1:
 				main_region_state_1_r2_state_sli1_react(true);
@@ -665,6 +669,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					main_region_state_1.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_1_r7_state_timer.ordinal();
 		case main_region_state_1_r1_state_type:
 			return stateVector[0] == State.main_region_state_1_r1_state_type;
+		case main_region_state_1_r1_changePrice:
+			return stateVector[0] == State.main_region_state_1_r1_changePrice;
 		case main_region_state_1_r2_state_sli1:
 			return stateVector[1] == State.main_region_state_1_r2_state_sli1;
 		case main_region_state_1_r3_state_sli2:
@@ -837,6 +843,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.setTimer(this, 0, (45 * 1000), false);
 	}
 	
+	/* Entry action for state 'changePrice'. */
+	private void entryAction_main_region_state_1_r1_changePrice() {
+		sCInterface.raiseDoChangePrice();
+	}
+	
 	/* Entry action for state 'state_nfc'. */
 	private void entryAction_main_region_state_1_r5_state_nfc() {
 		timer.setTimer(this, 1, 1, false);
@@ -920,6 +931,13 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	private void enterSequence_main_region_state_1_r1_state_type_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_state_1_r1_state_type;
+	}
+	
+	/* 'default' enter sequence for state changePrice */
+	private void enterSequence_main_region_state_1_r1_changePrice_default() {
+		entryAction_main_region_state_1_r1_changePrice();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_1_r1_changePrice;
 	}
 	
 	/* 'default' enter sequence for state state_sli1 */
@@ -1041,6 +1059,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.$NullState$;
 	}
 	
+	/* Default exit sequence for state changePrice */
+	private void exitSequence_main_region_state_1_r1_changePrice() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
 	/* Default exit sequence for state state_sli1 */
 	private void exitSequence_main_region_state_1_r2_state_sli1() {
 		nextStateIndex = 1;
@@ -1114,6 +1138,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_1_r1_state_type:
 			exitSequence_main_region_state_1_r1_state_type();
 			break;
+		case main_region_state_1_r1_changePrice:
+			exitSequence_main_region_state_1_r1_changePrice();
+			break;
 		case main_region_state_refund1:
 			exitSequence_main_region_state_refund1();
 			break;
@@ -1182,6 +1209,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		switch (stateVector[0]) {
 		case main_region_state_1_r1_state_type:
 			exitSequence_main_region_state_1_r1_state_type();
+			break;
+		case main_region_state_1_r1_changePrice:
+			exitSequence_main_region_state_1_r1_changePrice();
 			break;
 		default:
 			break;
@@ -1302,7 +1332,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				sCInterface.raiseDoChangeType();
 				
 				entryAction_main_region_state_1();
-				enterSequence_main_region_state_1_r1_state_type_default();
+				enterSequence_main_region_state_1_r1_changePrice_default();
 				enterSequence_main_region_state_1_r2_default();
 				enterSequence_main_region_state_1_r3_default();
 				enterSequence_main_region_state_1_r4_default();
@@ -1354,7 +1384,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 								sCInterface.raiseDoChangeType();
 								
 								entryAction_main_region_state_1();
-								enterSequence_main_region_state_1_r1_state_type_default();
+								enterSequence_main_region_state_1_r1_changePrice_default();
 								enterSequence_main_region_state_1_r2_default();
 								enterSequence_main_region_state_1_r3_default();
 								enterSequence_main_region_state_1_r4_default();
@@ -1557,6 +1587,15 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					did_transition = false;
 				}
 			}
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_1_r1_changePrice_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
 		}
 		return did_transition;
 	}
