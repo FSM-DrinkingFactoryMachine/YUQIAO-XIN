@@ -137,9 +137,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.theFSM.getPay() < theMachine.theFSM.getPrice()) {
 			theMachine.messagesToUser.setText("Dear Sir/Lady,your refund is " + theMachine.theFSM.getPay());
-		}else if(theMachine.theFSM.getPay() > theMachine.theFSM.getPrice()){
-			theMachine.messagesToUser.setText("Dear Sir/Lady,your refund is " + (theMachine.theFSM.getPay()-theMachine.theFSM.getPrice()));
 		}
+		
 	}
 
 	@Override
