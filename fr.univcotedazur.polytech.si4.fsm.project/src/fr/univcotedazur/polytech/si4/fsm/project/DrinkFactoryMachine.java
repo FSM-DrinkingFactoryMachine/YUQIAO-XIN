@@ -58,6 +58,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.messagesToUser.setText("Hello Sir/Lady,Please choose the drink");
 		theMachine.timer1.stop();
 		theMachine.myTimer.stop();
+		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
+		
 		
 		
 	}
@@ -91,8 +93,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.theFSM.setPay(theMachine.pay);
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.pay);
-		System.out.println(theMachine.pay);
-		System.out.print(theMachine.theFSM.getPrice());
 	}
 
 	@Override
@@ -113,7 +113,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.sizeSlider.getValue()==0)
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the small cup.");
-			else if(theMachine.sugarSlider.getValue()==1)
+			else if(theMachine.sizeSlider.getValue()==1)
 				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the middle cup.");
 			else 
 				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>you have choosed the large cup.");
@@ -140,16 +140,15 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 				theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
 				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
 			}
-				else if(theMachine.sugarSlider.getValue()==1) {
+				else if(theMachine.sizeSlider.getValue()==1) {
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.1);
-					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
 				}
 				else 
 				{
 					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType)+0.3);
-					theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
-		
-		}
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
+				}
 		}
 	}
 
@@ -186,22 +185,31 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoShowDrinkRaised() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoShowDrinkRaised() {
-		// TODO Auto-generated method stub
-		if(theMachine.isOwnCup==false)
-		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/gobeletPolluant.jpg"));
-		else
-			theMachine.labelForPictures.setIcon(new ImageIcon("./picts/ownCup.jpg"));	
-	}
+		BufferedImage myPicture = null;
+		if(theMachine.isOwnCup==false) {
+			try {
+				myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+		}
+			
+		else {
+			try {
+				myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+			}
+		}
+}
 
 
 
 	
-}
+
 
 public class DrinkFactoryMachine extends JFrame {
 
@@ -293,7 +301,7 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
 		messagesToUser.setBackground(Color.white);
-		messagesToUser.setBounds(200, 50, 250, 150);
+		messagesToUser.setBounds(200, 50, 250, 100);
 		contentPane.add(messagesToUser);
 		
 
@@ -304,7 +312,7 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser1.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser1.setToolTipText("message to the user");
 		messagesToUser1.setBackground(Color.white);
-		messagesToUser1.setBounds(200, 220, 250, 150);
+		messagesToUser1.setBounds(200, 160, 250, 100);
 		contentPane.add(messagesToUser1);
 
 		timeValue = new JLabel("time rest: ");
@@ -313,7 +321,7 @@ public class DrinkFactoryMachine extends JFrame {
 		timeValue.setHorizontalAlignment(SwingConstants.LEFT);
 		timeValue.setVerticalAlignment(SwingConstants.TOP);
 		timeValue.setBackground(Color.white);
-		timeValue.setBounds(200, 220, 250, 150);
+		timeValue.setBounds(200, 270, 250, 100);
 		contentPane.add(timeValue);
 		lblCoins = new JLabel("Coins");
 		lblCoins.setFont(new Font("Arial",Font.BOLD,20));
