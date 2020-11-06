@@ -49,17 +49,21 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.drinkType="";
 		theMachine.nfcInfo="";
 		theMachine.pay=0;
+		theMachine.isOwnCup=false;
 		theMachine.sugarSlider.setValue(1);
-		theMachine.sizeSlider.setValue(1);
+		theMachine.sizeSlider.setValue(0);
 		theMachine.temperatureSlider.setValue(2);
 		theMachine.progressBar.setValue(0);
 		theMachine.currentProgress=0;
 		theMachine.theFSM.setPay(0);
 		theMachine.theFSM.setPrice(0);
+		theMachine.theFSM.setIsBiip(false);
 		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Please choose the drink");
 		theMachine.messagesToUser1.setText("");
-		theMachine.timer1.stop();
+//		theMachine.timer1.stop();
 //		theMachine.timeValue.setText("");
+		theMachine.changeToSugar();
+		theMachine.changeToNormal();
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
 	}
@@ -72,6 +76,16 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 //		theMachine.myTimer.stop();
 //		theMachine.timeValue.setText("");
+		theMachine.messagesToUser.setText("<html>Cleaning the Machine<br> please wait");
+		try
+		{
+		    Thread.sleep(4000);
+		}
+		catch(InterruptedException ex)
+		{
+		    Thread.currentThread().interrupt();
+		}
+		int s = 900;
 		theMachine.messagesToUser.setText("Preparing");
 		theMachine.messagesToUser1.setText("");
 		ActionListener every10=new ActionListener() {
@@ -79,17 +93,25 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
             public void actionPerformed(ActionEvent e) {
                 if(theMachine.currentProgress<100)
                     theMachine.currentProgress+=10;
+                else {
+                	theMachine.timer1.stop();
+                	theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>please take your drink.");
+                }
                 theMachine.progressBar.setValue(theMachine.currentProgress);
             }
         };
-        theMachine.timer1=new Timer(100,every10);
-        theMachine.timer1.start();
-  
-        if(theMachine.currentProgress==100) {
-            theMachine.timer1.stop();
+        if(theMachine.sizeSlider.getValue()==0) {
+        	s=700;
+        }else if(theMachine.sizeSlider.getValue()==2){
+        	s=1100;
         }
+        if(theMachine.drinkType.equals("Iced Tea") && theMachine.temperature1Slider.getValue()==1) {
+        	s+=150;
+        }
+        theMachine.timer1=new Timer(s,every10);
+        theMachine.timer1.start();
+        theMachine.showDrink();
         
-		
 	}
 
 
@@ -104,14 +126,38 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoChangeTypeRaised() {
 		// TODO Auto-generated method stub
+
 		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>you have choosed the drink of "+theMachine.drinkType);
-		
+		if(!theMachine.lblSugar.equals("Sugar")) {
+			theMachine.changeToSugar();
+		}
+		theMachine.changeToNormal();
 	}
 
 	@Override
 	public void onDoModify1Raised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade sweetness of your drink is "+theMachine.sugarSlider.getValue());
+		if(theMachine.lblSugar.getText().equals("Spices")) {
+			String spice = "";
+			switch(theMachine.spicesSlider.getValue()) {
+				case 0:
+					spice = "paprika";
+					break;
+				case 1:
+					spice = "basil";
+					break;
+				case 2:
+					spice = "thyme";
+					break;
+				case 3:
+					spice = "salt";
+					break;
+				
+			}
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade spices of your drink is "+ spice);
+		}
+		else
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade sweetness of your drink is "+theMachine.sugarSlider.getValue());
 	}
 
 	@Override
@@ -129,26 +175,49 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoModify3Raised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is "+theMachine.temperatureSlider.getValue());
+		//theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is "+theMachine.temperatureSlider.getValue());
+		if(theMachine.drinkType.equals("Iced Tea")) {
+			if(theMachine.temperature1Slider.getValue()==0)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the cold time of your drink is normal");
+			else 
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the cold time of your drink is long");
+		}else {
+		if(theMachine.temperatureSlider.getValue()==0)
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 20°C");
+			else if(theMachine.temperatureSlider.getValue()==1)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 35°C");
+			else if(theMachine.temperatureSlider.getValue()==2)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 60°C");
+			else if(theMachine.temperatureSlider.getValue()==3)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 85°C");
+		}
 	}
 
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
+		theMachine.theFSM.setIsBiip(true);
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
 	}
 
 	@Override
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
-		
+		double discount = 0.0;
+		if(theMachine.isOwnCup)
+			discount = -0.1;
 		if(!theMachine.drinkType.equals("")) {
-			if(theMachine.sizeSlider.getValue()==0) {
-				theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
-				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
-			}
+			if(!theMachine.drinkType.equals("Iced Tea")) {
+				if(theMachine.sizeSlider.getValue()==0) {
+					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
+					double price = theMachine.getPrice(theMachine.drinkType)+discount;
+					BigDecimal b = new BigDecimal(price);
+					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.theFSM.setPrice(price);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
+				}
 				else if(theMachine.sizeSlider.getValue()==1) {
-					double price = theMachine.getPrice(theMachine.drinkType)+0.1;
+					double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
 					BigDecimal b = new BigDecimal(price);
 					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 					theMachine.theFSM.setPrice(price);
@@ -156,19 +225,46 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 				}
 				else 
 				{
-					double price = theMachine.getPrice(theMachine.drinkType)+0.3;
+					double price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
 					BigDecimal b = new BigDecimal(price);
 					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 					theMachine.theFSM.setPrice(price);
 					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
 				}
+			}else {
+				double temp = 0.0;
+				if(theMachine.temperature1Slider.getValue()==1)
+					temp=0.25;
+				if(theMachine.sizeSlider.getValue()==0) {
+					theMachine.theFSM.setPrice(theMachine.getPrice(theMachine.drinkType));
+					double price = theMachine.getPrice(theMachine.drinkType)+discount+temp;
+					BigDecimal b = new BigDecimal(price);
+					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.theFSM.setPrice(price);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
+				}
+				else if(theMachine.sizeSlider.getValue()==1) {
+					double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1+temp;
+					BigDecimal b = new BigDecimal(price);
+					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.theFSM.setPrice(price);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
+				}
+				else 
+				{
+					double price = theMachine.getPrice(theMachine.drinkType)+discount+0.3+temp;
+					BigDecimal b = new BigDecimal(price);
+					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.theFSM.setPrice(price);
+					theMachine.messagesToUser1.setText("the price is "+theMachine.theFSM.getPrice());
+				}
+			}
 		}
 	}
 
 	@Override
 	public void onDoRefundRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("Refunding");
 		theMachine.messagesToUser1.setText("");
 		if(theMachine.theFSM.getPay() < theMachine.theFSM.getPrice()) {
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your refund is <br>" + theMachine.theFSM.getPay());
@@ -201,29 +297,22 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	}
 
 	@Override
-	public void onDoShowDrinkRaised() {
+	public void onDoChangeToSoupRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.myTimer.stop();
-//		theMachine.timeValue.setText("");
-		BufferedImage myPicture = null;
-		if(theMachine.isOwnCup==false) {
-			try {
-				myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
-			} catch (IOException ee) {
-				ee.printStackTrace();
-			}
-			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-		}
-			
-		else {
-			try {
-				myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
-			} catch (IOException ee) {
-				ee.printStackTrace();
-			}
-			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-			}
-		}
+		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>you have choosed the drink of Soup");
+		theMachine.changeToNormal();
+		theMachine.changeToSoup();
+	}
+
+	@Override
+	public void onDoChangeToIcedTeaRaised() {
+		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>you have choosed the drink of IcedTea");
+		theMachine.changeToSugar();
+		theMachine.changeToIcedTea();
+	}
+
+	
 }
 
 
@@ -239,7 +328,7 @@ public class DrinkFactoryMachine extends JFrame {
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
 	protected JLabel messagesToUser, messagesToUser1,lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature, timeValue;
-	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
+	protected JSlider sugarSlider, sizeSlider, temperatureSlider, temperature1Slider, spicesSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
 	protected String drinkType = "",nfcInfo="";
@@ -277,7 +366,60 @@ public class DrinkFactoryMachine extends JFrame {
 //		timeValue.setText("time rest: "+secs +"s\n");
 //		repaint();
 //	}
+	public void changeToSoup() {
+		lblSugar.setText("Spices");
+		contentPane.remove(sugarSlider);
+		contentPane.repaint();
+		contentPane.add(spicesSlider);
+		
+	}
+	public void changeToSugar() {
+		lblSugar.setText("Sugar");
+		contentPane.remove(spicesSlider);
+		contentPane.repaint();
+		contentPane.add(sugarSlider);
+		
+	}
 	
+	public void changeToIcedTea() {
+		contentPane.remove(temperatureSlider);
+		contentPane.repaint();
+		contentPane.add(temperature1Slider);
+		
+	}
+	public void changeToNormal() {
+		contentPane.remove(temperature1Slider);
+		contentPane.repaint();
+		contentPane.add(temperatureSlider);
+		
+	}
+	
+	
+	public void showDrink() {
+		// TODO Auto-generated method stub
+//		theMachine.myTimer.stop();
+//		theMachine.timeValue.setText("");
+		BufferedImage myPicture = null;
+		if(isOwnCup==false) {
+			try {
+				myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			labelForPictures.setIcon(new ImageIcon(myPicture));
+		}
+			
+		else {
+			try {
+				myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			labelForPictures.setIcon(new ImageIcon(myPicture));
+			}
+	}
+	
+
 	public double getPrice(String type) {
 		if(prices.containsKey(type))
 			return prices.get(type);
@@ -296,11 +438,11 @@ public class DrinkFactoryMachine extends JFrame {
                 new DrinkFactoryMachineImplementation(this)
 				);
 		
-		prices.put("Coffee", 0.5);
-		prices.put("Tea", 0.5);
+		prices.put("Coffee", 0.35);
+		prices.put("Tea", 0.4);
 		prices.put("Expresso", 0.5);
-		prices.put("Soup", 0.5);
-		prices.put("Iced Tea", 1.0);
+		prices.put("Soup", 0.75);
+		prices.put("Iced Tea", 0.5);
 		
 		setForeground(Color.DARK_GRAY);
 		setFont(new Font("Cantarell", Font.BOLD, 22));
@@ -422,7 +564,7 @@ public class DrinkFactoryMachine extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				drinkType = "Iced Tea";	
-				theFSM.raiseType1_btn();
+				theFSM.raiseType3_btn();
 			}
 		});
 
@@ -454,9 +596,41 @@ public class DrinkFactoryMachine extends JFrame {
 		      }
 		});
 
+		
+		
+		spicesSlider = new JSlider();
+		spicesSlider.setPaintLabels(true);
+		spicesSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		spicesSlider.setValue(2);
+		spicesSlider.setBackground(Color.DARK_GRAY);
+		spicesSlider.setForeground(Color.white);
+		spicesSlider.setPaintTicks(true);
+		spicesSlider.setMajorTickSpacing(1);
+		spicesSlider.setMaximum(3);
+		spicesSlider.setBounds(480, 80, 320, 85);
+		spicesSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli1_btn();
+		      }
+		});
+		Hashtable<Integer, JLabel> spicesTable = new Hashtable<Integer, JLabel>();
+		spicesTable.put(0, new JLabel("paprika"));
+		spicesTable.put(1, new JLabel("basil"));
+		spicesTable.put(2, new JLabel("thyme"));
+		spicesTable.put(3, new JLabel("salt"));
+		for (JLabel l : spicesTable.values()) {
+			l.setForeground(Color.white);
+		}
+		spicesSlider.setLabelTable(spicesTable);
+		
+		
+		
+		
+		
+		
 		sizeSlider = new JSlider();
 		sizeSlider.setPaintTicks(true);
-		sizeSlider.setValue(1);
+		sizeSlider.setValue(0);
 		sizeSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sizeSlider.setBackground(Color.DARK_GRAY);
 		sizeSlider.setForeground(Color.white);
@@ -500,6 +674,32 @@ public class DrinkFactoryMachine extends JFrame {
 		contentPane.add(temperatureSlider);
 
 		
+		temperature1Slider = new JSlider();
+		temperature1Slider.setPaintLabels(true);
+		temperature1Slider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		temperature1Slider.setValue(0);
+		temperature1Slider.setBackground(Color.DARK_GRAY);
+		temperature1Slider.setForeground(Color.white);
+		temperature1Slider.setPaintTicks(true);
+		temperature1Slider.setMajorTickSpacing(1);
+		temperature1Slider.setMaximum(1);
+		temperature1Slider.setBounds(480, 340, 320, 85);
+		temperature1Slider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli3_btn();
+		      }
+		});
+
+		Hashtable<Integer, JLabel> temperature1Table = new Hashtable<Integer, JLabel>();
+		temperature1Table.put(0, new JLabel("normal"));
+		temperature1Table.put(1, new JLabel("long"));
+		for (JLabel l : temperature1Table.values()) {
+			l.setForeground(Color.white);
+		}
+		temperature1Slider.setLabelTable(temperature1Table);
+
+		
+		
 
 		lblSugar = new JLabel("Sugar");
 		lblSugar.setFont(new Font("Arial",Font.BOLD,20));
@@ -508,6 +708,7 @@ public class DrinkFactoryMachine extends JFrame {
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSugar.setBounds(620, 50, 65, 25);
 		contentPane.add(lblSugar);
+	
 
 		lblSize = new JLabel("Size");
 		lblSize.setFont(new Font("Arial",Font.BOLD,20));
@@ -652,6 +853,7 @@ public class DrinkFactoryMachine extends JFrame {
 					ee.printStackTrace();
 				}
 				isOwnCup=true;
+				theFSM.raiseAddCup_Btn();
 				labelForPictures.setIcon(new ImageIcon(myPicture));
 			}
 		});
