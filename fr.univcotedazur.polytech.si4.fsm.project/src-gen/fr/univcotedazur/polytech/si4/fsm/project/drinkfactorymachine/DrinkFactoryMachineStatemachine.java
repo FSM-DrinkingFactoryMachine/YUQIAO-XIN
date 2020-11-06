@@ -901,7 +901,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'state_prepare'. */
 	private void entryAction_main_region_state_prepare() {
-		timer.setTimer(this, 5, (10 * 1000), false);
+		timer.setTimer(this, 5, (15 * 1000), false);
 		
 		sCInterface.raiseDoPrepare();
 	}
@@ -1575,7 +1575,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 													enterSequence_main_region_state_refund1_default();
 													react();
 												} else {
-													did_transition = false;
+													if (sCInterface.nfc_btn) {
+														exitSequence_main_region_state_1();
+														entryAction_main_region_state_1();
+														enterSequence_main_region_state_1_r1_default();
+														enterSequence_main_region_state_1_r2_default();
+														enterSequence_main_region_state_1_r3_default();
+														enterSequence_main_region_state_1_r4_default();
+														enterSequence_main_region_state_1_r5_state_nfc_default();
+														enterSequence_main_region_state_1_r6_default();
+														enterSequence_main_region_state_1_r7_default();
+														react();
+													} else {
+														did_transition = false;
+													}
 												}
 											}
 										}
@@ -1682,12 +1695,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				enterSequence_main_region_state_prepare_default();
 				react();
 			} else {
-				if (sCInterface.nfc_btn) {
-					exitSequence_main_region_state_1_r5_state_nfc();
-					enterSequence_main_region_state_1_r5_state_nfc_default();
-				} else {
-					did_transition = false;
-				}
+				did_transition = false;
 			}
 		}
 		return did_transition;

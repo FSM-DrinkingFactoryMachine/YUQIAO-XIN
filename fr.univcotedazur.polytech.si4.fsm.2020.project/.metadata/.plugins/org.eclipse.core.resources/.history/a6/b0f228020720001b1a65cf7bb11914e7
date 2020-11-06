@@ -129,15 +129,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoModify3Raised() {
 		// TODO Auto-generated method stub
-		if(theMachine.temperatureSlider.getValue()==0)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 20°C");
-		else if(theMachine.temperatureSlider.getValue()==1)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 35°C");
-		else if(theMachine.temperatureSlider.getValue()==2)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 60°C");
-		else
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 85°C");
-		
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is "+theMachine.temperatureSlider.getValue());
 	}
 
 	@Override
