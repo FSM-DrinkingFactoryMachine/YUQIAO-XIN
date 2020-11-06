@@ -901,7 +901,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'state_prepare'. */
 	private void entryAction_main_region_state_prepare() {
-		timer.setTimer(this, 5, (15 * 1000), false);
+		timer.setTimer(this, 5, (10 * 1000), false);
 		
 		sCInterface.raiseDoPrepare();
 	}

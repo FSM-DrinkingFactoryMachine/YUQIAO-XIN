@@ -89,7 +89,7 @@
         <outgoingTransitions xmi:id="_B1OjsBT_EeuRZ9CkzOJKCg" specification="after 1ms[pay==0] " target="_UERdIBT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_AOSF8BT9EeuRZ9CkzOJKCg" specification="entry/raise doPrepare" name="state_prepare" incomingTransitions="_owC54BT8EeuRZ9CkzOJKCg _PlUzUBT7EeuRZ9CkzOJKCg">
-        <outgoingTransitions xmi:id="_RlzycBT9EeuRZ9CkzOJKCg" specification="after 10s " target="_N6zyQBT7EeuRZ9CkzOJKCg"/>
+        <outgoingTransitions xmi:id="_RlzycBT9EeuRZ9CkzOJKCg" specification="after 15s " target="_N6zyQBT7EeuRZ9CkzOJKCg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_zVmRYBT-EeuRZ9CkzOJKCg" specification="entry/raise doRefund " name="state_refund2" incomingTransitions="_19YzABT-EeuRZ9CkzOJKCg">
         <outgoingTransitions xmi:id="_J-6AkBT_EeuRZ9CkzOJKCg" specification="after 5s " target="_UERdIBT2Eeuhf6sncyleXQ"/>
