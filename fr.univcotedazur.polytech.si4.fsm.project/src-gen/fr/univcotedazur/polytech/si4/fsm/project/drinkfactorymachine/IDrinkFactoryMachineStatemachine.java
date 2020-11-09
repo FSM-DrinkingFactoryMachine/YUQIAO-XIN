@@ -16,8 +16,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseType2_btn();
 		
-		public void raiseType3_btn();
-		
 		public void raiseSli1_btn();
 		
 		public void raiseSli2_btn();
@@ -58,9 +56,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoResetTime();
 		
-		public boolean isRaisedDoChangeToSoup();
-		
-		public boolean isRaisedDoChangeToIcedTea();
+		public boolean isRaisedDoShowDrink();
 		
 		public double getPay();
 		
@@ -69,10 +65,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public double getPrice();
 		
 		public void setPrice(double value);
-		
-		public boolean getIsBiip();
-		
-		public void setIsBiip(boolean value);
 		
 	public List<SCInterfaceListener> getListeners();
 	}
@@ -92,8 +84,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoShowPricePayRaised();
 		public void onDoShowTimeRaised();
 		public void onDoResetTimeRaised();
-		public void onDoChangeToSoupRaised();
-		public void onDoChangeToIcedTeaRaised();
+		public void onDoShowDrinkRaised();
 		}
 	
 	public SCInterface getSCInterface();
