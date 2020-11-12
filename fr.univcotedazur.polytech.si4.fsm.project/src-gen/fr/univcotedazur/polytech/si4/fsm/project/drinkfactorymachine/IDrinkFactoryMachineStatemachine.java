@@ -98,11 +98,11 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoTampGrain();
 		
-		public boolean isRaisedDoSetBag();
+		public boolean isRaisedDoSetSachet();
 		
 		public boolean isRaisedDoWaitInfusion();
 		
-		public boolean isRaisedDoWithdrawBag();
+		public boolean isRaisedDoWithdrawSachet();
 		
 		public boolean isRaisedDoJudgeCup();
 		
@@ -162,9 +162,9 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoAddWaterRaised();
 		public void onDoCrushGrainRaised();
 		public void onDoTampGrainRaised();
-		public void onDoSetBagRaised();
+		public void onDoSetSachetRaised();
 		public void onDoWaitInfusionRaised();
-		public void onDoWithdrawBagRaised();
+		public void onDoWithdrawSachetRaised();
 		public void onDoJudgeCupRaised();
 		public void onDoSetSoupRaised();
 		public void onDoAddSpiceRaised();

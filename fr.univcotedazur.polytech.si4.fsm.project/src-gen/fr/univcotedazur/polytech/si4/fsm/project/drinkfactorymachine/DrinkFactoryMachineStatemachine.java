@@ -790,20 +790,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean doSetBag;
+		private boolean doSetSachet;
 		
 		
-		public boolean isRaisedDoSetBag() {
+		public boolean isRaisedDoSetSachet() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doSetBag;
+				return doSetSachet;
 			}
 		}
 		
-		protected void raiseDoSetBag() {
+		protected void raiseDoSetSachet() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doSetBag = true;
+				doSetSachet = true;
 				for (SCInterfaceListener listener : listeners) {
-					listener.onDoSetBagRaised();
+					listener.onDoSetSachetRaised();
 				}
 			}
 		}
@@ -826,20 +826,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean doWithdrawBag;
+		private boolean doWithdrawSachet;
 		
 		
-		public boolean isRaisedDoWithdrawBag() {
+		public boolean isRaisedDoWithdrawSachet() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doWithdrawBag;
+				return doWithdrawSachet;
 			}
 		}
 		
-		protected void raiseDoWithdrawBag() {
+		protected void raiseDoWithdrawSachet() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doWithdrawBag = true;
+				doWithdrawSachet = true;
 				for (SCInterfaceListener listener : listeners) {
-					listener.onDoWithdrawBagRaised();
+					listener.onDoWithdrawSachetRaised();
 				}
 			}
 		}
@@ -1179,9 +1179,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doAddWater = false;
 		doCrushGrain = false;
 		doTampGrain = false;
-		doSetBag = false;
+		doSetSachet = false;
 		doWaitInfusion = false;
-		doWithdrawBag = false;
+		doWithdrawSachet = false;
 		doJudgeCup = false;
 		doSetSoup = false;
 		doAddSpice = false;
@@ -1223,7 +1223,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_prepare_r1_wait_recover,
 		main_region_state_prepare_r1_tea,
 		main_region_state_prepare_r1_tea_r1_state_1,
-		main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag,
+		main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet,
 		main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water,
 		main_region_state_prepare_r1_tea_r1_state_2,
 		main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat,
@@ -1233,7 +1233,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_prepare_r1_tea_r1_state_3_r1_add_sugar,
 		main_region_state_prepare_r1_tea_r1_state_3_r2_add_water,
 		main_region_state_prepare_r1_tea_r1_wait_infusion,
-		main_region_state_prepare_r1_tea_r1_withdraw_bag,
+		main_region_state_prepare_r1_tea_r1_withdraw_sachet,
 		main_region_state_prepare_r1_soup,
 		main_region_state_prepare_r1_soup_r1_state_1,
 		main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup,
@@ -1395,8 +1395,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			case main_region_state_prepare_r1_wait_recover:
 				main_region_state_prepare_r1_wait_recover_react(true);
 				break;
-			case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-				main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag_react(true);
+			case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+				main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet_react(true);
 				break;
 			case main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water:
 				main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water_react(true);
@@ -1419,8 +1419,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			case main_region_state_prepare_r1_tea_r1_wait_infusion:
 				main_region_state_prepare_r1_tea_r1_wait_infusion_react(true);
 				break;
-			case main_region_state_prepare_r1_tea_r1_withdraw_bag:
-				main_region_state_prepare_r1_tea_r1_withdraw_bag_react(true);
+			case main_region_state_prepare_r1_tea_r1_withdraw_sachet:
+				main_region_state_prepare_r1_tea_r1_withdraw_sachet_react(true);
 				break;
 			case main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup:
 				main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup_react(true);
@@ -1642,12 +1642,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			return stateVector[0] == State.main_region_state_prepare_r1_wait_recover;
 		case main_region_state_prepare_r1_tea:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare_r1_tea.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_tea_r1_withdraw_bag.ordinal();
+					main_region_state_prepare_r1_tea.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_tea_r1_withdraw_sachet.ordinal();
 		case main_region_state_prepare_r1_tea_r1_state_1:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_prepare_r1_tea_r1_state_1.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water.ordinal();
-		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-			return stateVector[0] == State.main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag;
+		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+			return stateVector[0] == State.main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet;
 		case main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water:
 			return stateVector[1] == State.main_region_state_prepare_r1_tea_r1_state_1_r2_heat_water;
 		case main_region_state_prepare_r1_tea_r1_state_2:
@@ -1668,8 +1668,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			return stateVector[1] == State.main_region_state_prepare_r1_tea_r1_state_3_r2_add_water;
 		case main_region_state_prepare_r1_tea_r1_wait_infusion:
 			return stateVector[0] == State.main_region_state_prepare_r1_tea_r1_wait_infusion;
-		case main_region_state_prepare_r1_tea_r1_withdraw_bag:
-			return stateVector[0] == State.main_region_state_prepare_r1_tea_r1_withdraw_bag;
+		case main_region_state_prepare_r1_tea_r1_withdraw_sachet:
+			return stateVector[0] == State.main_region_state_prepare_r1_tea_r1_withdraw_sachet;
 		case main_region_state_prepare_r1_soup:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_prepare_r1_soup.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_soup_r1_add_water.ordinal();
@@ -2014,16 +2014,16 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoTampGrain();
 	}
 	
-	public synchronized boolean isRaisedDoSetBag() {
-		return sCInterface.isRaisedDoSetBag();
+	public synchronized boolean isRaisedDoSetSachet() {
+		return sCInterface.isRaisedDoSetSachet();
 	}
 	
 	public synchronized boolean isRaisedDoWaitInfusion() {
 		return sCInterface.isRaisedDoWaitInfusion();
 	}
 	
-	public synchronized boolean isRaisedDoWithdrawBag() {
-		return sCInterface.isRaisedDoWithdrawBag();
+	public synchronized boolean isRaisedDoWithdrawSachet() {
+		return sCInterface.isRaisedDoWithdrawSachet();
 	}
 	
 	public synchronized boolean isRaisedDoJudgeCup() {
@@ -2129,9 +2129,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.setTimer(this, 2, (5 * 1000), false);
 	}
 	
-	/* Entry action for state 'set_bag'. */
-	private void entryAction_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag() {
-		sCInterface.raiseDoSetBag();
+	/* Entry action for state 'set_sachet'. */
+	private void entryAction_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet() {
+		sCInterface.raiseDoSetSachet();
 	}
 	
 	/* Entry action for state 'heat_water'. */
@@ -2181,11 +2181,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseDoWaitInfusion();
 	}
 	
-	/* Entry action for state 'withdraw_bag'. */
-	private void entryAction_main_region_state_prepare_r1_tea_r1_withdraw_bag() {
+	/* Entry action for state 'withdraw_sachet'. */
+	private void entryAction_main_region_state_prepare_r1_tea_r1_withdraw_sachet() {
 		timer.setTimer(this, 6, (3 * 1000), false);
 		
-		sCInterface.raiseDoWithdrawBag();
+		sCInterface.raiseDoWithdrawSachet();
 	}
 	
 	/* Entry action for state 'state_1'. */
@@ -2501,8 +2501,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.unsetTimer(this, 5);
 	}
 	
-	/* Exit action for state 'withdraw_bag'. */
-	private void exitAction_main_region_state_prepare_r1_tea_r1_withdraw_bag() {
+	/* Exit action for state 'withdraw_sachet'. */
+	private void exitAction_main_region_state_prepare_r1_tea_r1_withdraw_sachet() {
 		timer.unsetTimer(this, 6);
 	}
 	
@@ -2706,11 +2706,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		enterSequence_main_region_state_prepare_r1_tea_r1_state_1_r2_default();
 	}
 	
-	/* 'default' enter sequence for state set_bag */
-	private void enterSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag_default() {
-		entryAction_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag();
+	/* 'default' enter sequence for state set_sachet */
+	private void enterSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet_default() {
+		entryAction_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag;
+		stateVector[0] = State.main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet;
 	}
 	
 	/* 'default' enter sequence for state heat_water */
@@ -2776,11 +2776,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.main_region_state_prepare_r1_tea_r1_wait_infusion;
 	}
 	
-	/* 'default' enter sequence for state withdraw_bag */
-	private void enterSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag_default() {
-		entryAction_main_region_state_prepare_r1_tea_r1_withdraw_bag();
+	/* 'default' enter sequence for state withdraw_sachet */
+	private void enterSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet_default() {
+		entryAction_main_region_state_prepare_r1_tea_r1_withdraw_sachet();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_tea_r1_withdraw_bag;
+		stateVector[0] = State.main_region_state_prepare_r1_tea_r1_withdraw_sachet;
 	}
 	
 	/* 'default' enter sequence for state soup */
@@ -3504,8 +3504,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		exitAction_main_region_state_prepare_r1_tea_r1_state_1();
 	}
 	
-	/* Default exit sequence for state set_bag */
-	private void exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag() {
+	/* Default exit sequence for state set_sachet */
+	private void exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
@@ -3568,12 +3568,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		exitAction_main_region_state_prepare_r1_tea_r1_wait_infusion();
 	}
 	
-	/* Default exit sequence for state withdraw_bag */
-	private void exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag() {
+	/* Default exit sequence for state withdraw_sachet */
+	private void exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_main_region_state_prepare_r1_tea_r1_withdraw_bag();
+		exitAction_main_region_state_prepare_r1_tea_r1_withdraw_sachet();
 	}
 	
 	/* Default exit sequence for state soup */
@@ -3948,8 +3948,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_wait_recover:
 			exitSequence_main_region_state_prepare_r1_wait_recover();
 			break;
-		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag();
+		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet();
 			break;
 		case main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat:
 			exitSequence_main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat();
@@ -3960,8 +3960,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_tea_r1_wait_infusion:
 			exitSequence_main_region_state_prepare_r1_tea_r1_wait_infusion();
 			break;
-		case main_region_state_prepare_r1_tea_r1_withdraw_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag();
+		case main_region_state_prepare_r1_tea_r1_withdraw_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet();
 			break;
 		case main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup:
 			exitSequence_main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup();
@@ -4269,8 +4269,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_wait_recover:
 			exitSequence_main_region_state_prepare_r1_wait_recover();
 			break;
-		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag();
+		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet();
 			break;
 		case main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat:
 			exitSequence_main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat();
@@ -4281,8 +4281,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_tea_r1_wait_infusion:
 			exitSequence_main_region_state_prepare_r1_tea_r1_wait_infusion();
 			break;
-		case main_region_state_prepare_r1_tea_r1_withdraw_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag();
+		case main_region_state_prepare_r1_tea_r1_withdraw_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet();
 			break;
 		case main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup:
 			exitSequence_main_region_state_prepare_r1_soup_r1_state_1_r1_put_cup();
@@ -4439,8 +4439,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_state_prepare_r1_tea_r1() {
 		switch (stateVector[0]) {
-		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag();
+		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet();
 			break;
 		case main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat:
 			exitSequence_main_region_state_prepare_r1_tea_r1_state_2_r1_wait_heat();
@@ -4451,8 +4451,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_tea_r1_wait_infusion:
 			exitSequence_main_region_state_prepare_r1_tea_r1_wait_infusion();
 			break;
-		case main_region_state_prepare_r1_tea_r1_withdraw_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag();
+		case main_region_state_prepare_r1_tea_r1_withdraw_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet();
 			break;
 		default:
 			break;
@@ -4483,8 +4483,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1() {
 		switch (stateVector[0]) {
-		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag:
-			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag();
+		case main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet:
+			exitSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet();
 			break;
 		default:
 			break;
@@ -5025,7 +5025,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default react sequence for initial entry  */
 	private void react_main_region_state_prepare_r1_tea_r1_state_1_r1__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag_default();
+		enterSequence_main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet_default();
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -5519,7 +5519,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_tea_r1_state_1_r1_set_bag_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_tea_r1_state_1_r1_set_sachet_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -5642,7 +5642,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (timeEvents[5]) {
 				exitSequence_main_region_state_prepare_r1_tea_r1_wait_infusion();
-				enterSequence_main_region_state_prepare_r1_tea_r1_withdraw_bag_default();
+				enterSequence_main_region_state_prepare_r1_tea_r1_withdraw_sachet_default();
 				main_region_state_prepare_r1_tea_react(false);
 			} else {
 				did_transition = false;
@@ -5654,7 +5654,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_tea_r1_withdraw_bag_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_tea_r1_withdraw_sachet_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {

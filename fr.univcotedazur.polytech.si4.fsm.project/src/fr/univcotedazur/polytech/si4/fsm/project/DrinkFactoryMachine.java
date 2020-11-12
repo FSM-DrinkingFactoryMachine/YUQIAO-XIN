@@ -98,7 +98,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.curpay);
+		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
+			theMachine.theFSM.raisePrepare();
+		}
 	}
 
 	@Override
@@ -152,12 +154,14 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 		if(!theMachine.drinkType.equals("")) {
 			if(theMachine.sizeSlider.getValue()==0) {
+				theMachine.curprice = theMachine.getPrice(theMachine.drinkType);
 				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
 			}
 				else if(theMachine.sizeSlider.getValue()==1) {
 					double price = theMachine.getPrice(theMachine.drinkType)+0.1;
 					BigDecimal b = new BigDecimal(price);
 					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.curprice = price;
 					theMachine.messagesToUser1.setText("the price is "+price);
 				}
 				else 
@@ -165,6 +169,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 					double price = theMachine.getPrice(theMachine.drinkType)+0.3;
 					BigDecimal b = new BigDecimal(price);
 					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					theMachine.curprice = price;
 					theMachine.messagesToUser1.setText("the price is "+price);
 				}
 		}
@@ -197,6 +202,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoWaitRecoverRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>waiting for the<br>container to be recovered.");
 		BufferedImage myPicture = null;
 		if(theMachine.isOwnCup==false) {
 			try {
@@ -227,121 +233,141 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeTypeRaised() {
 		// TODO Auto-generated method stub
-		
+		switch(theMachine.drinkType) {
+			case "coffee":
+				theMachine.theFSM.raisePr_coffee();
+				break;
+			case "expresso":
+				theMachine.theFSM.raisePr_expresso();
+				break;
+			case "Iced Tea":
+				theMachine.theFSM.raisePr_icedTea();
+				break;
+			case "soup":
+				theMachine.theFSM.raisePr_soup();
+				break;
+			case "tea":
+				theMachine.theFSM.raisePr_tea();
+				break;
+			default:
+				break;
+		}
 	}
 
 	@Override
 	public void onDoSetDosetteRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
 	}
 
 	@Override
 	public void onDoHeatWaterRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>start of<br>water heating");
 	}
 
 	@Override
 	public void onDoWaitHeatRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>waiting for<br>the right temperature");
 	}
 
 	@Override
 	public void onDoPutCupRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>positioning of the cup");
 	}
 
 	@Override
 	public void onDoAddSugarRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>adding sugar");
 	}
 
 	@Override
 	public void onDoAddWaterRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>flow of water<br>according to correct size");
 	}
 
 	@Override
 	public void onDoCrushGrainRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>grain crushing");
 	}
 
 	@Override
 	public void onDoTampGrainRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>tamping of<br>the grains<br>according to the desired size");
 	}
 
 	@Override
-	public void onDoSetBagRaised() {
+	public void onDoSetSachetRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
 	}
 
 	@Override
 	public void onDoWaitInfusionRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>waiting for the infusion");
 	}
 
 	@Override
-	public void onDoWithdrawBagRaised() {
+	public void onDoWithdrawSachetRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>withdrawal of the sachet");
 	}
 
 	@Override
 	public void onDoJudgeCupRaised() {
 		// TODO Auto-generated method stub
-		
+		if(!theMachine.isOwnCup) {
+			theMachine.theFSM.raiseHasCup();
+		}
 	}
 
 	@Override
 	public void onDoSetSoupRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>recovery and<br>pouring of a dose of soup");
 	}
 
 	@Override
 	public void onDoAddSpiceRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>add spices<br>according to the desired dose");
 	}
 
 	@Override
 	public void onDoWaitHeatToHotRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>waiting for<br>the “hot” temperature");
 	}
 
 	@Override
 	public void onDoLockDoorRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>manual door<br>locking in closed position");
 	}
 
 	@Override
 	public void onDoInjectSN3Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a short time");
 	}
 
 	@Override
 	public void onDoInjectLN3Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a long time");
 	}
 
 	@Override
 	public void onDoOpenDoorRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
 	}
 
 	@Override
@@ -353,13 +379,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCleanRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
 	}
 
 	@Override
 	public void onDoAddCoinRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.curpay);
 	}
 
 	@Override
@@ -372,7 +398,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCancleTransactionRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>canceled bank transaction");
 	}
 
 	@Override
@@ -384,12 +410,17 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCancleOrderRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>Order is cancelled");
 	}
 
 	@Override
 	public void onDoNfcCaculateRaised() {
 		// TODO Auto-generated method stub
+		if(theMachine.curprice > 0) {
+			System.out.print(theMachine.curprice);
+			theMachine.theFSM.raisePrepare();
+			
+		}
 		
 	}
 }
