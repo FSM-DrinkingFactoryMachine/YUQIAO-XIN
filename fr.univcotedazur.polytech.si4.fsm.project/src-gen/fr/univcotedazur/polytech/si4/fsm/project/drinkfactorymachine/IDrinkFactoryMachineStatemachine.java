@@ -30,9 +30,33 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseAddCup_Btn();
 		
-		public boolean isRaisedDoReset();
+		public void raisePr_icedTea();
 		
-		public boolean isRaisedDoPrepare();
+		public void raisePr_tea();
+		
+		public void raisePr_soup();
+		
+		public void raisePr_coffee();
+		
+		public void raisePr_expresso();
+		
+		public void raiseAny_btn();
+		
+		public void raiseHasCup();
+		
+		public void raiseShort();
+		
+		public void raiseLong();
+		
+		public void raisePrepare();
+		
+		public void raiseReset();
+		
+		public void raiseReturnCoins();
+		
+		public void raiseCancleTransaction();
+		
+		public boolean isRaisedDoReset();
 		
 		public boolean isRaisedDoCaculate();
 		
@@ -50,21 +74,67 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoRefund();
 		
-		public boolean isRaisedDoShowPricePay();
-		
-		public boolean isRaisedDoShowTime();
-		
 		public boolean isRaisedDoResetTime();
 		
-		public boolean isRaisedDoShowDrink();
+		public boolean isRaisedDoInitialNfcInfo();
 		
-		public double getPay();
+		public boolean isRaisedDoNfcCaculate();
 		
-		public void setPay(double value);
+		public boolean isRaisedDoJudgeType();
 		
-		public double getPrice();
+		public boolean isRaisedDoSetDosette();
 		
-		public void setPrice(double value);
+		public boolean isRaisedDoHeatWater();
+		
+		public boolean isRaisedDoWaitHeat();
+		
+		public boolean isRaisedDoPutCup();
+		
+		public boolean isRaisedDoAddSugar();
+		
+		public boolean isRaisedDoAddWater();
+		
+		public boolean isRaisedDoCrushGrain();
+		
+		public boolean isRaisedDoTampGrain();
+		
+		public boolean isRaisedDoSetBag();
+		
+		public boolean isRaisedDoWaitInfusion();
+		
+		public boolean isRaisedDoWithdrawBag();
+		
+		public boolean isRaisedDoJudgeCup();
+		
+		public boolean isRaisedDoSetSoup();
+		
+		public boolean isRaisedDoAddSpice();
+		
+		public boolean isRaisedDoWaitHeatToHot();
+		
+		public boolean isRaisedDoLockDoor();
+		
+		public boolean isRaisedDoInjectSN3();
+		
+		public boolean isRaisedDoInjectLN3();
+		
+		public boolean isRaisedDoOpenDoor();
+		
+		public boolean isRaisedDoWaitRecover();
+		
+		public boolean isRaisedDoJudgeN3Time();
+		
+		public boolean isRaisedDoClean();
+		
+		public boolean isRaisedDoAddCoin();
+		
+		public boolean isRaisedDoJudgeRB();
+		
+		public boolean isRaisedDoJudgeIfReturnCoins();
+		
+		public boolean isRaisedDoCancleTransaction();
+		
+		public boolean isRaisedDoCancleOrder();
 		
 	public List<SCInterfaceListener> getListeners();
 	}
@@ -72,7 +142,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 	public interface SCInterfaceListener {
 	
 		public void onDoResetRaised();
-		public void onDoPrepareRaised();
 		public void onDoCaculateRaised();
 		public void onDoChangeTypeRaised();
 		public void onDoModify1Raised();
@@ -81,10 +150,37 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoStoreInfoRaised();
 		public void onDoChangePriceRaised();
 		public void onDoRefundRaised();
-		public void onDoShowPricePayRaised();
-		public void onDoShowTimeRaised();
 		public void onDoResetTimeRaised();
-		public void onDoShowDrinkRaised();
+		public void onDoInitialNfcInfoRaised();
+		public void onDoNfcCaculateRaised();
+		public void onDoJudgeTypeRaised();
+		public void onDoSetDosetteRaised();
+		public void onDoHeatWaterRaised();
+		public void onDoWaitHeatRaised();
+		public void onDoPutCupRaised();
+		public void onDoAddSugarRaised();
+		public void onDoAddWaterRaised();
+		public void onDoCrushGrainRaised();
+		public void onDoTampGrainRaised();
+		public void onDoSetBagRaised();
+		public void onDoWaitInfusionRaised();
+		public void onDoWithdrawBagRaised();
+		public void onDoJudgeCupRaised();
+		public void onDoSetSoupRaised();
+		public void onDoAddSpiceRaised();
+		public void onDoWaitHeatToHotRaised();
+		public void onDoLockDoorRaised();
+		public void onDoInjectSN3Raised();
+		public void onDoInjectLN3Raised();
+		public void onDoOpenDoorRaised();
+		public void onDoWaitRecoverRaised();
+		public void onDoJudgeN3TimeRaised();
+		public void onDoCleanRaised();
+		public void onDoAddCoinRaised();
+		public void onDoJudgeRBRaised();
+		public void onDoJudgeIfReturnCoinsRaised();
+		public void onDoCancleTransactionRaised();
+		public void onDoCancleOrderRaised();
 		}
 	
 	public SCInterface getSCInterface();
