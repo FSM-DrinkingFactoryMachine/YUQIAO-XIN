@@ -412,7 +412,7 @@
         <outgoingTransitions xmi:id="_bVn90CJ-EeujvNjfrUq4SQ" specification="after 1ms" target="_aKRLABT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_zVmRYBT-EeuRZ9CkzOJKCg" specification="entry/raise doRefund " name="state_refund" incomingTransitions="_C5UgECR4EeuvzIMMxdd5dw _9_cxoCR4EeuvzIMMxdd5dw">
-        <outgoingTransitions xmi:id="_xLpH8CR4EeuvzIMMxdd5dw" specification="after 2s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
+        <outgoingTransitions xmi:id="_xLpH8CR4EeuvzIMMxdd5dw" specification="reset" target="_UERdIBT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_AHA34CR1EeuvzIMMxdd5dw" specification="entry/raise&#xA;doJudgeRB" name="judge_returnCoinsOrCancleBank" incomingTransitions="_s4fbQCR5EeuvzIMMxdd5dw">
         <outgoingTransitions xmi:id="_9_cxoCR4EeuvzIMMxdd5dw" specification="returnCoins" target="_zVmRYBT-EeuRZ9CkzOJKCg"/>

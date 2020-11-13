@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event hasCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;&#xA;&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN3&#xA;out event doInjectLN3&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN3Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;&#xA;&#xA;&#xA;" name="DrinkFactoryMachine">
+  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event hasCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;in event next&#xA;&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN3&#xA;out event doInjectLN3&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN3Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;&#xA;&#xA;&#xA;" name="DrinkFactoryMachine">
     <regions xmi:id="_Gs7fsAoNEeuSTL6gNVglBA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TsRz4BT2Eeuhf6sncyleXQ">
         <outgoingTransitions xmi:id="_W42dkBT2Eeuhf6sncyleXQ" specification="" target="_aKRLABT2Eeuhf6sncyleXQ"/>
@@ -90,7 +90,7 @@
             <outgoingTransitions xmi:id="_q5veUCRzEeuvzIMMxdd5dw" specification="" target="_m3B20CRzEeuvzIMMxdd5dw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_8CEZkCRlEeuvzIMMxdd5dw" specification="entry/raise&#xA;doWaitRecover" name="wait_recover" incomingTransitions="_42Sn3iRqEeuvzIMMxdd5dw _dI_vcCRsEeuvzIMMxdd5dw _Uh6vcCRtEeuvzIMMxdd5dw _pAc-QCRvEeuvzIMMxdd5dw _EuKJgCRyEeuvzIMMxdd5dw">
-            <outgoingTransitions xmi:id="_1ku6ACR2EeuvzIMMxdd5dw" specification="after 5s" target="_9ZidoCR3EeuvzIMMxdd5dw"/>
+            <outgoingTransitions xmi:id="_1ku6ACR2EeuvzIMMxdd5dw" specification="after 15s" target="_9ZidoCR3EeuvzIMMxdd5dw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_jlh_8CRqEeuvzIMMxdd5dw" name="tea" incomingTransitions="_lvCYMCRsEeuvzIMMxdd5dw">
             <regions xmi:id="_jlh_8yRqEeuvzIMMxdd5dw" name="r1">
@@ -266,7 +266,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_ogO_YCRqEeuvzIMMxdd5dw" name="Copy_3_coffee" incomingTransitions="_42OWdSRqEeuvzIMMxdd5dw">
             <regions xmi:id="_ogO_YyRqEeuvzIMMxdd5dw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_ogO_ZCRqEeuvzIMMxdd5dw" name="state_1" incomingTransitions="_ogO_giRqEeuvzIMMxdd5dw">
-                <outgoingTransitions xmi:id="_ogO_ZiRqEeuvzIMMxdd5dw" specification="after 5s" target="_ogO_gyRqEeuvzIMMxdd5dw"/>
+                <outgoingTransitions xmi:id="_ogO_ZiRqEeuvzIMMxdd5dw" specification="next" target="_ogO_gyRqEeuvzIMMxdd5dw"/>
                 <regions xmi:id="_ogO_ayRqEeuvzIMMxdd5dw" name="r1">
                   <vertices xsi:type="sgraph:State" xmi:id="_ogO_bCRqEeuvzIMMxdd5dw" specification="entry/raise &#xA;doSetDosette" name="set_dosette" incomingTransitions="_ogO_dSRqEeuvzIMMxdd5dw"/>
                   <vertices xsi:type="sgraph:Entry" xmi:id="_ogO_dCRqEeuvzIMMxdd5dw">
@@ -400,7 +400,7 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_m3B20CRzEeuvzIMMxdd5dw" specification="entry/raise doClean" name="clean_machine" incomingTransitions="_q5veUCRzEeuvzIMMxdd5dw">
-            <outgoingTransitions xmi:id="_XOuqECRkEeuvzIMMxdd5dw" specification="after 5s" target="_V-ysMCRkEeuvzIMMxdd5dw"/>
+            <outgoingTransitions xmi:id="_XOuqECRkEeuvzIMMxdd5dw" specification="next" target="_V-ysMCRkEeuvzIMMxdd5dw"/>
           </vertices>
         </regions>
       </vertices>
@@ -412,7 +412,7 @@
         <outgoingTransitions xmi:id="_bVn90CJ-EeujvNjfrUq4SQ" specification="after 1ms" target="_aKRLABT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_zVmRYBT-EeuRZ9CkzOJKCg" specification="entry/raise doRefund " name="state_refund" incomingTransitions="_C5UgECR4EeuvzIMMxdd5dw _9_cxoCR4EeuvzIMMxdd5dw">
-        <outgoingTransitions xmi:id="_xLpH8CR4EeuvzIMMxdd5dw" specification="after 2s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
+        <outgoingTransitions xmi:id="_xLpH8CR4EeuvzIMMxdd5dw" specification="reset" target="_UERdIBT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_AHA34CR1EeuvzIMMxdd5dw" specification="entry/raise&#xA;doJudgeRB" name="judge_returnCoinsOrCancleBank" incomingTransitions="_s4fbQCR5EeuvzIMMxdd5dw">
         <outgoingTransitions xmi:id="_9_cxoCR4EeuvzIMMxdd5dw" specification="returnCoins" target="_zVmRYBT-EeuRZ9CkzOJKCg"/>
@@ -3167,7 +3167,7 @@
     <edges xmi:id="_XOvRICRkEeuvzIMMxdd5dw" type="Transition" element="_XOuqECRkEeuvzIMMxdd5dw" source="_xSBbkiR0EeuvzIMMxdd5dw" target="_xSAyhSR0EeuvzIMMxdd5dw">
       <children xsi:type="notation:DecorationNode" xmi:id="_XOvRJCRkEeuvzIMMxdd5dw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_XOvRJSRkEeuvzIMMxdd5dw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_XOv4MCRkEeuvzIMMxdd5dw" x="-34" y="27"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_XOv4MCRkEeuvzIMMxdd5dw" x="-49" y="31"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_XOvRISRkEeuvzIMMxdd5dw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_XOvRIyRkEeuvzIMMxdd5dw" fontName="Verdana"/>

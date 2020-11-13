@@ -400,11 +400,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeIfReturnCoinsRaised() {
 		// TODO Auto-generated method stub
-		if(theMachine.curpay > theMachine.curprice) {
-			theMachine.theFSM.raiseReturnCoins();
-		}else {
-			theMachine.theFSM.raiseReset();
-		}
 		
 	}
 

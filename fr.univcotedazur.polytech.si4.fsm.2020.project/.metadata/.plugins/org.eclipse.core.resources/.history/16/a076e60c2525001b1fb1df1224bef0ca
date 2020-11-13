@@ -231,10 +231,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoSetDosetteRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
-//		theMachine.messagesToUser1.setText("");
+		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
+		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Coffee")) {
-			theMachine.controlProgressBar(250, 30);
+			theMachine.controlProgressBar(500, 30);
 		}
 		
 	}
@@ -242,8 +242,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoHeatWaterRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser1.setText("<html>start of<br>water heating");
-//		theMachine.messagesToUser1.setText("");
+		theMachine.messagesToUser1.setText("<html>start of<br>water heating");
+		theMachine.messagesToUser1.setText("");
 //		if(theMachine.drinkType.equals("Coffee")) {
 //			theMachine.controlProgressBar(500, 30);
 //			if(theMachine.currentProgress == 30) {
@@ -255,15 +255,15 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoWaitHeatRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser1.setText("<html>waiting for<br>the right temperature");
+		theMachine.messagesToUser1.setText("<html>waiting for<br>the right temperature");
 		if(theMachine.drinkType.equals("Coffee"))
-			theMachine.controlProgressBar(266, 60);
+			theMachine.controlProgressBar(500, 70);
 	}
 
 	@Override
 	public void onDoPutCupRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>positioning of the cup");
+		theMachine.messagesToUser.setText("<html>positioning of the cup");
 //		if(theMachine.drinkType.equals("Coffee"))
 //			theMachine.controlProgressBar(500, 70);
 	}
@@ -271,45 +271,45 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoAddSugarRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>adding sugar");
+		theMachine.messagesToUser.setText("<html>adding sugar");
 		if(theMachine.drinkType.equals("Coffee"))
-			theMachine.controlProgressBar(250, 100);
+			theMachine.controlProgressBar(500, 100);
 	}
 
 	@Override
 	public void onDoAddWaterRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>flow of water<br>according to correct size");
+		theMachine.messagesToUser.setText("<html>flow of water<br>according to correct size");
 	}
 
 	@Override
 	public void onDoCrushGrainRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>grain crushing");
+		theMachine.messagesToUser.setText("<html>grain crushing");
 	}
 
 	@Override
 	public void onDoTampGrainRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>tamping of<br>the grains<br>according to the desired size");
+		theMachine.messagesToUser.setText("<html>tamping of<br>the grains<br>according to the desired size");
 	}
 
 	@Override
 	public void onDoSetSachetRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
+		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
 	}
 
 	@Override
 	public void onDoWaitInfusionRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>waiting for the infusion");
+		theMachine.messagesToUser.setText("<html>waiting for the infusion");
 	}
 
 	@Override
 	public void onDoWithdrawSachetRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>withdrawal of the sachet");
+		theMachine.messagesToUser.setText("<html>withdrawal of the sachet");
 	}
 
 	@Override
@@ -323,43 +323,43 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoSetSoupRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>recovery and<br>pouring of a dose of soup");
+		theMachine.messagesToUser.setText("<html>recovery and<br>pouring of a dose of soup");
 	}
 
 	@Override
 	public void onDoAddSpiceRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>add spices<br>according to the desired dose");
+		theMachine.messagesToUser.setText("<html>add spices<br>according to the desired dose");
 	}
 
 	@Override
 	public void onDoWaitHeatToHotRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>waiting for<br>the “hot” temperature");
+		theMachine.messagesToUser.setText("<html>waiting for<br>the “hot” temperature");
 	}
 
 	@Override
 	public void onDoLockDoorRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>manual door<br>locking in closed position");
+		theMachine.messagesToUser.setText("<html>manual door<br>locking in closed position");
 	}
 
 	@Override
 	public void onDoInjectSN3Raised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a short time");
+		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a short time");
 	}
 
 	@Override
 	public void onDoInjectLN3Raised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a long time");
+		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a long time");
 	}
 
 	@Override
 	public void onDoOpenDoorRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
+		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
 	}
 
 	@Override
@@ -371,8 +371,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCleanRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
-		theMachine.messagesToUser.setText("Preparing");
+		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
 		theMachine.messagesToUser1.setText("");
 		theMachine.controlProgressBar(500, 10);
 		
@@ -400,11 +399,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeIfReturnCoinsRaised() {
 		// TODO Auto-generated method stub
-		if(theMachine.curpay > theMachine.curprice) {
-			theMachine.theFSM.raiseReturnCoins();
-		}else {
-			theMachine.theFSM.raiseReset();
-		}
 		
 	}
 
