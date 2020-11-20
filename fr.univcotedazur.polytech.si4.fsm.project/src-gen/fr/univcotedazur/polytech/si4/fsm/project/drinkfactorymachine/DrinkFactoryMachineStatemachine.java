@@ -1256,17 +1256,17 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_prepare_r1_expresso_r1_state_3,
 		main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar,
 		main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water,
-		main_region_state_prepare_r1_Copy_3_coffee,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_1,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_2,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_3,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar,
-		main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water,
+		main_region_state_prepare_r1_coffee,
+		main_region_state_prepare_r1_coffee_r1_state_1,
+		main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette,
+		main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water,
+		main_region_state_prepare_r1_coffee_r1_state_2,
+		main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat,
+		main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup,
+		main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup,
+		main_region_state_prepare_r1_coffee_r1_state_3,
+		main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar,
+		main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water,
 		main_region_state_prepare_r1_Iced_tea,
 		main_region_state_prepare_r1_Iced_tea_r1_state_1,
 		main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette,
@@ -1467,26 +1467,26 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			case main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water:
 				main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+				main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+				main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+				main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+				main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+				main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar:
+				main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar_react(true);
 				break;
-			case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water:
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water_react(true);
+			case main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water:
+				main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water_react(true);
 				break;
 			case main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette:
 				main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette_react(true);
@@ -1721,32 +1721,32 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			return stateVector[0] == State.main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar;
 		case main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water:
 			return stateVector[1] == State.main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water;
-		case main_region_state_prepare_r1_Copy_3_coffee:
+		case main_region_state_prepare_r1_coffee:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare_r1_Copy_3_coffee.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water.ordinal();
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1:
+					main_region_state_prepare_r1_coffee.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water.ordinal();
+		case main_region_state_prepare_r1_coffee_r1_state_1:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare_r1_Copy_3_coffee_r1_state_1.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water.ordinal();
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-			return stateVector[0] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-			return stateVector[1] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2:
+					main_region_state_prepare_r1_coffee_r1_state_1.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water.ordinal();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+			return stateVector[0] == State.main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette;
+		case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+			return stateVector[1] == State.main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water;
+		case main_region_state_prepare_r1_coffee_r1_state_2:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare_r1_Copy_3_coffee_r1_state_2.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup.ordinal();
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-			return stateVector[0] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-			return stateVector[1] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-			return stateVector[1] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3:
+					main_region_state_prepare_r1_coffee_r1_state_2.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup.ordinal();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+			return stateVector[0] == State.main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat;
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+			return stateVector[1] == State.main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup;
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+			return stateVector[1] == State.main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup;
+		case main_region_state_prepare_r1_coffee_r1_state_3:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare_r1_Copy_3_coffee_r1_state_3.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water.ordinal();
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar:
-			return stateVector[0] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water:
-			return stateVector[1] == State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water;
+					main_region_state_prepare_r1_coffee_r1_state_3.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water.ordinal();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar:
+			return stateVector[0] == State.main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar;
+		case main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water:
+			return stateVector[1] == State.main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water;
 		case main_region_state_prepare_r1_Iced_tea:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_prepare_r1_Iced_tea.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_Iced_tea_r1_inject_n3_r1_inject_short_n3.ordinal();
@@ -2291,52 +2291,52 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Entry action for state 'state_1'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_1() {
 		timer.setTimer(this, 13, (5 * 1000), false);
 	}
 	
 	/* Entry action for state 'set_dosette'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette() {
 		sCInterface.raiseDoSetDosette();
 	}
 	
 	/* Entry action for state 'heat_water'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water() {
 		sCInterface.raiseDoHeatWater();
 	}
 	
 	/* Entry action for state 'state_2'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_2() {
 		timer.setTimer(this, 14, (8 * 1000), false);
 	}
 	
 	/* Entry action for state 'wait_heat'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat() {
 		sCInterface.raiseDoWaitHeat();
 	}
 	
 	/* Entry action for state 'put_cup'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup() {
 		sCInterface.raiseDoPutCup();
 	}
 	
 	/* Entry action for state 'judge_cup'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup() {
 		sCInterface.raiseDoJudgeCup();
 	}
 	
 	/* Entry action for state 'state_3'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_3() {
 		timer.setTimer(this, 15, (10 * 1000), false);
 	}
 	
 	/* Entry action for state 'add_sugar'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar() {
 		sCInterface.raiseDoAddSugar();
 	}
 	
 	/* Entry action for state 'add_water'. */
-	private void entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water() {
+	private void entryAction_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water() {
 		sCInterface.raiseDoAddWater();
 	}
 	
@@ -2539,17 +2539,17 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Exit action for state 'state_1'. */
-	private void exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1() {
+	private void exitAction_main_region_state_prepare_r1_coffee_r1_state_1() {
 		timer.unsetTimer(this, 13);
 	}
 	
 	/* Exit action for state 'state_2'. */
-	private void exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2() {
+	private void exitAction_main_region_state_prepare_r1_coffee_r1_state_2() {
 		timer.unsetTimer(this, 14);
 	}
 	
 	/* Exit action for state 'state_3'. */
-	private void exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3() {
+	private void exitAction_main_region_state_prepare_r1_coffee_r1_state_3() {
 		timer.unsetTimer(this, 15);
 	}
 	
@@ -2942,79 +2942,79 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[1] = State.main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water;
 	}
 	
-	/* 'default' enter sequence for state Copy_3_coffee */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_default();
+	/* 'default' enter sequence for state coffee */
+	private void enterSequence_main_region_state_prepare_r1_coffee_default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_default();
 	}
 	
 	/* 'default' enter sequence for state state_1 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_default();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_1();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_default();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_default();
 	}
 	
 	/* 'default' enter sequence for state set_dosette */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette;
+		stateVector[0] = State.main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette;
 	}
 	
 	/* 'default' enter sequence for state heat_water */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water;
+		stateVector[1] = State.main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water;
 	}
 	
 	/* 'default' enter sequence for state state_2 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_default();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_2();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_default();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_default();
 	}
 	
 	/* 'default' enter sequence for state wait_heat */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat;
+		stateVector[0] = State.main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat;
 	}
 	
 	/* 'default' enter sequence for state put_cup */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup;
+		stateVector[1] = State.main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup;
 	}
 	
 	/* 'default' enter sequence for state judge_cup */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup;
+		stateVector[1] = State.main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup;
 	}
 	
 	/* 'default' enter sequence for state state_3 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_default();
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_3();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_default();
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_default();
 	}
 	
 	/* 'default' enter sequence for state add_sugar */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar;
+		stateVector[0] = State.main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar;
 	}
 	
 	/* 'default' enter sequence for state add_water */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water_default() {
-		entryAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water_default() {
+		entryAction_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water();
 		nextStateIndex = 1;
-		stateVector[1] = State.main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water;
+		stateVector[1] = State.main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water;
 	}
 	
 	/* 'default' enter sequence for state Iced_tea */
@@ -3339,38 +3339,38 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_default() {
+		react_main_region_state_prepare_r1_coffee_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_1_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_1_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_2_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_2_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_3_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
-	private void enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_default() {
-		react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2__entry_Default();
+	private void enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_default() {
+		react_main_region_state_prepare_r1_coffee_r1_state_3_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -3715,63 +3715,63 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[1] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state Copy_3_coffee */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee() {
-		exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1();
+	/* Default exit sequence for state coffee */
+	private void exitSequence_main_region_state_prepare_r1_coffee() {
+		exitSequence_main_region_state_prepare_r1_coffee_r1();
 	}
 	
 	/* Default exit sequence for state state_1 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1() {
-		exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1();
-		exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2();
-		exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_1() {
+		exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1();
+		exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2();
+		exitAction_main_region_state_prepare_r1_coffee_r1_state_1();
 	}
 	
 	/* Default exit sequence for state set_dosette */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state heat_water */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state state_2 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2() {
-		exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1();
-		exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2();
-		exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2() {
+		exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1();
+		exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2();
+		exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 	}
 	
 	/* Default exit sequence for state wait_heat */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state put_cup */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state judge_cup */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state add_sugar */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state add_water */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
@@ -3993,14 +3993,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar:
 			exitSequence_main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar();
 			break;
 		case main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette:
 			exitSequence_main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette();
@@ -4095,21 +4095,21 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			exitSequence_main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water();
 			exitAction_main_region_state_prepare_r1_expresso_r1_state_3();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_1();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_3();
 			break;
 		case main_region_state_prepare_r1_Iced_tea_r1_state_1_r2_heat_water:
 			exitSequence_main_region_state_prepare_r1_Iced_tea_r1_state_1_r2_heat_water();
@@ -4314,14 +4314,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar:
 			exitSequence_main_region_state_prepare_r1_expresso_r1_state_3_r1_add_sugar();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar();
 			break;
 		case main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette:
 			exitSequence_main_region_state_prepare_r1_Iced_tea_r1_state_1_r1_set_dosette();
@@ -4395,21 +4395,21 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			exitSequence_main_region_state_prepare_r1_expresso_r1_state_3_r2_add_water();
 			exitAction_main_region_state_prepare_r1_expresso_r1_state_3();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_1();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_3();
 			break;
 		case main_region_state_prepare_r1_Iced_tea_r1_state_1_r2_heat_water:
 			exitSequence_main_region_state_prepare_r1_Iced_tea_r1_state_1_r2_heat_water();
@@ -4761,59 +4761,37 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1() {
 		switch (stateVector[0]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar();
 			break;
 		default:
 			break;
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_1();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_2();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water();
-			exitAction_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r1 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1() {
-		switch (stateVector[0]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	/* Default exit sequence for region r2 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2() {
-		switch (stateVector[1]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water();
+		case main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water();
+			exitAction_main_region_state_prepare_r1_coffee_r1_state_3();
 			break;
 		default:
 			break;
@@ -4821,10 +4799,10 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Default exit sequence for region r1 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1() {
 		switch (stateVector[0]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette();
 			break;
 		default:
 			break;
@@ -4832,13 +4810,35 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Default exit sequence for region r2 */
-	private void exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2() {
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2() {
 		switch (stateVector[1]) {
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup();
+		case main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water();
 			break;
-		case main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup:
-			exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
+		default:
+			break;
+		}
+	}
+	
+	/* Default exit sequence for region r1 */
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1() {
+		switch (stateVector[0]) {
+		case main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/* Default exit sequence for region r2 */
+	private void exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2() {
+		switch (stateVector[1]) {
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup();
+			break;
+		case main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup:
+			exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
 			break;
 		default:
 			break;
@@ -5138,38 +5138,38 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_1_r1__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_1_r2__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_default();
+	private void react_main_region_state_prepare_r1_coffee_r1__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_2_r1__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_2_r2__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_3_r1__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2__entry_Default() {
-		enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water_default();
+	private void react_main_region_state_prepare_r1_coffee_r1_state_3_r2__entry_Default() {
+		enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water_default();
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -5374,7 +5374,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 								
 								enterSequence_main_region_state_choose_r6_state_caculate_default();
 							} else {
-								did_transition = false;
+								if (sCInterface.addCup_Btn) {
+									exitSequence_main_region_state_choose_r6_state_caculate();
+									sCInterface.raiseDoChangePrice();
+									
+									enterSequence_main_region_state_choose_r6_state_caculate_default();
+								} else {
+									did_transition = false;
+								}
 							}
 						}
 					}
@@ -5444,7 +5451,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.pr_coffee) {
 				exitSequence_main_region_state_prepare_r1_state_judgeType();
-				enterSequence_main_region_state_prepare_r1_Copy_3_coffee_default();
+				enterSequence_main_region_state_prepare_r1_coffee_default();
 				main_region_state_prepare_react(false);
 			} else {
 				if (sCInterface.pr_expresso) {
@@ -5964,7 +5971,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -5976,25 +5983,25 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (timeEvents[13]) {
-				exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_1();
-				enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_default();
-				main_region_state_prepare_r1_Copy_3_coffee_react(false);
+				exitSequence_main_region_state_prepare_r1_coffee_r1_state_1();
+				enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_default();
+				main_region_state_prepare_r1_coffee_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r1_set_dosette_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_1_r1_set_dosette_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -6003,37 +6010,37 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_r2_heat_water_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_1_r2_heat_water_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_r1_state_1_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_r1_state_1_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_2_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (timeEvents[14]) {
-				exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2();
-				enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_default();
-				main_region_state_prepare_r1_Copy_3_coffee_react(false);
+				exitSequence_main_region_state_prepare_r1_coffee_r1_state_2();
+				enterSequence_main_region_state_prepare_r1_coffee_r1_state_3_default();
+				main_region_state_prepare_r1_coffee_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r1_wait_heat_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_2_r1_wait_heat_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -6042,42 +6049,42 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_r1_state_2_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (sCInterface.hasCup) {
-				exitSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_judge_cup();
-				enterSequence_main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_r2_put_cup_default();
-				main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_react(false);
+				exitSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_judge_cup();
+				enterSequence_main_region_state_prepare_r1_coffee_r1_state_2_r2_put_cup_default();
+				main_region_state_prepare_r1_coffee_r1_state_2_react(false);
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_r1_state_2_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_r1_state_2_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_3_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (timeEvents[15]) {
-				exitSequence_main_region_state_prepare_r1_Copy_3_coffee();
+				exitSequence_main_region_state_prepare_r1_coffee();
 				enterSequence_main_region_state_prepare_r1_wait_recover_default();
 				main_region_state_prepare_react(false);
 			} else {
@@ -6085,12 +6092,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_react(try_transition);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r1_add_sugar_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_3_r1_add_sugar_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -6099,14 +6106,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_r2_add_water_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_coffee_r1_state_3_r2_add_water_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = main_region_state_prepare_r1_Copy_3_coffee_r1_state_3_react(try_transition);
+			did_transition = main_region_state_prepare_r1_coffee_r1_state_3_react(try_transition);
 		}
 		return did_transition;
 	}

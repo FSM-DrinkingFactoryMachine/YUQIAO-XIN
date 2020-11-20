@@ -39,6 +39,7 @@ import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFacto
 class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	DrinkFactoryMachine theMachine;
 	String text = "<html>Hello Sir/Lady<br>Please choose the drink", text1 = "";
+	boolean isBiip = false;
 	public DrinkFactoryMachineImplementation(DrinkFactoryMachine dfm) {
     	theMachine = dfm; 
     }
@@ -48,18 +49,20 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		text = "<html>Hello Sir/Lady<br>Please choose the drink";
 		text1 = "";
+		isBiip = false;
 		theMachine.drinkType = "";
 		theMachine.nfcInfo = "";
+		theMachine.timer1.stop();
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
 		theMachine.sugarSlider.setValue(1);
 		theMachine.sizeSlider.setValue(1);
 		theMachine.temperatureSlider.setValue(2);
 		theMachine.progressBar.setValue(0);
-		theMachine.currentProgress=0;
+		theMachine.currentProgress = 0;
+		theMachine.isOwnCup = false;
 		theMachine.messagesToUser.setText(text);
 		theMachine.messagesToUser1.setText(text1);
-		theMachine.timer1.stop();
 //		theMachine.timeValue.setText("");
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
@@ -119,33 +122,34 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
+		isBiip = true;
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
 	}
 
 	@Override
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
-		
+		double discount = theMachine.isOwnCup? -0.1 : 0;
 		if(!theMachine.drinkType.equals("")) {
 			if(theMachine.sizeSlider.getValue()==0) {
-				theMachine.curprice = theMachine.getPrice(theMachine.drinkType);
-				theMachine.messagesToUser1.setText("the price is "+theMachine.getPrice(theMachine.drinkType));
+				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				theMachine.curprice = price;
+				theMachine.messagesToUser1.setText("the price is "+price);
+			} else if(theMachine.sizeSlider.getValue()==1) {
+				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				theMachine.curprice = price;
+				theMachine.messagesToUser1.setText("the price is "+price);
+			} else {
+				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				theMachine.curprice = price;
+				theMachine.messagesToUser1.setText("the price is "+price);
 			}
-				else if(theMachine.sizeSlider.getValue()==1) {
-					double price = theMachine.getPrice(theMachine.drinkType)+0.1;
-					BigDecimal b = new BigDecimal(price);
-					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-					theMachine.curprice = price;
-					theMachine.messagesToUser1.setText("the price is "+price);
-				}
-				else 
-				{
-					double price = theMachine.getPrice(theMachine.drinkType)+0.3;
-					BigDecimal b = new BigDecimal(price);
-					price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-					theMachine.curprice = price;
-					theMachine.messagesToUser1.setText("the price is "+price);
-				}
 		}
 	}
 
@@ -177,6 +181,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoWaitRecoverRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>waiting for the<br>container to be recovered.");
+		theMachine.timer1.stop();
 		BufferedImage myPicture = null;
 		if(theMachine.isOwnCup==false) {
 			try {
@@ -388,6 +393,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoJudgeRBRaised() {
 		// TODO Auto-generated method stub
 		
+		if(theMachine.curpay > 0) {
+			theMachine.theFSM.raiseReturnCoins();
+		}else if(isBiip) {
+			theMachine.theFSM.raiseCancleTransaction();
+		}
 	}
 
 
@@ -418,6 +428,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoNfcCaculateRaised() {
 		// TODO Auto-generated method stub
 		if(theMachine.curprice > 0) {
+			theMachine.nfcPri+=1;
 			theMachine.theFSM.raisePrepare();
 		}
 		
@@ -440,8 +451,8 @@ public class DrinkFactoryMachine extends JFrame {
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
-	protected String drinkType = "",nfcInfo="";
-	protected int currentProgress=0;//secs=45;
+	protected String drinkType = "",coinType ="",nfcInfo="";
+	protected int currentProgress=0, nfcPri = 0;//secs=45;
 	protected JProgressBar progressBar;
 	protected double curpay = 0.0,curprice = 0.0;
 	protected Timer timer1;//myTimer;
@@ -879,7 +890,7 @@ public class DrinkFactoryMachine extends JFrame {
 				labelForPictures.setIcon(new ImageIcon(myPicture));
 			}
 		});
-
+		theFSM.raiseAddCup_Btn();
 //		ActionListener doCount = new ActionListener() {
 //			@Override
 //			public void actionPerformed(ActionEvent e) {
