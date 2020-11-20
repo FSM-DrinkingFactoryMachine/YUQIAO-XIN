@@ -52,6 +52,24 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean type3_btn;
+		
+		
+		public void raiseType3_btn() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				inEventQueue.add(
+					new Runnable() {
+						@Override
+						public void run() {
+							type3_btn = true;
+							singleCycle();
+						}
+					}
+				);
+				runCycle();
+			}
+		}
+		
 		private boolean sli1_btn;
 		
 		
@@ -462,6 +480,60 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				doChangeType = true;
 				for (SCInterfaceListener listener : listeners) {
 					listener.onDoChangeTypeRaised();
+				}
+			}
+		}
+		
+		private boolean doChangeSlider;
+		
+		
+		public boolean isRaisedDoChangeSlider() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSlider;
+			}
+		}
+		
+		protected void raiseDoChangeSlider() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSlider = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSliderRaised();
+				}
+			}
+		}
+		
+		private boolean doChangeSliderToSoup;
+		
+		
+		public boolean isRaisedDoChangeSliderToSoup() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSliderToSoup;
+			}
+		}
+		
+		protected void raiseDoChangeSliderToSoup() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSliderToSoup = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSliderToSoupRaised();
+				}
+			}
+		}
+		
+		private boolean doChangeSliderToIcedTea;
+		
+		
+		public boolean isRaisedDoChangeSliderToIcedTea() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSliderToIcedTea;
+			}
+		}
+		
+		protected void raiseDoChangeSliderToIcedTea() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSliderToIcedTea = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSliderToIcedTeaRaised();
 				}
 			}
 		}
@@ -1135,6 +1207,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		protected void clearEvents() {
 			type1_btn = false;
 			type2_btn = false;
+			type3_btn = false;
 			sli1_btn = false;
 			sli2_btn = false;
 			sli3_btn = false;
@@ -1161,6 +1234,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doReset = false;
 		doCaculate = false;
 		doChangeType = false;
+		doChangeSlider = false;
+		doChangeSliderToSoup = false;
+		doChangeSliderToIcedTea = false;
 		doModify1 = false;
 		doModify2 = false;
 		doModify3 = false;
@@ -1209,7 +1285,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public enum State {
 		main_region_state_choose,
-		main_region_state_choose_r1_state_type,
+		main_region_state_choose_r1_state_type1,
+		main_region_state_choose_r1_state_type2,
+		main_region_state_choose_r1_state_type3,
 		main_region_state_choose_r2_state_sli1,
 		main_region_state_choose_r3_state_sli2,
 		main_region_state_choose_r4_state_sli3,
@@ -1362,8 +1440,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	protected synchronized void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case main_region_state_choose_r1_state_type:
-				main_region_state_choose_r1_state_type_react(true);
+			case main_region_state_choose_r1_state_type1:
+				main_region_state_choose_r1_state_type1_react(true);
+				break;
+			case main_region_state_choose_r1_state_type2:
+				main_region_state_choose_r1_state_type2_react(true);
+				break;
+			case main_region_state_choose_r1_state_type3:
+				main_region_state_choose_r1_state_type3_react(true);
 				break;
 			case main_region_state_choose_r2_state_sli1:
 				main_region_state_choose_r2_state_sli1_react(true);
@@ -1615,8 +1699,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_choose:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_choose.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_choose_r7_state_timer.ordinal();
-		case main_region_state_choose_r1_state_type:
-			return stateVector[0] == State.main_region_state_choose_r1_state_type;
+		case main_region_state_choose_r1_state_type1:
+			return stateVector[0] == State.main_region_state_choose_r1_state_type1;
+		case main_region_state_choose_r1_state_type2:
+			return stateVector[0] == State.main_region_state_choose_r1_state_type2;
+		case main_region_state_choose_r1_state_type3:
+			return stateVector[0] == State.main_region_state_choose_r1_state_type3;
 		case main_region_state_choose_r2_state_sli1:
 			return stateVector[1] == State.main_region_state_choose_r2_state_sli1;
 		case main_region_state_choose_r3_state_sli2:
@@ -1850,6 +1938,10 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseType2_btn();
 	}
 	
+	public synchronized void raiseType3_btn() {
+		sCInterface.raiseType3_btn();
+	}
+	
 	public synchronized void raiseSli1_btn() {
 		sCInterface.raiseSli1_btn();
 	}
@@ -1940,6 +2032,18 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public synchronized boolean isRaisedDoChangeType() {
 		return sCInterface.isRaisedDoChangeType();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSlider() {
+		return sCInterface.isRaisedDoChangeSlider();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSliderToSoup() {
+		return sCInterface.isRaisedDoChangeSliderToSoup();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSliderToIcedTea() {
+		return sCInterface.isRaisedDoChangeSliderToIcedTea();
 	}
 	
 	public synchronized boolean isRaisedDoModify1() {
@@ -2088,6 +2192,21 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public synchronized boolean isRaisedDoCancleOrder() {
 		return sCInterface.isRaisedDoCancleOrder();
+	}
+	
+	/* Entry action for state 'state_type1'. */
+	private void entryAction_main_region_state_choose_r1_state_type1() {
+		sCInterface.raiseDoChangeType();
+	}
+	
+	/* Entry action for state 'state_type2'. */
+	private void entryAction_main_region_state_choose_r1_state_type2() {
+		sCInterface.raiseDoChangeType();
+	}
+	
+	/* Entry action for state 'state_type3'. */
+	private void entryAction_main_region_state_choose_r1_state_type3() {
+		sCInterface.raiseDoChangeType();
 	}
 	
 	/* Entry action for state 'state_nfc1'. */
@@ -2624,10 +2743,25 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		enterSequence_main_region_state_choose_r7_default();
 	}
 	
-	/* 'default' enter sequence for state state_type */
-	private void enterSequence_main_region_state_choose_r1_state_type_default() {
+	/* 'default' enter sequence for state state_type1 */
+	private void enterSequence_main_region_state_choose_r1_state_type1_default() {
+		entryAction_main_region_state_choose_r1_state_type1();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_choose_r1_state_type;
+		stateVector[0] = State.main_region_state_choose_r1_state_type1;
+	}
+	
+	/* 'default' enter sequence for state state_type2 */
+	private void enterSequence_main_region_state_choose_r1_state_type2_default() {
+		entryAction_main_region_state_choose_r1_state_type2();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_choose_r1_state_type2;
+	}
+	
+	/* 'default' enter sequence for state state_type3 */
+	private void enterSequence_main_region_state_choose_r1_state_type3_default() {
+		entryAction_main_region_state_choose_r1_state_type3();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_choose_r1_state_type3;
 	}
 	
 	/* 'default' enter sequence for state state_sli1 */
@@ -3424,8 +3558,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		exitSequence_main_region_state_choose_r7();
 	}
 	
-	/* Default exit sequence for state state_type */
-	private void exitSequence_main_region_state_choose_r1_state_type() {
+	/* Default exit sequence for state state_type1 */
+	private void exitSequence_main_region_state_choose_r1_state_type1() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_type2 */
+	private void exitSequence_main_region_state_choose_r1_state_type2() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_type3 */
+	private void exitSequence_main_region_state_choose_r1_state_type3() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
@@ -3948,8 +4094,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_state_choose_r1_state_type:
-			exitSequence_main_region_state_choose_r1_state_type();
+		case main_region_state_choose_r1_state_type1:
+			exitSequence_main_region_state_choose_r1_state_type1();
+			break;
+		case main_region_state_choose_r1_state_type2:
+			exitSequence_main_region_state_choose_r1_state_type2();
+			break;
+		case main_region_state_choose_r1_state_type3:
+			exitSequence_main_region_state_choose_r1_state_type3();
 			break;
 		case main_region_state_prepare_r1_state_judgeType:
 			exitSequence_main_region_state_prepare_r1_state_judgeType();
@@ -4189,8 +4341,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Default exit sequence for region r1 */
 	private void exitSequence_main_region_state_choose_r1() {
 		switch (stateVector[0]) {
-		case main_region_state_choose_r1_state_type:
-			exitSequence_main_region_state_choose_r1_state_type();
+		case main_region_state_choose_r1_state_type1:
+			exitSequence_main_region_state_choose_r1_state_type1();
+			break;
+		case main_region_state_choose_r1_state_type2:
+			exitSequence_main_region_state_choose_r1_state_type2();
+			break;
+		case main_region_state_choose_r1_state_type3:
+			exitSequence_main_region_state_choose_r1_state_type3();
 			break;
 		default:
 			break;
@@ -4994,7 +5152,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default react sequence for initial entry  */
 	private void react_main_region_state_choose_r1__entry_Default() {
-		enterSequence_main_region_state_choose_r1_state_type_default();
+		enterSequence_main_region_state_choose_r1_state_type1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -5234,21 +5392,72 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_choose_r1_state_type_react(boolean try_transition) {
+	private boolean main_region_state_choose_r1_state_type1_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.type1_btn) {
-				exitSequence_main_region_state_choose_r1_state_type();
-				sCInterface.raiseDoChangeType();
+			if (sCInterface.type2_btn) {
+				exitSequence_main_region_state_choose_r1_state_type1();
+				sCInterface.raiseDoChangeSliderToSoup();
 				
-				enterSequence_main_region_state_choose_r1_state_type_default();
+				enterSequence_main_region_state_choose_r1_state_type2_default();
 			} else {
-				if (sCInterface.type2_btn) {
-					exitSequence_main_region_state_choose_r1_state_type();
-					sCInterface.raiseDoChangeType();
+				if (sCInterface.type1_btn) {
+					exitSequence_main_region_state_choose_r1_state_type1();
+					enterSequence_main_region_state_choose_r1_state_type1_default();
+				} else {
+					if (sCInterface.type3_btn) {
+						exitSequence_main_region_state_choose_r1_state_type1();
+						sCInterface.raiseDoChangeSliderToIcedTea();
+						
+						enterSequence_main_region_state_choose_r1_state_type3_default();
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_choose_r1_state_type2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.type3_btn) {
+				exitSequence_main_region_state_choose_r1_state_type2();
+				sCInterface.raiseDoChangeSliderToIcedTea();
+				
+				enterSequence_main_region_state_choose_r1_state_type3_default();
+			} else {
+				if (sCInterface.type1_btn) {
+					exitSequence_main_region_state_choose_r1_state_type2();
+					sCInterface.raiseDoChangeSlider();
 					
-					enterSequence_main_region_state_choose_r1_state_type_default();
+					enterSequence_main_region_state_choose_r1_state_type1_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_choose_r1_state_type3_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.type2_btn) {
+				exitSequence_main_region_state_choose_r1_state_type3();
+				sCInterface.raiseDoChangeSliderToSoup();
+				
+				enterSequence_main_region_state_choose_r1_state_type2_default();
+			} else {
+				if (sCInterface.type1_btn) {
+					exitSequence_main_region_state_choose_r1_state_type3();
+					sCInterface.raiseDoChangeSlider();
+					
+					enterSequence_main_region_state_choose_r1_state_type1_default();
 				} else {
 					did_transition = false;
 				}

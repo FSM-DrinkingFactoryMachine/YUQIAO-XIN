@@ -10,7 +10,7 @@
         <regions xmi:id="_6CxCEBUAEeuRZ9CkzOJKCg" name="r1">
           <vertices xsi:type="sgraph:State" xmi:id="_3cGGUBT2Eeuhf6sncyleXQ" specification="entry/raise doChangeType" name="state_type1" incomingTransitions="_s8Df8BT_EeuRZ9CkzOJKCg _H3LiQBUDEeuRZ9CkzOJKCg _t78BECsjEeulYeHvRZxQnA _2HqsYCsjEeulYeHvRZxQnA">
             <outgoingTransitions xmi:id="_m61okBT4EeuRZ9CkzOJKCg" specification="type2_btn&#xA;/raise doChangeSliderToSoup" target="_xdg8UCshEeulYeHvRZxQnA"/>
-            <outgoingTransitions xmi:id="_s8Df8BT_EeuRZ9CkzOJKCg" specification="type1_btn&#xA;" target="_3cGGUBT2Eeuhf6sncyleXQ"/>
+            <outgoingTransitions xmi:id="_s8Df8BT_EeuRZ9CkzOJKCg" specification="type1_btn&#xA;/raise doChangeType" target="_3cGGUBT2Eeuhf6sncyleXQ"/>
             <outgoingTransitions xmi:id="_Geu24CsjEeulYeHvRZxQnA" specification="type3_btn&#xA;/raise doChangeSliderToIcedTea" target="_mU3-gCsiEeulYeHvRZxQnA"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_HSFRIBUDEeuRZ9CkzOJKCg">

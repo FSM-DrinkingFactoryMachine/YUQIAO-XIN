@@ -16,6 +16,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseType2_btn();
 		
+		public void raiseType3_btn();
+		
 		public void raiseSli1_btn();
 		
 		public void raiseSli2_btn();
@@ -61,6 +63,12 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public boolean isRaisedDoCaculate();
 		
 		public boolean isRaisedDoChangeType();
+		
+		public boolean isRaisedDoChangeSlider();
+		
+		public boolean isRaisedDoChangeSliderToSoup();
+		
+		public boolean isRaisedDoChangeSliderToIcedTea();
 		
 		public boolean isRaisedDoModify1();
 		
@@ -144,6 +152,9 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoResetRaised();
 		public void onDoCaculateRaised();
 		public void onDoChangeTypeRaised();
+		public void onDoChangeSliderRaised();
+		public void onDoChangeSliderToSoupRaised();
+		public void onDoChangeSliderToIcedTeaRaised();
 		public void onDoModify1Raised();
 		public void onDoModify2Raised();
 		public void onDoModify3Raised();
