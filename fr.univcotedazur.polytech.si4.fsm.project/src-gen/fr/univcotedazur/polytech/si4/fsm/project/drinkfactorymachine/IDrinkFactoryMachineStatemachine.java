@@ -54,6 +54,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseReset();
 		
+		public void raiseNextStep();
+		
 		public void raiseReturnCoins();
 		
 		public void raiseCancleTransaction();
@@ -63,12 +65,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public boolean isRaisedDoCaculate();
 		
 		public boolean isRaisedDoChangeType();
-		
-		public boolean isRaisedDoChangeSlider();
-		
-		public boolean isRaisedDoChangeSliderToSoup();
-		
-		public boolean isRaisedDoChangeSliderToIcedTea();
 		
 		public boolean isRaisedDoModify1();
 		
@@ -122,15 +118,15 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoLockDoor();
 		
-		public boolean isRaisedDoInjectSN3();
+		public boolean isRaisedDoInjectSN2();
 		
-		public boolean isRaisedDoInjectLN3();
+		public boolean isRaisedDoInjectLN2();
 		
 		public boolean isRaisedDoOpenDoor();
 		
 		public boolean isRaisedDoWaitRecover();
 		
-		public boolean isRaisedDoJudgeN3Time();
+		public boolean isRaisedDoJudgeN2Time();
 		
 		public boolean isRaisedDoClean();
 		
@@ -144,6 +140,20 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoCancleOrder();
 		
+		public boolean isRaisedDoHeatTime();
+		
+		public boolean isRaisedDoSetTime();
+		
+		public boolean isRaisedDoAjoutTime();
+		
+		public boolean isRaisedDoInfusionTime();
+		
+		public boolean isRaisedDoChangeSlider();
+		
+		public boolean isRaisedDoChangeSliderToSoup();
+		
+		public boolean isRaisedDoChangeSliderToIcedTea();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -152,9 +162,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoResetRaised();
 		public void onDoCaculateRaised();
 		public void onDoChangeTypeRaised();
-		public void onDoChangeSliderRaised();
-		public void onDoChangeSliderToSoupRaised();
-		public void onDoChangeSliderToIcedTeaRaised();
 		public void onDoModify1Raised();
 		public void onDoModify2Raised();
 		public void onDoModify3Raised();
@@ -181,17 +188,24 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoAddSpiceRaised();
 		public void onDoWaitHeatToHotRaised();
 		public void onDoLockDoorRaised();
-		public void onDoInjectSN3Raised();
-		public void onDoInjectLN3Raised();
+		public void onDoInjectSN2Raised();
+		public void onDoInjectLN2Raised();
 		public void onDoOpenDoorRaised();
 		public void onDoWaitRecoverRaised();
-		public void onDoJudgeN3TimeRaised();
+		public void onDoJudgeN2TimeRaised();
 		public void onDoCleanRaised();
 		public void onDoAddCoinRaised();
 		public void onDoJudgeRBRaised();
 		public void onDoJudgeIfReturnCoinsRaised();
 		public void onDoCancleTransactionRaised();
 		public void onDoCancleOrderRaised();
+		public void onDoHeatTimeRaised();
+		public void onDoSetTimeRaised();
+		public void onDoAjoutTimeRaised();
+		public void onDoInfusionTimeRaised();
+		public void onDoChangeSliderRaised();
+		public void onDoChangeSliderToSoupRaised();
+		public void onDoChangeSliderToIcedTeaRaised();
 		}
 	
 	public SCInterface getSCInterface();
