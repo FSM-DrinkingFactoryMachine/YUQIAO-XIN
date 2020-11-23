@@ -60,6 +60,10 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseCancleTransaction();
 		
+		public void raiseY();
+		
+		public void raiseN();
+		
 		public boolean isRaisedDoReset();
 		
 		public boolean isRaisedDoCaculate();
@@ -154,6 +158,12 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoChangeSliderToIcedTea();
 		
+		public boolean isRaisedDoDeleteInfo();
+		
+		public boolean isRaisedDoIfAddMilk();
+		
+		public boolean isRaisedDoAddMilk();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -206,6 +216,9 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoChangeSliderRaised();
 		public void onDoChangeSliderToSoupRaised();
 		public void onDoChangeSliderToIcedTeaRaised();
+		public void onDoDeleteInfoRaised();
+		public void onDoIfAddMilkRaised();
+		public void onDoAddMilkRaised();
 		}
 	
 	public SCInterface getSCInterface();

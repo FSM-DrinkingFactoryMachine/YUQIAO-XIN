@@ -349,17 +349,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>manual door<br>locking in closed position");
 	}
 
-	@Override
-	public void onDoInjectSN3Raised() {
-		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a short time");
-	}
 
-	@Override
-	public void onDoInjectLN3Raised() {
-		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>injection of<br>liquid nitrogen for a long time");
-	}
+
+
 
 	@Override
 	public void onDoOpenDoorRaised() {
@@ -367,11 +359,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
 	}
 
-	@Override
-	public void onDoJudgeN3TimeRaised() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void onDoCleanRaised() {
@@ -431,6 +419,66 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.nfcPri+=1;
 			theMachine.theFSM.raisePrepare();
 		}
+		
+	}
+
+	@Override
+	public void onDoInjectSN2Raised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoInjectLN2Raised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoJudgeN2TimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoHeatTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoSetTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAjoutTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoInfusionTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoChangeSliderRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoChangeSliderToSoupRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoChangeSliderToIcedTeaRaised() {
+		// TODO Auto-generated method stub
 		
 	}
 }
