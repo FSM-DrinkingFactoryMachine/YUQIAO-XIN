@@ -1258,6 +1258,60 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean doChangeSlider1;
+		
+		
+		public boolean isRaisedDoChangeSlider1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSlider1;
+			}
+		}
+		
+		protected void raiseDoChangeSlider1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSlider1 = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSlider1Raised();
+				}
+			}
+		}
+		
+		private boolean doChangeSliderToSoup1;
+		
+		
+		public boolean isRaisedDoChangeSliderToSoup1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSliderToSoup1;
+			}
+		}
+		
+		protected void raiseDoChangeSliderToSoup1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSliderToSoup1 = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSliderToSoup1Raised();
+				}
+			}
+		}
+		
+		private boolean doChangeSliderToIcedTea1;
+		
+		
+		public boolean isRaisedDoChangeSliderToIcedTea1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doChangeSliderToIcedTea1;
+			}
+		}
+		
+		protected void raiseDoChangeSliderToIcedTea1() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doChangeSliderToIcedTea1 = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoChangeSliderToIcedTea1Raised();
+				}
+			}
+		}
+		
 		private boolean doDeleteInfo;
 		
 		
@@ -1385,6 +1439,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doChangeSlider = false;
 		doChangeSliderToSoup = false;
 		doChangeSliderToIcedTea = false;
+		doChangeSlider1 = false;
+		doChangeSliderToSoup1 = false;
+		doChangeSliderToIcedTea1 = false;
 		doDeleteInfo = false;
 		doIfAddMilk = false;
 		doAddMilk = false;
@@ -2164,6 +2221,18 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public synchronized boolean isRaisedDoChangeSliderToIcedTea() {
 		return sCInterface.isRaisedDoChangeSliderToIcedTea();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSlider1() {
+		return sCInterface.isRaisedDoChangeSlider1();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSliderToSoup1() {
+		return sCInterface.isRaisedDoChangeSliderToSoup1();
+	}
+	
+	public synchronized boolean isRaisedDoChangeSliderToIcedTea1() {
+		return sCInterface.isRaisedDoChangeSliderToIcedTea1();
 	}
 	
 	public synchronized boolean isRaisedDoDeleteInfo() {
@@ -3990,7 +4059,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			} else {
 				if (sCInterface.type3_btn) {
 					exitSequence_main_region_state_choose_ty_state_type2();
-					sCInterface.raiseDoChangeSliderToIcedTea();
+					sCInterface.raiseDoChangeSliderToIcedTea1();
 					
 					enterSequence_main_region_state_choose_ty_state_type3_default();
 				} else {
@@ -4007,13 +4076,13 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.type2_btn) {
 				exitSequence_main_region_state_choose_ty_state_type3();
-				sCInterface.raiseDoChangeSliderToSoup();
+				sCInterface.raiseDoChangeSliderToSoup1();
 				
 				enterSequence_main_region_state_choose_ty_state_type2_default();
 			} else {
 				if (sCInterface.type1_btn) {
 					exitSequence_main_region_state_choose_ty_state_type3();
-					sCInterface.raiseDoChangeSlider();
+					sCInterface.raiseDoChangeSlider1();
 					
 					enterSequence_main_region_state_choose_ty_state_type_default();
 				} else {

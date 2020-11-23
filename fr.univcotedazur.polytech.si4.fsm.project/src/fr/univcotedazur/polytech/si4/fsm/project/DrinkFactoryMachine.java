@@ -487,11 +487,12 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoChangeSliderRaised() {
 		// TODO Auto-generated method stub
+		theMachine.getContentPane().remove(theMachine.lblSpice);
+		theMachine.getContentPane().remove(theMachine.spiceSlider);
+		theMachine.getContentPane().repaint();
 		theMachine.getContentPane().add(theMachine.lblSugar);
 		theMachine.getContentPane().add(theMachine.sugarSlider);
-		theMachine.getContentPane().add(theMachine.lblTemperature);
-		theMachine.getContentPane().add(theMachine.temperatureSlider);
-		theMachine.getContentPane().repaint();
+		
 		
 	}
 
@@ -516,6 +517,47 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.getContentPane().add(theMachine.lblTime);
 		theMachine.getContentPane().add(theMachine.timeSlider);
 		
+		
+	}
+	
+	@Override
+	public void onDoChangeSlider1Raised() {
+		// TODO Auto-generated method stub
+		theMachine.getContentPane().remove(theMachine.lblTime);
+		theMachine.getContentPane().remove(theMachine.timeSlider);
+		theMachine.getContentPane().repaint();
+		theMachine.getContentPane().add(theMachine.lblTemperature);
+		theMachine.getContentPane().add(theMachine.temperatureSlider);
+		
+	}
+
+	@Override
+	public void onDoChangeSliderToSoup1Raised() {
+		// TODO Auto-generated method stub
+		theMachine.getContentPane().remove(theMachine.lblSugar);
+		theMachine.getContentPane().remove(theMachine.sugarSlider);
+		theMachine.getContentPane().remove(theMachine.lblTime);
+		theMachine.getContentPane().remove(theMachine.timeSlider);
+		theMachine.getContentPane().repaint();
+		theMachine.getContentPane().add(theMachine.lblSpice);
+		theMachine.getContentPane().add(theMachine.spiceSlider);
+		theMachine.getContentPane().add(theMachine.lblTemperature);
+		theMachine.getContentPane().add(theMachine.temperatureSlider);
+		
+	}
+
+	@Override
+	public void onDoChangeSliderToIcedTea1Raised() {
+		// TODO Auto-generated method stub
+		theMachine.getContentPane().remove(theMachine.lblSpice);
+		theMachine.getContentPane().remove(theMachine.spiceSlider);
+		theMachine.getContentPane().remove(theMachine.lblTemperature);
+		theMachine.getContentPane().remove(theMachine.temperatureSlider);
+		theMachine.getContentPane().repaint();
+		theMachine.getContentPane().add(theMachine.lblSugar);
+		theMachine.getContentPane().add(theMachine.sugarSlider);
+		theMachine.getContentPane().add(theMachine.lblTime);
+		theMachine.getContentPane().add(theMachine.timeSlider);
 		
 	}
 

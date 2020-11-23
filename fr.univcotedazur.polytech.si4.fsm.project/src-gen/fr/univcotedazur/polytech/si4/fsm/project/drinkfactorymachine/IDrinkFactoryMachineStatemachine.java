@@ -150,6 +150,12 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoChangeSliderToIcedTea();
 		
+		public boolean isRaisedDoChangeSlider1();
+		
+		public boolean isRaisedDoChangeSliderToSoup1();
+		
+		public boolean isRaisedDoChangeSliderToIcedTea1();
+		
 		public boolean isRaisedDoDeleteInfo();
 		
 		public boolean isRaisedDoIfAddMilk();
@@ -204,6 +210,9 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoChangeSliderRaised();
 		public void onDoChangeSliderToSoupRaised();
 		public void onDoChangeSliderToIcedTeaRaised();
+		public void onDoChangeSlider1Raised();
+		public void onDoChangeSliderToSoup1Raised();
+		public void onDoChangeSliderToIcedTea1Raised();
 		public void onDoDeleteInfoRaised();
 		public void onDoIfAddMilkRaised();
 		public void onDoAddMilkRaised();
