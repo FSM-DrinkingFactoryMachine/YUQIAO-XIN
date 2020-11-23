@@ -144,12 +144,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoCancleOrder();
 		
-		public boolean isRaisedDoHeatTime();
-		
-		public boolean isRaisedDoAjoutTime();
-		
-		public boolean isRaisedDoInfusionTime();
-		
 		public boolean isRaisedDoChangeSlider();
 		
 		public boolean isRaisedDoChangeSliderToSoup();
@@ -207,9 +201,6 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoJudgeIfReturnCoinsRaised();
 		public void onDoCancleTransactionRaised();
 		public void onDoCancleOrderRaised();
-		public void onDoHeatTimeRaised();
-		public void onDoAjoutTimeRaised();
-		public void onDoInfusionTimeRaised();
 		public void onDoChangeSliderRaised();
 		public void onDoChangeSliderToSoupRaised();
 		public void onDoChangeSliderToIcedTeaRaised();

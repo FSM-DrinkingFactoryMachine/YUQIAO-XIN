@@ -284,10 +284,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.drinkType=="Soup")
 		{
 		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
+		
 //		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
+		theMachine.theFSM.raisePr_soup();}
 		
 		
 
@@ -623,7 +622,6 @@ public class DrinkFactoryMachine extends JFrame {
 	        			theFSM.raisePr_icedTea();;
 	        			break;
 	        		case "Soup":
-	        			System.out.print("soup");
 	        			theFSM.raisePr_soup();
 	        			break;
 	        		case "Tea":

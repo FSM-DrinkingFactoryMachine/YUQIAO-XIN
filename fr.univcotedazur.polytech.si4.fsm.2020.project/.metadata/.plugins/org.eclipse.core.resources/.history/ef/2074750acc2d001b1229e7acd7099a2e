@@ -214,6 +214,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeTypeRaised() {
 		// TODO Auto-generated method stub
+		theMachine.myTimer.start();
 		switch(theMachine.drinkType) {
 			case "Coffee":
 				theMachine.theFSM.raisePr_coffee();
@@ -284,10 +285,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.drinkType=="Soup")
 		{
 		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
+		
 //		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
+		theMachine.theFSM.raisePr_soup();}
 		
 		
 
@@ -365,7 +365,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			break;
 		case "Soup":
 			theMachine.controlProgressBar(250, 35);
-			theMachine.controlRuningTime(35, "Soup");
+			theMachine.theFSM.raisePr_soup();
 			break;
 		case "Tea":
 			theMachine.theFSM.raiseNextStep();
@@ -623,7 +623,6 @@ public class DrinkFactoryMachine extends JFrame {
 	        			theFSM.raisePr_icedTea();;
 	        			break;
 	        		case "Soup":
-	        			System.out.print("soup");
 	        			theFSM.raisePr_soup();
 	        			break;
 	        		case "Tea":

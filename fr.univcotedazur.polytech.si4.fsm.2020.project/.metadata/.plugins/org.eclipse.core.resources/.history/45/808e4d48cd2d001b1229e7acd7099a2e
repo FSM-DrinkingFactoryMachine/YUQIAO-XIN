@@ -214,25 +214,25 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeTypeRaised() {
 		// TODO Auto-generated method stub
-		switch(theMachine.drinkType) {
-			case "Coffee":
-				theMachine.theFSM.raisePr_coffee();
-				break;
-			case "Expresso":
-				theMachine.theFSM.raisePr_expresso();
-				break;
-			case "Iced Tea":
-				theMachine.theFSM.raisePr_icedTea();
-				break;
-			case "Soup":
-				theMachine.theFSM.raisePr_soup();
-				break;
-			case "Tea":
-				theMachine.theFSM.raisePr_tea();
-				break;
-			default:
-				break;
-		}
+//		switch(theMachine.drinkType) {
+//			case "Coffee":
+//				theMachine.theFSM.raisePr_coffee();
+//				break;
+//			case "Expresso":
+//				theMachine.theFSM.raisePr_expresso();
+//				break;
+//			case "Iced Tea":
+//				theMachine.theFSM.raisePr_icedTea();
+//				break;
+//			case "Soup":
+//				theMachine.theFSM.raisePr_soup();
+//				break;
+//			case "Tea":
+//				theMachine.theFSM.raisePr_tea();
+//				break;
+//			default:
+//				break;
+//		}
 	}
 
 	@Override
@@ -284,10 +284,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.drinkType=="Soup")
 		{
 		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
+		
 //		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
+		theMachine.theFSM.raisePr_soup();}
 		
 		
 

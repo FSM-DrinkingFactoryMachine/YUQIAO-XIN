@@ -198,8 +198,8 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_PvOfkCrbEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doWaitInfusion" name="wait_infusion" incomingTransitions="_N4z14CruEeuPAueG2OxNJw _S8NeUCruEeuPAueG2OxNJw">
-            <outgoingTransitions xmi:id="_ZsZ6YCrbEeuPAueG2OxNJw" specification="pr_tea" target="_ZsYsQCrbEeuPAueG2OxNJw"/>
-            <outgoingTransitions xmi:id="_YLPzMCrnEeuPAueG2OxNJw" specification="pr_icedTea" target="_NAIloCrnEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_ZsZ6YCrbEeuPAueG2OxNJw" specification="pr_tea/raise doInfusionTime" target="_ZsYsQCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_YLPzMCrnEeuPAueG2OxNJw" specification="pr_icedTea/raise doInfusionTime" target="_NAIloCrnEeuPAueG2OxNJw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_ZsYsQCrbEeuPAueG2OxNJw" specification="entry/raise &#xD;&#xA;doWithdrawSachet" name="withdraw_sachet" incomingTransitions="_ZsZ6YCrbEeuPAueG2OxNJw">
             <outgoingTransitions xmi:id="_soXjMCrdEeuPAueG2OxNJw" specification="after 2s" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
@@ -228,11 +228,11 @@
             <outgoingTransitions xmi:id="_TOs5UCrqEeuPAueG2OxNJw" specification="after 1s" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_pZl8QCrsEeuPAueG2OxNJw" name="prepare_3">
-            <outgoingTransitions xmi:id="_65tuoCrtEeuPAueG2OxNJw" specification="pr_coffee" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
-            <outgoingTransitions xmi:id="_EH8_0CruEeuPAueG2OxNJw" specification="pr_expresso" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
-            <outgoingTransitions xmi:id="_JBUigCruEeuPAueG2OxNJw" specification="pr_soup" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
-            <outgoingTransitions xmi:id="_N4z14CruEeuPAueG2OxNJw" specification="pr_tea" target="_PvOfkCrbEeuPAueG2OxNJw"/>
-            <outgoingTransitions xmi:id="_S8NeUCruEeuPAueG2OxNJw" specification="pr_icedTea" target="_PvOfkCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_65tuoCrtEeuPAueG2OxNJw" specification="pr_coffee/raise doAjoutTime" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
+            <outgoingTransitions xmi:id="_EH8_0CruEeuPAueG2OxNJw" specification="pr_expresso/raise doAjoutTime" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
+            <outgoingTransitions xmi:id="_JBUigCruEeuPAueG2OxNJw" specification="pr_soup/raise doAjoutTime" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
+            <outgoingTransitions xmi:id="_N4z14CruEeuPAueG2OxNJw" specification="pr_tea/raise doAjoutTime" target="_PvOfkCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_S8NeUCruEeuPAueG2OxNJw" specification="pr_icedTea/raise doAjoutTime" target="_PvOfkCrbEeuPAueG2OxNJw"/>
             <regions xmi:id="_pZl8QyrsEeuPAueG2OxNJw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_sOjXMCrsEeuPAueG2OxNJw" specification="entry/raise doAddSugar" name="add_sugar" incomingTransitions="_YnD9wCrtEeuPAueG2OxNJw _nw2CsCshEeuHodhjWyUzSw _-Y7p4CshEeuHodhjWyUzSw"/>
             </regions>
@@ -2477,7 +2477,7 @@
     <edges xmi:id="_2hkiUCrwEeugzOvWseLKXw" type="Transition" element="_2hFaICrwEeugzOvWseLKXw" source="_HholSCz9EeuZRsrjhdd6JQ" target="_HhomCyz9EeuZRsrjhdd6JQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_2hlJYCrwEeugzOvWseLKXw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_2hlJYSrwEeugzOvWseLKXw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_2hlJYirwEeugzOvWseLKXw" x="-25" y="-13"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_2hlJYirwEeugzOvWseLKXw" x="75" y="-82"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_2hkiUSrwEeugzOvWseLKXw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_2hkiUyrwEeugzOvWseLKXw" fontName="Verdana"/>

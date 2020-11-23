@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event type3_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event needCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event nextStep&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;in event y&#xA;in event n&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN2&#xA;out event doInjectLN2&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN2Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;&#xA;&#xA;&#xA;out event doChangeSlider&#xA;out event doChangeSliderToSoup&#xA;out event doChangeSliderToIcedTea&#xA;out event doDeleteInfo&#xA;out event doIfAddMilk&#xA;out event doAddMilk&#xA;&#xA;" name="DrinkFactoryMachine">
+  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event type3_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event needCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event nextStep&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;in event y&#xA;in event n&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN2&#xA;out event doInjectLN2&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN2Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;&#xA;&#xA;out event doAjoutTime&#xA;out event doInfusionTime&#xA;out event doChangeSlider&#xA;out event doChangeSliderToSoup&#xA;out event doChangeSliderToIcedTea&#xA;out event doDeleteInfo&#xA;out event doIfAddMilk&#xA;out event doAddMilk&#xA;&#xA;" name="DrinkFactoryMachine">
     <regions xmi:id="_Gs7fsAoNEeuSTL6gNVglBA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TsRz4BT2Eeuhf6sncyleXQ">
         <outgoingTransitions xmi:id="_W42dkBT2Eeuhf6sncyleXQ" specification="" target="_aKRLABT2Eeuhf6sncyleXQ"/>
@@ -143,10 +143,10 @@
                 <regions xmi:id="_wzr1RCqqEeuPAueG2OxNJw" name="r2">
                   <vertices xsi:type="sgraph:State" xmi:id="_1u7AMCqqEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doJudgeCup" name="judge_cup" incomingTransitions="_DuEboCqrEeuPAueG2OxNJw">
                     <outgoingTransitions xmi:id="__i6CwCqqEeuPAueG2OxNJw" specification="needCup" target="_8ILBQCqqEeuPAueG2OxNJw"/>
-                    <outgoingTransitions xmi:id="_nw2CsCshEeuHodhjWyUzSw" specification="nextStep" target="_sOjXMCrsEeuPAueG2OxNJw"/>
+                    <outgoingTransitions xmi:id="_nw2CsCshEeuHodhjWyUzSw" specification="nextStep/raise doHeatTime" target="_sOjXMCrsEeuPAueG2OxNJw"/>
                   </vertices>
                   <vertices xsi:type="sgraph:State" xmi:id="_8ILBQCqqEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doPutCup" name="put_cup" incomingTransitions="__i6CwCqqEeuPAueG2OxNJw">
-                    <outgoingTransitions xmi:id="_-Y7p4CshEeuHodhjWyUzSw" specification="nextStep" target="_sOjXMCrsEeuPAueG2OxNJw"/>
+                    <outgoingTransitions xmi:id="_-Y7p4CshEeuHodhjWyUzSw" specification="nextStep/raise doHeatTime" target="_sOjXMCrsEeuPAueG2OxNJw"/>
                   </vertices>
                   <vertices xsi:type="sgraph:Entry" xmi:id="_DCS6wCqrEeuPAueG2OxNJw">
                     <outgoingTransitions xmi:id="_DuEboCqrEeuPAueG2OxNJw" specification="" target="_1u7AMCqqEeuPAueG2OxNJw"/>
@@ -159,7 +159,7 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_-PmV4CqsEeuPAueG2OxNJw" name="state_2" incomingTransitions="_ylOc0CrVEeuPAueG2OxNJw _2hFaICrwEeugzOvWseLKXw">
-            <outgoingTransitions xmi:id="_TycYMCrtEeuPAueG2OxNJw" specification="nextStep" target="_s59EoCrsEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_TycYMCrtEeuPAueG2OxNJw" specification="nextStep/raise doHeatTime" target="_s59EoCrsEeuPAueG2OxNJw"/>
             <regions xmi:id="_-PmV4yqsEeuPAueG2OxNJw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_I2cRkCrVEeuPAueG2OxNJw" specification="entry/raise doWaitHeat" name="wait_heat" incomingTransitions="_MlvN0CrVEeuPAueG2OxNJw"/>
               <vertices xsi:type="sgraph:Entry" xmi:id="_MKPkoCrVEeuPAueG2OxNJw">
@@ -180,7 +180,7 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_--lmMCrVEeuPAueG2OxNJw" name="state_3" incomingTransitions="_okT8ECrWEeuPAueG2OxNJw">
-            <outgoingTransitions xmi:id="_YnD9wCrtEeuPAueG2OxNJw" specification="nextStep" target="_sOjXMCrsEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_YnD9wCrtEeuPAueG2OxNJw" specification="nextStep/raise doHeatTime" target="_sOjXMCrsEeuPAueG2OxNJw"/>
             <regions xmi:id="_--lmMyrVEeuPAueG2OxNJw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_CaH48CrWEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doWaitHeatToHot" name="wait_hot" incomingTransitions="_EU3HUCrWEeuPAueG2OxNJw"/>
               <vertices xsi:type="sgraph:Entry" xmi:id="_D7ovACrWEeuPAueG2OxNJw">
@@ -198,8 +198,8 @@
             </regions>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_PvOfkCrbEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doWaitInfusion" name="wait_infusion" incomingTransitions="_N4z14CruEeuPAueG2OxNJw _S8NeUCruEeuPAueG2OxNJw">
-            <outgoingTransitions xmi:id="_ZsZ6YCrbEeuPAueG2OxNJw" specification="pr_tea" target="_ZsYsQCrbEeuPAueG2OxNJw"/>
-            <outgoingTransitions xmi:id="_YLPzMCrnEeuPAueG2OxNJw" specification="pr_icedTea" target="_NAIloCrnEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_ZsZ6YCrbEeuPAueG2OxNJw" specification="pr_tea/raise doInfusionTime" target="_ZsYsQCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_YLPzMCrnEeuPAueG2OxNJw" specification="pr_icedTea/raise doInfusionTime" target="_NAIloCrnEeuPAueG2OxNJw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_ZsYsQCrbEeuPAueG2OxNJw" specification="entry/raise &#xD;&#xA;doWithdrawSachet" name="withdraw_sachet" incomingTransitions="_ZsZ6YCrbEeuPAueG2OxNJw">
             <outgoingTransitions xmi:id="_soXjMCrdEeuPAueG2OxNJw" specification="after 2s" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
@@ -228,11 +228,11 @@
             <outgoingTransitions xmi:id="_TOs5UCrqEeuPAueG2OxNJw" specification="after 1s" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_pZl8QCrsEeuPAueG2OxNJw" name="prepare_3">
-            <outgoingTransitions xmi:id="_65tuoCrtEeuPAueG2OxNJw" specification="pr_coffee" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
-            <outgoingTransitions xmi:id="_EH8_0CruEeuPAueG2OxNJw" specification="pr_expresso" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
-            <outgoingTransitions xmi:id="_JBUigCruEeuPAueG2OxNJw" specification="pr_soup" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
-            <outgoingTransitions xmi:id="_N4z14CruEeuPAueG2OxNJw" specification="pr_tea" target="_PvOfkCrbEeuPAueG2OxNJw"/>
-            <outgoingTransitions xmi:id="_S8NeUCruEeuPAueG2OxNJw" specification="pr_icedTea" target="_PvOfkCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_65tuoCrtEeuPAueG2OxNJw" specification="pr_coffee/raise doAjoutTime" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
+            <outgoingTransitions xmi:id="_EH8_0CruEeuPAueG2OxNJw" specification="pr_expresso/raise doAjoutTime" target="_tyUHECz8EeuZRsrjhdd6JQ"/>
+            <outgoingTransitions xmi:id="_JBUigCruEeuPAueG2OxNJw" specification="pr_soup/raise doAjoutTime" target="_8CEZkCRlEeuvzIMMxdd5dw"/>
+            <outgoingTransitions xmi:id="_N4z14CruEeuPAueG2OxNJw" specification="pr_tea/raise doAjoutTime" target="_PvOfkCrbEeuPAueG2OxNJw"/>
+            <outgoingTransitions xmi:id="_S8NeUCruEeuPAueG2OxNJw" specification="pr_icedTea/raise doAjoutTime" target="_PvOfkCrbEeuPAueG2OxNJw"/>
             <regions xmi:id="_pZl8QyrsEeuPAueG2OxNJw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_sOjXMCrsEeuPAueG2OxNJw" specification="entry/raise doAddSugar" name="add_sugar" incomingTransitions="_YnD9wCrtEeuPAueG2OxNJw _nw2CsCshEeuHodhjWyUzSw _-Y7p4CshEeuHodhjWyUzSw"/>
             </regions>
@@ -2477,7 +2477,7 @@
     <edges xmi:id="_2hkiUCrwEeugzOvWseLKXw" type="Transition" element="_2hFaICrwEeugzOvWseLKXw" source="_HholSCz9EeuZRsrjhdd6JQ" target="_HhomCyz9EeuZRsrjhdd6JQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_2hlJYCrwEeugzOvWseLKXw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_2hlJYSrwEeugzOvWseLKXw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_2hlJYirwEeugzOvWseLKXw" x="-25" y="-13"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_2hlJYirwEeugzOvWseLKXw" x="75" y="-82"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_2hkiUSrwEeugzOvWseLKXw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_2hkiUyrwEeugzOvWseLKXw" fontName="Verdana"/>

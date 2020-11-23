@@ -1204,60 +1204,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean doHeatTime;
-		
-		
-		public boolean isRaisedDoHeatTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doHeatTime;
-			}
-		}
-		
-		protected void raiseDoHeatTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doHeatTime = true;
-				for (SCInterfaceListener listener : listeners) {
-					listener.onDoHeatTimeRaised();
-				}
-			}
-		}
-		
-		private boolean doAjoutTime;
-		
-		
-		public boolean isRaisedDoAjoutTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doAjoutTime;
-			}
-		}
-		
-		protected void raiseDoAjoutTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doAjoutTime = true;
-				for (SCInterfaceListener listener : listeners) {
-					listener.onDoAjoutTimeRaised();
-				}
-			}
-		}
-		
-		private boolean doInfusionTime;
-		
-		
-		public boolean isRaisedDoInfusionTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doInfusionTime;
-			}
-		}
-		
-		protected void raiseDoInfusionTime() {
-			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doInfusionTime = true;
-				for (SCInterfaceListener listener : listeners) {
-					listener.onDoInfusionTimeRaised();
-				}
-			}
-		}
-		
 		private boolean doChangeSlider;
 		
 		
@@ -1436,9 +1382,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doJudgeIfReturnCoins = false;
 		doCancleTransaction = false;
 		doCancleOrder = false;
-		doHeatTime = false;
-		doAjoutTime = false;
-		doInfusionTime = false;
 		doChangeSlider = false;
 		doChangeSliderToSoup = false;
 		doChangeSliderToIcedTea = false;
@@ -2209,18 +2152,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public synchronized boolean isRaisedDoCancleOrder() {
 		return sCInterface.isRaisedDoCancleOrder();
-	}
-	
-	public synchronized boolean isRaisedDoHeatTime() {
-		return sCInterface.isRaisedDoHeatTime();
-	}
-	
-	public synchronized boolean isRaisedDoAjoutTime() {
-		return sCInterface.isRaisedDoAjoutTime();
-	}
-	
-	public synchronized boolean isRaisedDoInfusionTime() {
-		return sCInterface.isRaisedDoInfusionTime();
 	}
 	
 	public synchronized boolean isRaisedDoChangeSlider() {
@@ -4505,8 +4436,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			} else {
 				if (sCInterface.nextStep) {
 					exitSequence_main_region_state_prepare_r1_perpare_2();
-					sCInterface.raiseDoHeatTime();
-					
 					enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
 					enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 					main_region_state_prepare_react(false);
@@ -4527,8 +4456,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_perpare_2();
-				sCInterface.raiseDoHeatTime();
-				
 				enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
 				enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 				main_region_state_prepare_react(false);
@@ -4548,8 +4475,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_state_2();
-				sCInterface.raiseDoHeatTime();
-				
 				enterSequence_main_region_state_prepare_r1_prepare_3_r2_add_water_default();
 				main_region_state_prepare_react(false);
 			} else {
@@ -4598,8 +4523,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_state_3();
-				sCInterface.raiseDoHeatTime();
-				
 				enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
 				enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 				main_region_state_prepare_react(false);
@@ -4658,15 +4581,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.pr_tea) {
 				exitSequence_main_region_state_prepare_r1_wait_infusion();
-				sCInterface.raiseDoInfusionTime();
-				
 				enterSequence_main_region_state_prepare_r1_withdraw_sachet_default();
 				main_region_state_prepare_react(false);
 			} else {
 				if (sCInterface.pr_icedTea) {
 					exitSequence_main_region_state_prepare_r1_wait_infusion();
-					sCInterface.raiseDoInfusionTime();
-					
 					enterSequence_main_region_state_prepare_r1_lock_door_default();
 					main_region_state_prepare_react(false);
 				} else {
@@ -4812,36 +4731,26 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.pr_coffee) {
 				exitSequence_main_region_state_prepare_r1_prepare_3();
-				sCInterface.raiseDoAjoutTime();
-				
 				enterSequence_main_region_state_prepare_r1_if_add_milk_default();
 				main_region_state_prepare_react(false);
 			} else {
 				if (sCInterface.pr_expresso) {
 					exitSequence_main_region_state_prepare_r1_prepare_3();
-					sCInterface.raiseDoAjoutTime();
-					
 					enterSequence_main_region_state_prepare_r1_if_add_milk_default();
 					main_region_state_prepare_react(false);
 				} else {
 					if (sCInterface.pr_soup) {
 						exitSequence_main_region_state_prepare_r1_prepare_3();
-						sCInterface.raiseDoAjoutTime();
-						
 						enterSequence_main_region_state_prepare_r1_wait_recover_default();
 						main_region_state_prepare_react(false);
 					} else {
 						if (sCInterface.pr_tea) {
 							exitSequence_main_region_state_prepare_r1_prepare_3();
-							sCInterface.raiseDoAjoutTime();
-							
 							enterSequence_main_region_state_prepare_r1_wait_infusion_default();
 							main_region_state_prepare_react(false);
 						} else {
 							if (sCInterface.pr_icedTea) {
 								exitSequence_main_region_state_prepare_r1_prepare_3();
-								sCInterface.raiseDoAjoutTime();
-								
 								enterSequence_main_region_state_prepare_r1_wait_infusion_default();
 								main_region_state_prepare_react(false);
 							} else {

@@ -284,10 +284,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.drinkType=="Soup")
 		{
 		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
+		
 //		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
+		theMachine.theFSM.raisePr_soup();}
 		
 		
 
@@ -365,7 +364,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			break;
 		case "Soup":
 			theMachine.controlProgressBar(250, 35);
-			theMachine.controlRuningTime(35, "Soup");
+			theMachine.theFSM.raisePr_soup();
 			break;
 		case "Tea":
 			theMachine.theFSM.raiseNextStep();
@@ -525,6 +524,23 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 	}
 
+	@Override
+	public void onDoHeatTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAjoutTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoInfusionTimeRaised() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void onDoDeleteInfoRaised() {
@@ -607,39 +623,34 @@ public class DrinkFactoryMachine extends JFrame {
 	    timer1.start();
 	}
 	
-	public void controlRuningTime(int Position, String buttonType) {
+	public void controlRuningTime(int Position) {
 		ActionListener every10=new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            if(currentProgress==Position) {
-	            	switch(buttonType) {
+	            	switch(drinkType) {
 	        		case "Coffee":
-	        			theFSM.raisePr_coffee();
+	        			theFSM.raiseNextStep();
 	        			break;
 	        		case "Expresso":
-	        			theFSM.raisePr_expresso();
+	        			theFSM.raiseNextStep();
 	        			break;
 	        		case "Iced Tea":
-	        			theFSM.raisePr_icedTea();;
+	        			theFSM.raiseNextStep();
 	        			break;
 	        		case "Soup":
-	        			System.out.print("soup");
+	        			controlProgressBar(250, 35);
 	        			theFSM.raisePr_soup();
 	        			break;
 	        		case "Tea":
-	        			theFSM.raisePr_tea();
-	        			break;
-	        		case "Next":
 	        			theFSM.raiseNextStep();
 	        			break;
 	        		default:
 	        			break;
 	            	}
 	            }
-	        }
+	                
 	    };
-	    myTimer=new Timer(10,every10);
-	    myTimer.start();
 	}
 	
 	public double getPrice(String type) {

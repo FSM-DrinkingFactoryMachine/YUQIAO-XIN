@@ -284,10 +284,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.drinkType=="Soup")
 		{
 		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
+		
 //		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
+		theMachine.theFSM.raisePr_soup();}
 		
 		
 
@@ -353,26 +352,26 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.theFSM.raiseNeedCup();
 		}
 		else {
-			switch(theMachine.drinkType) {
-		case "Coffee":
-			theMachine.theFSM.raiseNextStep();
-			break;
-		case "Expresso":
-			theMachine.theFSM.raiseNextStep();
-			break;
-		case "Iced Tea":
-			theMachine.theFSM.raiseNextStep();
-			break;
-		case "Soup":
-			theMachine.controlProgressBar(250, 35);
-			theMachine.controlRuningTime(35, "Soup");
-			break;
-		case "Tea":
-			theMachine.theFSM.raiseNextStep();
-			break;
-		default:
-			break;
-				}
+//			switch(theMachine.drinkType) {
+//		case "Coffee":
+//			theMachine.theFSM.raiseNextStep();
+//			break;
+//		case "Expresso":
+//			theMachine.theFSM.raiseNextStep();
+//			break;
+//		case "Iced Tea":
+//			theMachine.theFSM.raiseNextStep();
+//			break;
+//		case "Soup":
+//			theMachine.controlProgressBar(250, 35);
+//			theMachine.controlRuningTime(35, "Soup");
+//			break;
+//		case "Tea":
+//			theMachine.theFSM.raiseNextStep();
+//			break;
+//		default:
+//			break;
+//				}
 			}
 	}
 
