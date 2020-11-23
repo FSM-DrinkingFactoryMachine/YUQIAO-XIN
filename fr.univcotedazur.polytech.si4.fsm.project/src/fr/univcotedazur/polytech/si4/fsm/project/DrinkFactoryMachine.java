@@ -55,14 +55,15 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.timer1.stop();
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
-		theMachine.sugarSlider.setValue(1);
-		theMachine.sizeSlider.setValue(1);
-		theMachine.temperatureSlider.setValue(2);
+		theMachine.sugarSlider.setValue(0);
+		theMachine.sizeSlider.setValue(0);
+		theMachine.temperatureSlider.setValue(0);
 		theMachine.progressBar.setValue(0);
 		theMachine.currentProgress = 0;
 		theMachine.isOwnCup = false;
 		theMachine.messagesToUser.setText(text);
 		theMachine.messagesToUser1.setText(text1);
+		theMachine.messagesToUser2.setText(text1);
 //		theMachine.timeValue.setText("");
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
@@ -132,7 +133,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		double discount = theMachine.isOwnCup? -0.1 : 0;
 		if(!theMachine.drinkType.equals("")) {
 			if(theMachine.sizeSlider.getValue()==0) {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
+				double price = theMachine.getPrice(theMachine.drinkType)+discount;
 				BigDecimal b = new BigDecimal(price);
 				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 				theMachine.curprice = price;
@@ -173,6 +174,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 	@Override
 	public void onDoResetTimeRaised() {
+		
 		// TODO Auto-generated method stub
 		
 	}
@@ -239,7 +241,14 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
 //		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Coffee")) {
+			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
 			theMachine.controlProgressBar(250, 30);
+			theMachine.theFSM.raisePr_coffee();
+		}
+		else if(theMachine.drinkType.equals("Iced Tea")) {
+			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
+			theMachine.controlProgressBar(200, 15);
+			theMachine.theFSM.raisePr_icedTea();
 		}
 		
 	}
@@ -255,22 +264,36 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //				theMachine.theFSM.raiseNext();
 //			}
 //		}
+		theMachine.messagesToUser1.setText("<html>start of<br>water heating");
 	}
 
 	@Override
 	public void onDoWaitHeatRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser1.setText("<html>waiting for<br>the right temperature");
-		if(theMachine.drinkType.equals("Coffee"))
-			theMachine.controlProgressBar(266, 60);
+		theMachine.messagesToUser1.setText("");
+		theMachine.messagesToUser.setText("<html>waiting for<br>the right temperature");
+			
 	}
 
 	@Override
-	public void onDoPutCupRaised() {
+	public void onDoPutCupRaised()  {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>positioning of the cup");
 //		if(theMachine.drinkType.equals("Coffee"))
 //			theMachine.controlProgressBar(500, 70);
+		if(theMachine.drinkType=="Soup")
+		{
+		theMachine.controlProgressBar(200, 35);
+		
+//		Thread.sleep(200*36);
+		theMachine.theFSM.raisePr_soup();}
+		
+		
+
+	
+		else 
+			theMachine.theFSM.raiseNextStep();
+			
 	}
 
 	@Override
@@ -290,24 +313,29 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCrushGrainRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>grain crushing");
+		theMachine.messagesToUser.setText("<html>grain crushing");
+		theMachine.controlProgressBar(250, 30);
+		theMachine.theFSM.raisePr_expresso();
 	}
 
 	@Override
 	public void onDoTampGrainRaised() {
-		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>tamping of<br>the grains<br>according to the desired size");
+		
+		theMachine.messagesToUser1.setText("<html>tamping of the grains<br>");
 	}
 
 	@Override
 	public void onDoSetSachetRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
+		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
+		theMachine.controlProgressBar(200, 25);
+		theMachine.theFSM.raisePr_tea();
 	}
 
 	@Override
 	public void onDoWaitInfusionRaised() {
 		// TODO Auto-generated method stub
+		theMachine.controlProgressBar(250, 25);
 //		theMachine.messagesToUser.setText("<html>waiting for the infusion");
 	}
 
@@ -320,21 +348,43 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeCupRaised() {
 		// TODO Auto-generated method stub
-		if(!theMachine.isOwnCup) {
-			theMachine.theFSM.raiseHasCup();
+		if(theMachine.isOwnCup==false) {
+			theMachine.theFSM.raiseNeedCup();
 		}
+		else {
+			switch(theMachine.drinkType) {
+		case "Coffee":
+			theMachine.theFSM.raiseNextStep();
+			break;
+		case "Expresso":
+			theMachine.theFSM.raiseNextStep();
+			break;
+		case "Iced Tea":
+			theMachine.theFSM.raiseNextStep();
+			break;
+		case "Soup":
+			theMachine.controlProgressBar(250, 35);
+			theMachine.theFSM.raisePr_soup();
+			break;
+		case "Tea":
+			theMachine.theFSM.raiseNextStep();
+			break;
+		default:
+			break;
+				}
+			}
 	}
 
 	@Override
 	public void onDoSetSoupRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>recovery and<br>pouring of a dose of soup");
+		theMachine.messagesToUser1.setText("<html>recovery and<br>pouring of a dose of soup");
 	}
 
 	@Override
 	public void onDoAddSpiceRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>add spices<br>according to the desired dose");
+		theMachine.messagesToUser2.setText("<html>add spices<br>according to the desired dose");
 	}
 
 	@Override
@@ -351,15 +401,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 
 
-
-
 	@Override
 	public void onDoOpenDoorRaised() {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
 	}
 
-
+	
 
 	@Override
 	public void onDoCleanRaised() {
@@ -434,6 +482,42 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 	}
 
+
+	@Override
+	public void onDoChangeSliderRaised() {
+		// TODO Auto-generated method stub
+		theMachine.getContentPane().add(theMachine.lblSugar);
+		theMachine.getContentPane().add(theMachine.sugarSlider);
+		theMachine.getContentPane().add(theMachine.lblTemperature);
+		theMachine.getContentPane().add(theMachine.temperatureSlider);
+		theMachine.getContentPane().repaint();
+		
+	}
+
+	@Override
+	public void onDoChangeSliderToSoupRaised() {
+		// TODO Auto-generated method stub
+		theMachine.getContentPane().remove(theMachine.lblSugar);
+		theMachine.getContentPane().remove(theMachine.sugarSlider);
+		theMachine.getContentPane().repaint();//页面改变需要重新绘制
+		theMachine.getContentPane().add(theMachine.lblSpice);
+		theMachine.getContentPane().add(theMachine.spiceSlider);
+			
+	}
+
+	@Override
+	public void onDoChangeSliderToIcedTeaRaised() {
+		// TODO Auto-generated method stub
+//		if(theMachine.getContentPane().contains(theMachine.lblSpice))
+		theMachine.getContentPane().remove(theMachine.lblTemperature);
+		theMachine.getContentPane().remove(theMachine.temperatureSlider);
+		theMachine.getContentPane().repaint();
+		theMachine.getContentPane().add(theMachine.lblTime);
+		theMachine.getContentPane().add(theMachine.timeSlider);
+		
+		
+	}
+
 	@Override
 	public void onDoJudgeN2TimeRaised() {
 		// TODO Auto-generated method stub
@@ -442,12 +526,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 	@Override
 	public void onDoHeatTimeRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoSetTimeRaised() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -465,19 +543,19 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	}
 
 	@Override
-	public void onDoChangeSliderRaised() {
+	public void onDoDeleteInfoRaised() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onDoChangeSliderToSoupRaised() {
+	public void onDoIfAddMilkRaised() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onDoChangeSliderToIcedTeaRaised() {
+	public void onDoAddMilkRaised() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -495,28 +573,30 @@ public class DrinkFactoryMachine extends JFrame {
 	 */
 	private static final long serialVersionUID = 2030629304432075314L;
 	private JPanel contentPane;
-	protected JLabel messagesToUser, messagesToUser1,lblCoins, lblSugar, lblSize, lblNfc, labelForPictures, lblTemperature, timeValue;
-	protected JSlider sugarSlider, sizeSlider, temperatureSlider;
+	protected JLabel messagesToUser, messagesToUser1,messagesToUser2,lblCoins, lblSugar, lblSize, lblSpice,lblTime,lblNfc, 
+	labelForPictures, lblTemperature, timeValue;
+	protected JSlider sugarSlider, sizeSlider, temperatureSlider,spiceSlider,timeSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
 						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
 	protected String drinkType = "",coinType ="",nfcInfo="";
 	protected int currentProgress=0, nfcPri = 0;//secs=45;
 	protected JProgressBar progressBar;
 	protected double curpay = 0.0,curprice = 0.0;
-	protected Timer timer1;//myTimer;
+	protected Timer timer1,myTimer;
 	protected boolean isOwnCup=false;
+	protected boolean spiceExist=false,timeExist=false;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	
 	/**
-	 * @wbp.nonvisual location=311,475
+	 * @wbp.nonvisual location=311,47
 	 */
 	private final ImageIcon imageIcon = new ImageIcon();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -567,11 +647,11 @@ public class DrinkFactoryMachine extends JFrame {
                 new DrinkFactoryMachineImplementation(this)
 				);
 		
-		prices.put("Coffee", 0.5);
-		prices.put("Tea", 0.5);
+		prices.put("Coffee", 0.35);
+		prices.put("Tea", 0.4);
 		prices.put("Expresso", 0.5);
-		prices.put("Soup", 0.5);
-		prices.put("Iced Tea", 1.0);
+		prices.put("Soup", 0.75);
+		prices.put("Iced Tea", 0.5);//0.5 normal,0.75 long
 		
 		setForeground(Color.DARK_GRAY);
 		setFont(new Font("Cantarell", Font.BOLD, 22));
@@ -592,7 +672,7 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
 		messagesToUser.setBackground(Color.white);
-		messagesToUser.setBounds(200, 50, 250, 100);
+		messagesToUser.setBounds(200, 50, 250, 80);
 		contentPane.add(messagesToUser);
 		
 
@@ -603,7 +683,19 @@ public class DrinkFactoryMachine extends JFrame {
 		messagesToUser1.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser1.setToolTipText("message to the user");
 		messagesToUser1.setBackground(Color.white);
-		messagesToUser1.setBounds(200, 160, 250, 100);
+		messagesToUser1.setBounds(200, 150, 250, 80);
+		contentPane.add(messagesToUser1);
+		
+		
+		
+		messagesToUser2 = new JLabel("");
+		messagesToUser2.setFont(new Font("Arial",Font.BOLD,20));
+		messagesToUser2.setForeground(Color.white);
+		messagesToUser2.setHorizontalAlignment(SwingConstants.LEFT);
+		messagesToUser2.setVerticalAlignment(SwingConstants.TOP);
+		messagesToUser2.setToolTipText("message to the user");
+		messagesToUser2.setBackground(Color.white);
+		messagesToUser2.setBounds(200, 250, 250, 80);
 		contentPane.add(messagesToUser1);
 
 //		timeValue = new JLabel("");
@@ -697,7 +789,7 @@ public class DrinkFactoryMachine extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				drinkType = "Iced Tea";	
-				theFSM.raiseType1_btn();
+				theFSM.raiseType3_btn();
 				theFSM.raiseAny_btn();
 			}
 		});
@@ -714,7 +806,7 @@ public class DrinkFactoryMachine extends JFrame {
         	
 
 		sugarSlider = new JSlider();
-		sugarSlider.setValue(1);
+		sugarSlider.setValue(0);
 		sugarSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sugarSlider.setBackground(Color.DARK_GRAY);
 		sugarSlider.setForeground(Color.white);
@@ -730,10 +822,32 @@ public class DrinkFactoryMachine extends JFrame {
 		    	  theFSM.raiseAny_btn();
 		      }
 		});
+		
+		spiceSlider = new JSlider();
+		spiceSlider.setValue(0);
+		spiceSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		spiceSlider.setBackground(Color.DARK_GRAY);
+		spiceSlider.setForeground(Color.white);
+		spiceSlider.setPaintTicks(true);
+		spiceSlider.setMinorTickSpacing(1);
+		spiceSlider.setMajorTickSpacing(1);
+		spiceSlider.setMaximum(4);
+		spiceSlider.setBounds(480, 80, 320, 55);
+//		contentPane.add(spiceSlider);
+		spiceSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli1_btn();
+		    	  theFSM.raiseAny_btn();
+		      }
+		});
+		
+		
+		
+		
 
 		sizeSlider = new JSlider();
 		sizeSlider.setPaintTicks(true);
-		sizeSlider.setValue(1);
+		sizeSlider.setValue(0);
 		sizeSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		sizeSlider.setBackground(Color.DARK_GRAY);
 		sizeSlider.setForeground(Color.white);
@@ -752,7 +866,7 @@ public class DrinkFactoryMachine extends JFrame {
 		temperatureSlider = new JSlider();
 		temperatureSlider.setPaintLabels(true);
 		temperatureSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		temperatureSlider.setValue(2);
+		temperatureSlider.setValue(0);
 		temperatureSlider.setBackground(Color.DARK_GRAY);
 		temperatureSlider.setForeground(Color.white);
 		temperatureSlider.setPaintTicks(true);
@@ -779,6 +893,31 @@ public class DrinkFactoryMachine extends JFrame {
 		contentPane.add(temperatureSlider);
 
 		
+		timeSlider = new JSlider();
+		timeSlider.setPaintLabels(true);
+		timeSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		timeSlider.setValue(0);
+		timeSlider.setBackground(Color.DARK_GRAY);
+		timeSlider.setForeground(Color.white);
+		timeSlider.setPaintTicks(true);
+		timeSlider.setMajorTickSpacing(1);
+		timeSlider.setMaximum(1);
+		timeSlider.setBounds(480, 340, 320, 85);
+		timeSlider.addChangeListener(new ChangeListener() {
+		      public void stateChanged(ChangeEvent event) {
+		    	  theFSM.raiseSli3_btn();
+		    	  theFSM.raiseAny_btn();
+		      }
+		});
+
+		Hashtable<Integer, JLabel> temperatureTable1 = new Hashtable<Integer, JLabel>();
+		temperatureTable1.put(0, new JLabel("normal"));
+		temperatureTable1.put(1, new JLabel("long"));
+		for (JLabel l : temperatureTable1.values()) {
+			l.setForeground(Color.white);
+		}
+		timeSlider.setLabelTable(temperatureTable1);
+		
 
 		lblSugar = new JLabel("Sugar");
 		lblSugar.setFont(new Font("Arial",Font.BOLD,20));
@@ -787,6 +926,15 @@ public class DrinkFactoryMachine extends JFrame {
 		lblSugar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSugar.setBounds(620, 50, 65, 25);
 		contentPane.add(lblSugar);
+		
+		lblSpice = new JLabel("Spice");
+		lblSpice.setFont(new Font("Arial",Font.BOLD,20));
+		lblSpice.setForeground(Color.white);
+		lblSpice.setBackground(Color.white);
+		lblSpice.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSpice.setBounds(620, 50, 65, 25);
+//		contentPane.add(lblSugar);
+		
 
 		lblSize = new JLabel("Size");
 		lblSize.setFont(new Font("Arial",Font.BOLD,20));
@@ -804,6 +952,16 @@ public class DrinkFactoryMachine extends JFrame {
 		lblTemperature.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTemperature.setBounds(580, 310, 145, 25);
 		contentPane.add(lblTemperature);
+		
+		lblTime = new JLabel("Refrigerating Time");
+		lblTime.setFont(new Font("Arial",Font.BOLD,20));
+		lblTime.setForeground(Color.white);
+		lblTime.setBackground(Color.white);
+		lblTime.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTime.setBounds(555, 310, 180, 25);
+		
+		
+		
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
