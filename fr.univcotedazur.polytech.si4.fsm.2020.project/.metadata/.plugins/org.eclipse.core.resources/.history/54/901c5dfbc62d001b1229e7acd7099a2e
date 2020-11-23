@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event type3_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event needCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event nextStep&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;in event y&#xA;in event n&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN2&#xA;out event doInjectLN2&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN2Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;out event doHeatTime&#xA;&#xA;out event doAjoutTime&#xA;out event doInfusionTime&#xA;out event doChangeSlider&#xA;out event doChangeSliderToSoup&#xA;out event doChangeSliderToIcedTea&#xA;out event doDeleteInfo&#xA;out event doIfAddMilk&#xA;out event doAddMilk&#xA;&#xA;" name="DrinkFactoryMachine">
+  <sgraph:Statechart xmi:id="_GsW38AoNEeuSTL6gNVglBA" specification="@EventDriven&#xA;// Use the event driven execution model.&#xA;// Runs a run-to-completion step&#xA;// each time an event is raised.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'&#xA;// instead.&#xA;&#xA;@ChildFirstExecution&#xA;// In composite states, execute&#xA;// child states first.&#xA;// @ParentFirstExecution does the opposite.&#xA;&#xA;interface:&#xA;// Define events&#xA;// and variables here. &#xA;// Use CTRL + Space for content assist.&#xA;&#xA;&#xA;in event type1_btn&#xA;in event type2_btn&#xA;in event type3_btn&#xA;in event sli1_btn&#xA;in event sli2_btn&#xA;in event sli3_btn&#xA;in event pay_coins&#xA;in event nfc_btn&#xA;in event cancle_btn&#xA;in event AddCup_Btn&#xA;in event pr_icedTea&#xA;in event pr_tea&#xA;in event pr_soup&#xA;in event pr_coffee&#xA;in event pr_expresso&#xA;in event any_btn&#xA;in event hasCup&#xA;in event short&#xA;in event long&#xA;in event prepare&#xA;in event reset&#xA;in event nextStep&#xA;in event returnCoins&#xA;in event cancleTransaction&#xA;in event y&#xA;in event n&#xA;&#xA;out event doReset&#xA;out event doCaculate&#xA;out event doChangeType&#xA;out event doModify1&#xA;out event doModify2&#xA;out event doModify3&#xA;out event doStoreInfo&#xA;out event doChangePrice&#xA;out event doRefund&#xA;out event doResetTime&#xA;out event doInitialNfcInfo&#xA;out event doNfcCaculate&#xA;out event doJudgeType&#xA;out event doSetDosette&#xA;out event doHeatWater&#xA;out event doWaitHeat&#xA;out event doPutCup&#xA;out event doAddSugar&#xA;out event doAddWater&#xA;out event doCrushGrain&#xA;out event doTampGrain&#xA;out event doSetSachet&#xA;out event doWaitInfusion&#xA;out event doWithdrawSachet&#xA;out event doJudgeCup&#xA;out event doSetSoup&#xA;out event doAddSpice&#xA;out event doWaitHeatToHot&#xA;out event doLockDoor&#xA;out event doInjectSN2&#xA;out event doInjectLN2&#xA;out event doOpenDoor&#xA;out event doWaitRecover&#xA;out event doJudgeN2Time&#xA;out event doClean&#xA;out event doAddCoin&#xA;out event doJudgeRB&#xA;out event doJudgeIfReturnCoins&#xA;out event doCancleTransaction&#xA;out event doCancleOrder&#xA;out event doHeatTime&#xA;out event doSetTime&#xA;out event doAjoutTime&#xA;out event doInfusionTime&#xA;out event doChangeSlider&#xA;out event doChangeSliderToSoup&#xA;out event doChangeSliderToIcedTea&#xA;out event doDeleteInfo&#xA;out event doIfAddMilk&#xA;out event doAddMilk&#xA;&#xA;" name="DrinkFactoryMachine">
     <regions xmi:id="_Gs7fsAoNEeuSTL6gNVglBA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TsRz4BT2Eeuhf6sncyleXQ">
         <outgoingTransitions xmi:id="_W42dkBT2Eeuhf6sncyleXQ" specification="" target="_aKRLABT2Eeuhf6sncyleXQ"/>
@@ -104,21 +104,21 @@
           <vertices xsi:type="sgraph:State" xmi:id="_ppPIICqnEeuPAueG2OxNJw" name="prepare_1">
             <regions xmi:id="_ppPvMCqnEeuPAueG2OxNJw" name="r1">
               <vertices xsi:type="sgraph:State" xmi:id="_5HlsgCqnEeuPAueG2OxNJw" specification="entry/raise doSetDosette" name="set_dosette" incomingTransitions="_TgbzECqpEeuPAueG2OxNJw _0gDOwCqpEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_bmozQCqrEeuPAueG2OxNJw" specification="pr_coffee" target="_wzr1QCqqEeuPAueG2OxNJw"/>
-                <outgoingTransitions xmi:id="_okT8ECrWEeuPAueG2OxNJw" specification="pr_icedTea" target="_--lmMCrVEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_bmozQCqrEeuPAueG2OxNJw" specification="pr_coffee/raise doSetTime" target="_wzr1QCqqEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_okT8ECrWEeuPAueG2OxNJw" specification="pr_icedTea/raise doSetTime" target="_--lmMCrVEeuPAueG2OxNJw"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_L1UW8CqoEeuPAueG2OxNJw" specification="entry/raise doCrushGrain" name="crush_grain" incomingTransitions="_fcLMUCqpEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_b9IOlyrVEeuPAueG2OxNJw" specification="pr_expresso" target="_kopbwCqqEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_b9IOlyrVEeuPAueG2OxNJw" specification="pr_expresso/raise doSetTime" target="_kopbwCqqEeuPAueG2OxNJw"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_T_N2QCqoEeuPAueG2OxNJw" specification="entry/raise doSetSachet" name="set_sachet" incomingTransitions="_iOKLwCqpEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_xJ1O8CqrEeuPAueG2OxNJw" specification="pr_tea" target="_wzr1QCqqEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_xJ1O8CqrEeuPAueG2OxNJw" specification="pr_tea/raise doSetTime" target="_wzr1QCqqEeuPAueG2OxNJw"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_vcBJoCqoEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doJudgeCup" name="judge_cup" incomingTransitions="_lerhUCqpEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_4thKMCqoEeuPAueG2OxNJw" specification="needCup" target="_1TodQCqoEeuPAueG2OxNJw"/>
-                <outgoingTransitions xmi:id="_2hFaICrwEeugzOvWseLKXw" specification="pr_soup" target="_-PmV4CqsEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_4thKMCqoEeuPAueG2OxNJw" specification="hasCup" target="_1TodQCqoEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_2hFaICrwEeugzOvWseLKXw" specification="pr_soup/raise doSetTime" target="_-PmV4CqsEeuPAueG2OxNJw"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_1TodQCqoEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doPutCup" name="put_cup" incomingTransitions="_4thKMCqoEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_ylOc0CrVEeuPAueG2OxNJw" specification="pr_soup" target="_-PmV4CqsEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_ylOc0CrVEeuPAueG2OxNJw" specification="pr_soup/raise doSetTime" target="_-PmV4CqsEeuPAueG2OxNJw"/>
               </vertices>
             </regions>
             <regions xmi:id="_ppPvMSqnEeuPAueG2OxNJw" name="r2">
@@ -142,7 +142,7 @@
                 </regions>
                 <regions xmi:id="_wzr1RCqqEeuPAueG2OxNJw" name="r2">
                   <vertices xsi:type="sgraph:State" xmi:id="_1u7AMCqqEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doJudgeCup" name="judge_cup" incomingTransitions="_DuEboCqrEeuPAueG2OxNJw">
-                    <outgoingTransitions xmi:id="__i6CwCqqEeuPAueG2OxNJw" specification="needCup" target="_8ILBQCqqEeuPAueG2OxNJw"/>
+                    <outgoingTransitions xmi:id="__i6CwCqqEeuPAueG2OxNJw" specification="hasCup" target="_8ILBQCqqEeuPAueG2OxNJw"/>
                     <outgoingTransitions xmi:id="_nw2CsCshEeuHodhjWyUzSw" specification="nextStep/raise doHeatTime" target="_sOjXMCrsEeuPAueG2OxNJw"/>
                   </vertices>
                   <vertices xsi:type="sgraph:State" xmi:id="_8ILBQCqqEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doPutCup" name="put_cup" incomingTransitions="__i6CwCqqEeuPAueG2OxNJw">
@@ -189,7 +189,7 @@
             </regions>
             <regions xmi:id="_--lmNCrVEeuPAueG2OxNJw" name="r2">
               <vertices xsi:type="sgraph:State" xmi:id="_bBi6rCrWEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doJudgeCup" name="judge_cup" incomingTransitions="_h6DDgCrWEeuPAueG2OxNJw">
-                <outgoingTransitions xmi:id="_fi8pQCrWEeuPAueG2OxNJw" specification="needCup" target="_dHcQLSrWEeuPAueG2OxNJw"/>
+                <outgoingTransitions xmi:id="_fi8pQCrWEeuPAueG2OxNJw" specification="hasCup" target="_dHcQLSrWEeuPAueG2OxNJw"/>
               </vertices>
               <vertices xsi:type="sgraph:State" xmi:id="_dHcQLSrWEeuPAueG2OxNJw" specification="entry/raise&#xD;&#xA;doPutCup" name="put_cup" incomingTransitions="_fi8pQCrWEeuPAueG2OxNJw"/>
               <vertices xsi:type="sgraph:Entry" xmi:id="_g0IkUCrWEeuPAueG2OxNJw">
@@ -1917,7 +1917,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_cGg8kSRdEeuvzIMMxdd5dw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_cGg8kyRdEeuvzIMMxdd5dw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_cGg8kiRdEeuvzIMMxdd5dw" points="[-1, 9, -285, -762]$[-1, 289, -285, -482]$[479, 289, 195, -482]$[479, 561, 195, -210]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_cGg8kiRdEeuvzIMMxdd5dw" points="[-1, 9, -285, -762]$[-1, 280, -285, -491]$[-33, 280, -317, -491]$[-33, 291, -317, -480]$[479, 291, 195, -480]$[479, 561, 195, -210]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_cGixwCRdEeuvzIMMxdd5dw" id="(0.34328358208955223,0.8301886792452831)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_cGixwSRdEeuvzIMMxdd5dw" id="(0.5882352941176471,0.08450704225352113)"/>
     </edges>
@@ -2119,7 +2119,7 @@
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="__i6CwiqqEeuPAueG2OxNJw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="__i6CxCqqEeuPAueG2OxNJw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="__i6CwyqqEeuPAueG2OxNJw" points="[21, 13, 39, -133]$[21, 92, 39, -54]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="__i6CwyqqEeuPAueG2OxNJw" points="[-9, 13, 9, -133]$[-9, 92, 9, -54]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="__i7Q4CqqEeuPAueG2OxNJw" id="(0.52,0.7868852459016393)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="__i7Q4SqqEeuPAueG2OxNJw" id="(0.34,0.8852459016393442)"/>
     </edges>
@@ -2158,7 +2158,7 @@
     <edges xmi:id="_bmpaUCqrEeuPAueG2OxNJw" type="Transition" element="_bmozQCqrEeuPAueG2OxNJw" source="_HholJCz9EeuZRsrjhdd6JQ" target="_Hholpiz9EeuZRsrjhdd6JQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_bmpaVCqrEeuPAueG2OxNJw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_bmpaVSqrEeuPAueG2OxNJw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_bmpaViqrEeuPAueG2OxNJw" x="189" y="-167"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_bmpaViqrEeuPAueG2OxNJw" x="188" y="-180"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_bmpaUSqrEeuPAueG2OxNJw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_bmpaUyqrEeuPAueG2OxNJw" fontName="Verdana"/>
@@ -2488,11 +2488,11 @@
     <edges xmi:id="_nw4e8CshEeuHodhjWyUzSw" type="Transition" element="_nw2CsCshEeuHodhjWyUzSw" source="_Hhol0Sz9EeuZRsrjhdd6JQ" target="_HhpMVyz9EeuZRsrjhdd6JQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_nw5GACshEeuHodhjWyUzSw" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_nw5GASshEeuHodhjWyUzSw"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_nw5GAishEeuHodhjWyUzSw" x="91" y="5"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_nw5GAishEeuHodhjWyUzSw" x="79" y="5"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_nw4e8SshEeuHodhjWyUzSw" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_nw4e8yshEeuHodhjWyUzSw" fontName="Verdana"/>
-      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_nw4e8ishEeuHodhjWyUzSw" points="[-37, 39, 263, -533]$[-37, 110, 263, -462]$[-242, 110, 58, -462]$[-242, 532, 58, -40]"/>
+      <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_nw4e8ishEeuHodhjWyUzSw" points="[-87, 7, 213, -553]$[-242, 7, 58, -553]$[-242, 520, 58, -40]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_nw67MCshEeuHodhjWyUzSw" id="(0.87,0.36065573770491804)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_nw67MSshEeuHodhjWyUzSw" id="(0.13,0.47058823529411764)"/>
     </edges>
