@@ -9,7 +9,6 @@ INDEX VERSION 1.131+/Users/zhaoyuqiao/Desktop/YUQIAO-XIN/fr.univcotedazur.polyte
 2720862322.index
 4094656754.index
 1061822604.index
-2031847617.index
 4278627869.index
 818966121.index
 2224733212.index

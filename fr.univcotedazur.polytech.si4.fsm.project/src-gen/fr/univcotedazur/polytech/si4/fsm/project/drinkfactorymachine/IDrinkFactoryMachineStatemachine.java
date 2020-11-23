@@ -162,6 +162,18 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoAddMilk();
 		
+		public boolean isRaisedDoIfAddCroutons();
+		
+		public boolean isRaisedDoAddCroutons();
+		
+		public boolean isRaisedDoIfAddSirop();
+		
+		public boolean isRaisedDoAddSirop();
+		
+		public boolean isRaisedDoIfAddIceCream();
+		
+		public boolean isRaisedDoAddIceCream();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -216,6 +228,12 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoDeleteInfoRaised();
 		public void onDoIfAddMilkRaised();
 		public void onDoAddMilkRaised();
+		public void onDoIfAddCroutonsRaised();
+		public void onDoAddCroutonsRaised();
+		public void onDoIfAddSiropRaised();
+		public void onDoAddSiropRaised();
+		public void onDoIfAddIceCreamRaised();
+		public void onDoAddIceCreamRaised();
 		}
 	
 	public SCInterface getSCInterface();

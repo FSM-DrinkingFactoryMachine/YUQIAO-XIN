@@ -1366,6 +1366,114 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean doIfAddCroutons;
+		
+		
+		public boolean isRaisedDoIfAddCroutons() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doIfAddCroutons;
+			}
+		}
+		
+		protected void raiseDoIfAddCroutons() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doIfAddCroutons = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoIfAddCroutonsRaised();
+				}
+			}
+		}
+		
+		private boolean doAddCroutons;
+		
+		
+		public boolean isRaisedDoAddCroutons() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doAddCroutons;
+			}
+		}
+		
+		protected void raiseDoAddCroutons() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doAddCroutons = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoAddCroutonsRaised();
+				}
+			}
+		}
+		
+		private boolean doIfAddSirop;
+		
+		
+		public boolean isRaisedDoIfAddSirop() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doIfAddSirop;
+			}
+		}
+		
+		protected void raiseDoIfAddSirop() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doIfAddSirop = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoIfAddSiropRaised();
+				}
+			}
+		}
+		
+		private boolean doAddSirop;
+		
+		
+		public boolean isRaisedDoAddSirop() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doAddSirop;
+			}
+		}
+		
+		protected void raiseDoAddSirop() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doAddSirop = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoAddSiropRaised();
+				}
+			}
+		}
+		
+		private boolean doIfAddIceCream;
+		
+		
+		public boolean isRaisedDoIfAddIceCream() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doIfAddIceCream;
+			}
+		}
+		
+		protected void raiseDoIfAddIceCream() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doIfAddIceCream = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoIfAddIceCreamRaised();
+				}
+			}
+		}
+		
+		private boolean doAddIceCream;
+		
+		
+		public boolean isRaisedDoAddIceCream() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doAddIceCream;
+			}
+		}
+		
+		protected void raiseDoAddIceCream() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doAddIceCream = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoAddIceCreamRaised();
+				}
+			}
+		}
+		
 		protected void clearEvents() {
 			type1_btn = false;
 			type2_btn = false;
@@ -1445,6 +1553,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doDeleteInfo = false;
 		doIfAddMilk = false;
 		doAddMilk = false;
+		doIfAddCroutons = false;
+		doAddCroutons = false;
+		doIfAddSirop = false;
+		doAddSirop = false;
+		doIfAddIceCream = false;
+		doAddIceCream = false;
 		}
 		
 	}
@@ -1501,9 +1615,16 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_prepare_r1_open_door,
 		main_region_state_prepare_r1_prepare_3,
 		main_region_state_prepare_r1_prepare_3_r1_add_sugar,
+		main_region_state_prepare_r1_prepare_3_r1_if_add_sirop,
+		main_region_state_prepare_r1_prepare_3_r1_add_sirop,
 		main_region_state_prepare_r1_prepare_3_r2_add_water,
 		main_region_state_prepare_r1_if_add_milk,
 		main_region_state_prepare_r1_add_milk,
+		main_region_state_prepare_r1_add_soup_water,
+		main_region_state_prepare_r1_if_add_croutons,
+		main_region_state_prepare_r1_add_Croutons,
+		main_region_state_prepare_r1_if_add_iceCream,
+		main_region_state_prepare_r1_add_iceCream,
 		main_region_state_reset,
 		main_region_state_refund,
 		main_region_judge_returnCoinsOrCancleBank,
@@ -1520,7 +1641,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	private ITimer timer;
 	
-	private final boolean[] timeEvents = new boolean[11];
+	private final boolean[] timeEvents = new boolean[14];
 	
 	private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
 	private boolean isRunningCycle = false;
@@ -1692,6 +1813,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			case main_region_state_prepare_r1_prepare_3_r1_add_sugar:
 				main_region_state_prepare_r1_prepare_3_r1_add_sugar_react(true);
 				break;
+			case main_region_state_prepare_r1_prepare_3_r1_if_add_sirop:
+				main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_react(true);
+				break;
+			case main_region_state_prepare_r1_prepare_3_r1_add_sirop:
+				main_region_state_prepare_r1_prepare_3_r1_add_sirop_react(true);
+				break;
 			case main_region_state_prepare_r1_prepare_3_r2_add_water:
 				main_region_state_prepare_r1_prepare_3_r2_add_water_react(true);
 				break;
@@ -1700,6 +1827,21 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				break;
 			case main_region_state_prepare_r1_add_milk:
 				main_region_state_prepare_r1_add_milk_react(true);
+				break;
+			case main_region_state_prepare_r1_add_soup_water:
+				main_region_state_prepare_r1_add_soup_water_react(true);
+				break;
+			case main_region_state_prepare_r1_if_add_croutons:
+				main_region_state_prepare_r1_if_add_croutons_react(true);
+				break;
+			case main_region_state_prepare_r1_add_Croutons:
+				main_region_state_prepare_r1_add_Croutons_react(true);
+				break;
+			case main_region_state_prepare_r1_if_add_iceCream:
+				main_region_state_prepare_r1_if_add_iceCream_react(true);
+				break;
+			case main_region_state_prepare_r1_add_iceCream:
+				main_region_state_prepare_r1_add_iceCream_react(true);
 				break;
 			case main_region_state_reset:
 				main_region_state_reset_react(true);
@@ -1813,7 +1955,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			return stateVector[6] == State.main_region_state_choose_r7_state_timer;
 		case main_region_state_prepare:
 			return stateVector[0].ordinal() >= State.
-					main_region_state_prepare.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_add_milk.ordinal();
+					main_region_state_prepare.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_add_iceCream.ordinal();
 		case main_region_state_prepare_r1_state_judgeType:
 			return stateVector[0] == State.main_region_state_prepare_r1_state_judgeType;
 		case main_region_state_prepare_r1_wait_recover:
@@ -1887,12 +2029,26 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					main_region_state_prepare_r1_prepare_3.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_prepare_3_r2_add_water.ordinal();
 		case main_region_state_prepare_r1_prepare_3_r1_add_sugar:
 			return stateVector[0] == State.main_region_state_prepare_r1_prepare_3_r1_add_sugar;
+		case main_region_state_prepare_r1_prepare_3_r1_if_add_sirop:
+			return stateVector[0] == State.main_region_state_prepare_r1_prepare_3_r1_if_add_sirop;
+		case main_region_state_prepare_r1_prepare_3_r1_add_sirop:
+			return stateVector[0] == State.main_region_state_prepare_r1_prepare_3_r1_add_sirop;
 		case main_region_state_prepare_r1_prepare_3_r2_add_water:
 			return stateVector[1] == State.main_region_state_prepare_r1_prepare_3_r2_add_water;
 		case main_region_state_prepare_r1_if_add_milk:
 			return stateVector[0] == State.main_region_state_prepare_r1_if_add_milk;
 		case main_region_state_prepare_r1_add_milk:
 			return stateVector[0] == State.main_region_state_prepare_r1_add_milk;
+		case main_region_state_prepare_r1_add_soup_water:
+			return stateVector[0] == State.main_region_state_prepare_r1_add_soup_water;
+		case main_region_state_prepare_r1_if_add_croutons:
+			return stateVector[0] == State.main_region_state_prepare_r1_if_add_croutons;
+		case main_region_state_prepare_r1_add_Croutons:
+			return stateVector[0] == State.main_region_state_prepare_r1_add_Croutons;
+		case main_region_state_prepare_r1_if_add_iceCream:
+			return stateVector[0] == State.main_region_state_prepare_r1_if_add_iceCream;
+		case main_region_state_prepare_r1_add_iceCream:
+			return stateVector[0] == State.main_region_state_prepare_r1_add_iceCream;
 		case main_region_state_reset:
 			return stateVector[0] == State.main_region_state_reset;
 		case main_region_state_refund:
@@ -2247,6 +2403,30 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoAddMilk();
 	}
 	
+	public synchronized boolean isRaisedDoIfAddCroutons() {
+		return sCInterface.isRaisedDoIfAddCroutons();
+	}
+	
+	public synchronized boolean isRaisedDoAddCroutons() {
+		return sCInterface.isRaisedDoAddCroutons();
+	}
+	
+	public synchronized boolean isRaisedDoIfAddSirop() {
+		return sCInterface.isRaisedDoIfAddSirop();
+	}
+	
+	public synchronized boolean isRaisedDoAddSirop() {
+		return sCInterface.isRaisedDoAddSirop();
+	}
+	
+	public synchronized boolean isRaisedDoIfAddIceCream() {
+		return sCInterface.isRaisedDoIfAddIceCream();
+	}
+	
+	public synchronized boolean isRaisedDoAddIceCream() {
+		return sCInterface.isRaisedDoAddIceCream();
+	}
+	
 	/* Entry action for state 'state_type'. */
 	private void entryAction_main_region_state_choose_ty_state_type() {
 		sCInterface.raiseDoChangeType();
@@ -2426,6 +2606,16 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseDoAddSugar();
 	}
 	
+	/* Entry action for state 'if_add_sirop'. */
+	private void entryAction_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop() {
+		sCInterface.raiseDoIfAddSirop();
+	}
+	
+	/* Entry action for state 'add_sirop'. */
+	private void entryAction_main_region_state_prepare_r1_prepare_3_r1_add_sirop() {
+		sCInterface.raiseDoAddSirop();
+	}
+	
 	/* Entry action for state 'add_water'. */
 	private void entryAction_main_region_state_prepare_r1_prepare_3_r2_add_water() {
 		sCInterface.raiseDoAddWater();
@@ -2443,9 +2633,40 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseDoAddMilk();
 	}
 	
+	/* Entry action for state 'add_soup_water'. */
+	private void entryAction_main_region_state_prepare_r1_add_soup_water() {
+		timer.setTimer(this, 8, (3 * 1000), false);
+		
+		sCInterface.raiseDoAddWater();
+	}
+	
+	/* Entry action for state 'if_add_croutons'. */
+	private void entryAction_main_region_state_prepare_r1_if_add_croutons() {
+		sCInterface.raiseDoIfAddCroutons();
+	}
+	
+	/* Entry action for state 'add_Croutons'. */
+	private void entryAction_main_region_state_prepare_r1_add_Croutons() {
+		timer.setTimer(this, 9, (2 * 1000), false);
+		
+		sCInterface.raiseDoAddCroutons();
+	}
+	
+	/* Entry action for state 'if_add_iceCream'. */
+	private void entryAction_main_region_state_prepare_r1_if_add_iceCream() {
+		sCInterface.raiseDoIfAddIceCream();
+	}
+	
+	/* Entry action for state 'add_iceCream'. */
+	private void entryAction_main_region_state_prepare_r1_add_iceCream() {
+		timer.setTimer(this, 10, (3 * 1000), false);
+		
+		sCInterface.raiseDoAddIceCream();
+	}
+	
 	/* Entry action for state 'state_reset'. */
 	private void entryAction_main_region_state_reset() {
-		timer.setTimer(this, 8, 1, false);
+		timer.setTimer(this, 11, 1, false);
 		
 		sCInterface.raiseDoReset();
 	}
@@ -2467,7 +2688,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'cancleOrder'. */
 	private void entryAction_main_region_cancleOrder() {
-		timer.setTimer(this, 9, (2 * 1000), false);
+		timer.setTimer(this, 12, (2 * 1000), false);
 		
 		sCInterface.raiseDoCancleOrder();
 	}
@@ -2479,7 +2700,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'clean_machine'. */
 	private void entryAction_main_region_clean_machine() {
-		timer.setTimer(this, 10, (5 * 1000), false);
+		timer.setTimer(this, 13, (5 * 1000), false);
 		
 		sCInterface.raiseDoClean();
 	}
@@ -2524,19 +2745,34 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.unsetTimer(this, 7);
 	}
 	
+	/* Exit action for state 'add_soup_water'. */
+	private void exitAction_main_region_state_prepare_r1_add_soup_water() {
+		timer.unsetTimer(this, 8);
+	}
+	
+	/* Exit action for state 'add_Croutons'. */
+	private void exitAction_main_region_state_prepare_r1_add_Croutons() {
+		timer.unsetTimer(this, 9);
+	}
+	
+	/* Exit action for state 'add_iceCream'. */
+	private void exitAction_main_region_state_prepare_r1_add_iceCream() {
+		timer.unsetTimer(this, 10);
+	}
+	
 	/* Exit action for state 'state_reset'. */
 	private void exitAction_main_region_state_reset() {
-		timer.unsetTimer(this, 8);
+		timer.unsetTimer(this, 11);
 	}
 	
 	/* Exit action for state 'cancleOrder'. */
 	private void exitAction_main_region_cancleOrder() {
-		timer.unsetTimer(this, 9);
+		timer.unsetTimer(this, 12);
 	}
 	
 	/* Exit action for state 'clean_machine'. */
 	private void exitAction_main_region_clean_machine() {
-		timer.unsetTimer(this, 10);
+		timer.unsetTimer(this, 13);
 	}
 	
 	/* 'default' enter sequence for state state_choose */
@@ -2834,6 +3070,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.main_region_state_prepare_r1_prepare_3_r1_add_sugar;
 	}
 	
+	/* 'default' enter sequence for state if_add_sirop */
+	private void enterSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_default() {
+		entryAction_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_prepare_3_r1_if_add_sirop;
+	}
+	
+	/* 'default' enter sequence for state add_sirop */
+	private void enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop_default() {
+		entryAction_main_region_state_prepare_r1_prepare_3_r1_add_sirop();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_prepare_3_r1_add_sirop;
+	}
+	
 	/* 'default' enter sequence for state add_water */
 	private void enterSequence_main_region_state_prepare_r1_prepare_3_r2_add_water_default() {
 		entryAction_main_region_state_prepare_r1_prepare_3_r2_add_water();
@@ -2853,6 +3103,41 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		entryAction_main_region_state_prepare_r1_add_milk();
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_state_prepare_r1_add_milk;
+	}
+	
+	/* 'default' enter sequence for state add_soup_water */
+	private void enterSequence_main_region_state_prepare_r1_add_soup_water_default() {
+		entryAction_main_region_state_prepare_r1_add_soup_water();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_add_soup_water;
+	}
+	
+	/* 'default' enter sequence for state if_add_croutons */
+	private void enterSequence_main_region_state_prepare_r1_if_add_croutons_default() {
+		entryAction_main_region_state_prepare_r1_if_add_croutons();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_if_add_croutons;
+	}
+	
+	/* 'default' enter sequence for state add_Croutons */
+	private void enterSequence_main_region_state_prepare_r1_add_Croutons_default() {
+		entryAction_main_region_state_prepare_r1_add_Croutons();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_add_Croutons;
+	}
+	
+	/* 'default' enter sequence for state if_add_iceCream */
+	private void enterSequence_main_region_state_prepare_r1_if_add_iceCream_default() {
+		entryAction_main_region_state_prepare_r1_if_add_iceCream();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_if_add_iceCream;
+	}
+	
+	/* 'default' enter sequence for state add_iceCream */
+	private void enterSequence_main_region_state_prepare_r1_add_iceCream_default() {
+		entryAction_main_region_state_prepare_r1_add_iceCream();
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_prepare_r1_add_iceCream;
 	}
 	
 	/* 'default' enter sequence for state state_reset */
@@ -3292,6 +3577,18 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.$NullState$;
 	}
 	
+	/* Default exit sequence for state if_add_sirop */
+	private void exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state add_sirop */
+	private void exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
 	/* Default exit sequence for state add_water */
 	private void exitSequence_main_region_state_prepare_r1_prepare_3_r2_add_water() {
 		nextStateIndex = 1;
@@ -3310,6 +3607,42 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.$NullState$;
 		
 		exitAction_main_region_state_prepare_r1_add_milk();
+	}
+	
+	/* Default exit sequence for state add_soup_water */
+	private void exitSequence_main_region_state_prepare_r1_add_soup_water() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+		
+		exitAction_main_region_state_prepare_r1_add_soup_water();
+	}
+	
+	/* Default exit sequence for state if_add_croutons */
+	private void exitSequence_main_region_state_prepare_r1_if_add_croutons() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state add_Croutons */
+	private void exitSequence_main_region_state_prepare_r1_add_Croutons() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+		
+		exitAction_main_region_state_prepare_r1_add_Croutons();
+	}
+	
+	/* Default exit sequence for state if_add_iceCream */
+	private void exitSequence_main_region_state_prepare_r1_if_add_iceCream() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state add_iceCream */
+	private void exitSequence_main_region_state_prepare_r1_add_iceCream() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+		
+		exitAction_main_region_state_prepare_r1_add_iceCream();
 	}
 	
 	/* Default exit sequence for state state_reset */
@@ -3426,11 +3759,32 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_prepare_3_r1_add_sugar:
 			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar();
 			break;
+		case main_region_state_prepare_r1_prepare_3_r1_if_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+			break;
+		case main_region_state_prepare_r1_prepare_3_r1_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop();
+			break;
 		case main_region_state_prepare_r1_if_add_milk:
 			exitSequence_main_region_state_prepare_r1_if_add_milk();
 			break;
 		case main_region_state_prepare_r1_add_milk:
 			exitSequence_main_region_state_prepare_r1_add_milk();
+			break;
+		case main_region_state_prepare_r1_add_soup_water:
+			exitSequence_main_region_state_prepare_r1_add_soup_water();
+			break;
+		case main_region_state_prepare_r1_if_add_croutons:
+			exitSequence_main_region_state_prepare_r1_if_add_croutons();
+			break;
+		case main_region_state_prepare_r1_add_Croutons:
+			exitSequence_main_region_state_prepare_r1_add_Croutons();
+			break;
+		case main_region_state_prepare_r1_if_add_iceCream:
+			exitSequence_main_region_state_prepare_r1_if_add_iceCream();
+			break;
+		case main_region_state_prepare_r1_add_iceCream:
+			exitSequence_main_region_state_prepare_r1_add_iceCream();
 			break;
 		case main_region_state_reset:
 			exitSequence_main_region_state_reset();
@@ -3685,11 +4039,32 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_prepare_3_r1_add_sugar:
 			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar();
 			break;
+		case main_region_state_prepare_r1_prepare_3_r1_if_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+			break;
+		case main_region_state_prepare_r1_prepare_3_r1_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop();
+			break;
 		case main_region_state_prepare_r1_if_add_milk:
 			exitSequence_main_region_state_prepare_r1_if_add_milk();
 			break;
 		case main_region_state_prepare_r1_add_milk:
 			exitSequence_main_region_state_prepare_r1_add_milk();
+			break;
+		case main_region_state_prepare_r1_add_soup_water:
+			exitSequence_main_region_state_prepare_r1_add_soup_water();
+			break;
+		case main_region_state_prepare_r1_if_add_croutons:
+			exitSequence_main_region_state_prepare_r1_if_add_croutons();
+			break;
+		case main_region_state_prepare_r1_add_Croutons:
+			exitSequence_main_region_state_prepare_r1_add_Croutons();
+			break;
+		case main_region_state_prepare_r1_if_add_iceCream:
+			exitSequence_main_region_state_prepare_r1_if_add_iceCream();
+			break;
+		case main_region_state_prepare_r1_add_iceCream:
+			exitSequence_main_region_state_prepare_r1_add_iceCream();
 			break;
 		default:
 			break;
@@ -3880,6 +4255,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		switch (stateVector[0]) {
 		case main_region_state_prepare_r1_prepare_3_r1_add_sugar:
 			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar();
+			break;
+		case main_region_state_prepare_r1_prepare_3_r1_if_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+			break;
+		case main_region_state_prepare_r1_prepare_3_r1_add_sirop:
+			exitSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop();
 			break;
 		default:
 			break;
@@ -4505,7 +4886,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			} else {
 				if (sCInterface.nextStep) {
 					exitSequence_main_region_state_prepare_r1_perpare_2();
-					enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
+					enterSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_default();
 					enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 					main_region_state_prepare_react(false);
 				} else {
@@ -4525,7 +4906,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_perpare_2();
-				enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
+				enterSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_default();
 				enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 				main_region_state_prepare_react(false);
 			} else {
@@ -4544,7 +4925,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_state_2();
-				enterSequence_main_region_state_prepare_r1_prepare_3_r2_add_water_default();
+				enterSequence_main_region_state_prepare_r1_add_soup_water_default();
 				main_region_state_prepare_react(false);
 			} else {
 				did_transition = false;
@@ -4592,7 +4973,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nextStep) {
 				exitSequence_main_region_state_prepare_r1_state_3();
-				enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
+				enterSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_default();
 				enterSequence_main_region_state_prepare_r1_prepare_3_r2_default();
 				main_region_state_prepare_react(false);
 			} else {
@@ -4800,31 +5181,25 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.pr_coffee) {
 				exitSequence_main_region_state_prepare_r1_prepare_3();
-				enterSequence_main_region_state_prepare_r1_if_add_milk_default();
+				enterSequence_main_region_state_prepare_r1_if_add_iceCream_default();
 				main_region_state_prepare_react(false);
 			} else {
 				if (sCInterface.pr_expresso) {
 					exitSequence_main_region_state_prepare_r1_prepare_3();
-					enterSequence_main_region_state_prepare_r1_if_add_milk_default();
+					enterSequence_main_region_state_prepare_r1_if_add_iceCream_default();
 					main_region_state_prepare_react(false);
 				} else {
-					if (sCInterface.pr_soup) {
+					if (sCInterface.pr_tea) {
 						exitSequence_main_region_state_prepare_r1_prepare_3();
-						enterSequence_main_region_state_prepare_r1_wait_recover_default();
+						enterSequence_main_region_state_prepare_r1_wait_infusion_default();
 						main_region_state_prepare_react(false);
 					} else {
-						if (sCInterface.pr_tea) {
+						if (sCInterface.pr_icedTea) {
 							exitSequence_main_region_state_prepare_r1_prepare_3();
 							enterSequence_main_region_state_prepare_r1_wait_infusion_default();
 							main_region_state_prepare_react(false);
 						} else {
-							if (sCInterface.pr_icedTea) {
-								exitSequence_main_region_state_prepare_r1_prepare_3();
-								enterSequence_main_region_state_prepare_r1_wait_infusion_default();
-								main_region_state_prepare_react(false);
-							} else {
-								did_transition = false;
-							}
+							did_transition = false;
 						}
 					}
 				}
@@ -4837,6 +5212,34 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	private boolean main_region_state_prepare_r1_prepare_3_r1_add_sugar_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_prepare_3_r1_if_add_sirop_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.n) {
+				exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+				enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sugar_default();
+			} else {
+				if (sCInterface.y) {
+					exitSequence_main_region_state_prepare_r1_prepare_3_r1_if_add_sirop();
+					enterSequence_main_region_state_prepare_r1_prepare_3_r1_add_sirop_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_prepare_3_r1_add_sirop_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -4899,11 +5302,113 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_reset_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_add_soup_water_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (timeEvents[8]) {
+				exitSequence_main_region_state_prepare_r1_add_soup_water();
+				enterSequence_main_region_state_prepare_r1_if_add_croutons_default();
+				main_region_state_prepare_react(false);
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+			did_transition = main_region_state_prepare_react(try_transition);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_if_add_croutons_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.n) {
+				exitSequence_main_region_state_prepare_r1_if_add_croutons();
+				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				main_region_state_prepare_react(false);
+			} else {
+				if (sCInterface.y) {
+					exitSequence_main_region_state_prepare_r1_if_add_croutons();
+					enterSequence_main_region_state_prepare_r1_add_Croutons_default();
+					main_region_state_prepare_react(false);
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			did_transition = main_region_state_prepare_react(try_transition);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_add_Croutons_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (timeEvents[9]) {
+				exitSequence_main_region_state_prepare_r1_add_Croutons();
+				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				main_region_state_prepare_react(false);
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+			did_transition = main_region_state_prepare_react(try_transition);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_if_add_iceCream_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.n) {
+				exitSequence_main_region_state_prepare_r1_if_add_iceCream();
+				enterSequence_main_region_state_prepare_r1_if_add_milk_default();
+				main_region_state_prepare_react(false);
+			} else {
+				if (sCInterface.y) {
+					exitSequence_main_region_state_prepare_r1_if_add_iceCream();
+					enterSequence_main_region_state_prepare_r1_add_iceCream_default();
+					main_region_state_prepare_react(false);
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			did_transition = main_region_state_prepare_react(try_transition);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_prepare_r1_add_iceCream_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (timeEvents[10]) {
+				exitSequence_main_region_state_prepare_r1_add_iceCream();
+				enterSequence_main_region_state_prepare_r1_if_add_milk_default();
+				main_region_state_prepare_react(false);
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+			did_transition = main_region_state_prepare_react(try_transition);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_reset_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (timeEvents[11]) {
 				exitSequence_main_region_state_reset();
 				enterSequence_main_region_state_choose_default();
 				react();
@@ -4981,7 +5486,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[9]) {
+			if (timeEvents[12]) {
 				exitSequence_main_region_cancleOrder();
 				enterSequence_main_region_judge_returnCoinsOrCancleBank_default();
 				react();
@@ -5023,7 +5528,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[10]) {
+			if (timeEvents[13]) {
 				exitSequence_main_region_clean_machine();
 				enterSequence_main_region_judge_ifReturnCoins_default();
 				react();
