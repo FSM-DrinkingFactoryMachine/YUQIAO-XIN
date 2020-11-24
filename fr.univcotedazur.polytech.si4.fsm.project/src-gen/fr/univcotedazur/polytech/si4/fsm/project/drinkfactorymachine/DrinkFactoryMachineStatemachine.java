@@ -4593,7 +4593,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 								
 								enterSequence_main_region_state_choose_r6_state_caculate_default();
 							} else {
-								did_transition = false;
+								if (sCInterface.type3_btn) {
+									exitSequence_main_region_state_choose_r6_state_caculate();
+									sCInterface.raiseDoChangePrice();
+									
+									enterSequence_main_region_state_choose_r6_state_caculate_default();
+								} else {
+									did_transition = false;
+								}
 							}
 						}
 					}

@@ -91,7 +91,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoModify1Raised() {
 		// TODO Auto-generated method stub
+		if(theMachine.drinkType!="Soup")
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade sweetness of your drink is "+theMachine.sugarSlider.getValue());
+		else
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the amount of spices of your drink is "+theMachine.spiceSlider.getValue());	
 	}
 
 	@Override
@@ -109,15 +112,24 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoModify3Raised() {
 		// TODO Auto-generated method stub
-		if(theMachine.temperatureSlider.getValue()==0)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 20°C");
-		else if(theMachine.temperatureSlider.getValue()==1)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 35°C");
-		else if(theMachine.temperatureSlider.getValue()==2)
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 60°C");
-		else
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 85°C");
+		if(theMachine.drinkType!="Iced Tea") {
+			if(theMachine.temperatureSlider.getValue()==0)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 20°C");
+			else if(theMachine.temperatureSlider.getValue()==1)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 35°C");
+			else if(theMachine.temperatureSlider.getValue()==2)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 60°C");
+			else
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the temperature of your drink is 85°C");
 		
+			}
+		else {
+			if(theMachine.timeSlider.getValue()==0)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the refrigerating time of your drink normal");
+			else if(theMachine.timeSlider.getValue()==1)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the refrigerating time of your drink long");
+			
+		}
 	}
 
 	@Override
@@ -242,13 +254,15 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Coffee")) {
 			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
-			theMachine.controlProgressBar(250, 30);
-			theMachine.theFSM.raisePr_coffee();
+			theMachine.controlProgressBar(250, 20);
+			theMachine.controlRuningTime(20, "Coffee");
+//			theMachine.theFSM.raisePr_coffee();
 		}
 		else if(theMachine.drinkType.equals("Iced Tea")) {
 			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
-			theMachine.controlProgressBar(200, 15);
-			theMachine.theFSM.raisePr_icedTea();
+			theMachine.controlProgressBar(350, 15);
+			theMachine.controlRuningTime(15, "Iced Tea");
+			
 		}
 		
 	}
@@ -281,19 +295,28 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>positioning of the cup");
 //		if(theMachine.drinkType.equals("Coffee"))
 //			theMachine.controlProgressBar(500, 70);
-		if(theMachine.drinkType=="Soup")
-		{
-		theMachine.controlProgressBar(200, 35);
-		theMachine.controlRuningTime(35, "Soup");
-//		Thread.sleep(200*36);
-//		theMachine.theFSM.raisePr_soup();}
-		}
 		
+		switch(theMachine.drinkType) {
+		case "Coffee":
+			theMachine.theFSM.raisePr_coffee();
+			break;
+		case "Expresso":
+			theMachine.theFSM.raisePr_expresso();
+			break;
+		case "Iced Tea":
+			theMachine.theFSM.raisePr_icedTea();
+			break;
+		case "Soup":
+			theMachine.controlProgressBar(200, 35);
+			theMachine.controlRuningTime(35, "Soup");
+			break;
+		case "Tea":
+			theMachine.theFSM.raisePr_tea();
+			break;
+		default:
+			break;
+	}
 		
-
-	
-		else 
-			theMachine.theFSM.raiseNextStep();
 			
 	}
 
@@ -585,6 +608,42 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onDoIfAddCroutonsRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddCroutonsRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoIfAddSiropRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddSiropRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoIfAddIceCreamRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddIceCreamRaised() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 
@@ -603,7 +662,7 @@ public class DrinkFactoryMachine extends JFrame {
 	labelForPictures, lblTemperature, timeValue;
 	protected JSlider sugarSlider, sizeSlider, temperatureSlider,spiceSlider,timeSlider;
 	protected JButton coffeeButton, expressoButton, teaButton, soupButton, icedTeaButton, money50centsButton,
-						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton;
+						money25centsButton, money10centsButton, nfcBiiiipButton, addCupButton, cancelButton,yesButton,noButton;
 	protected String drinkType = "",coinType ="",nfcInfo="";
 	protected int currentProgress=0, nfcPri = 0;//secs=45;
 	protected JProgressBar progressBar;
@@ -665,7 +724,6 @@ public class DrinkFactoryMachine extends JFrame {
 	        			theFSM.raisePr_icedTea();;
 	        			break;
 	        		case "Soup":
-	        			System.out.print("soup");
 	        			theFSM.raisePr_soup();
 	        			break;
 	        		case "Tea":
@@ -1107,7 +1165,7 @@ public class DrinkFactoryMachine extends JFrame {
 		addCupButton.setFont(new Font("Arial",Font.BOLD,20));
 		addCupButton.setForeground(Color.DARK_GRAY);
 		addCupButton.setBackground(Color.white);
-		addCupButton.setBounds(70, 550, 150, 40);
+		addCupButton.setBounds(100, 550, 150, 40);
 		contentPane.add(addCupButton);
 
 		BufferedImage myPicture = null;
@@ -1152,15 +1210,35 @@ public class DrinkFactoryMachine extends JFrame {
 			}
 		});
 		theFSM.raiseAddCup_Btn();
-//		ActionListener doCount = new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				updateTimeValue();
-//				if(secs > 0)
-//					secs-=1;
-//			}
-//		};
-//		myTimer = new Timer(1000, doCount);
+			
 		
+		yesButton = new JButton("Yes");
+		yesButton.setFont(new Font("Arial",Font.BOLD,20));
+		yesButton.setForeground(Color.DARK_GRAY);
+		yesButton.setBackground(Color.white);
+		yesButton.setBounds(100, 650, 150, 40);
+		contentPane.add(yesButton);
+		yesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseY();
+				theFSM.raiseAny_btn();
+			}
+		});
+
+		
+		noButton = new JButton("No");
+		noButton.setFont(new Font("Arial",Font.BOLD,20));
+		noButton.setForeground(Color.DARK_GRAY);
+		noButton.setBackground(Color.white);
+		noButton.setBounds(100, 750, 150, 40);
+		contentPane.add(noButton);
+		noButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				theFSM.raiseN();
+				theFSM.raiseAny_btn();
+			}
+		});
 	}
 }
