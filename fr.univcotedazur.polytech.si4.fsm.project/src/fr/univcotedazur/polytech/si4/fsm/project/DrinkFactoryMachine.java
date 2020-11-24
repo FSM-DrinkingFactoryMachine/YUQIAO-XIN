@@ -253,13 +253,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
 //		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Coffee")) {
-			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
+			theMachine.messagesToUser1.setText("<html>waiting for <br>setting dosette.");
 			theMachine.controlProgressBar(250, 20);
 			theMachine.controlRuningTime(20, "Coffee");
 //			theMachine.theFSM.raisePr_coffee();
 		}
 		else if(theMachine.drinkType.equals("Iced Tea")) {
-			theMachine.messagesToUser.setText("<html>waiting for <br>setting dosette.");
+			theMachine.messagesToUser1.setText("<html>waiting for <br>setting dosette.");
 			theMachine.controlProgressBar(350, 15);
 			theMachine.controlRuningTime(15, "Iced Tea");
 			
@@ -270,15 +270,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoHeatWaterRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser1.setText("<html>start of<br>water heating");
-//		theMachine.messagesToUser1.setText("");
-//		if(theMachine.drinkType.equals("Coffee")) {
-//			theMachine.controlProgressBar(500, 30);
-//			if(theMachine.currentProgress == 30) {
-//				theMachine.theFSM.raiseNext();
-//			}
-//		}
-		theMachine.messagesToUser1.setText("<html>start of<br>water heating");
+		if(theMachine.drinkType.equals("Soup"))
+		{
+		theMachine.messagesToUser.setText("<html>start of<br>water heating");
+		theMachine.messagesToUser1.setText("");
+		}
+		else 
+			theMachine.messagesToUser.setText("<html>start of<br>water heating");
 	}
 
 	@Override
@@ -337,9 +335,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCrushGrainRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>grain crushing");
-		theMachine.controlProgressBar(250, 30);
-		theMachine.theFSM.raisePr_expresso();
+		theMachine.messagesToUser1.setText("<html>grain crushing");
+		theMachine.controlProgressBar(250, 20);
+		theMachine.controlRuningTime(20, "Expresso");
+
 	}
 
 	@Override
@@ -351,9 +350,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoSetSachetRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a sachet");
-		theMachine.controlProgressBar(200, 25);
-		theMachine.theFSM.raisePr_tea();
+		theMachine.messagesToUser1.setText("<html>recovery and<br>positioning of a sachet");
+		theMachine.controlProgressBar(300, 20);
+		theMachine.controlRuningTime(20, "Tea");
 	}
 
 	@Override
