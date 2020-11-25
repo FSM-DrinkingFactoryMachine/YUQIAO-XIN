@@ -55,6 +55,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.nfcInfo = "";
 		theMachine.timer1.stop();
 		theMachine.myTimer.stop();
+		for(ActionListener al: theMachine.myTimer.getActionListeners())
+			theMachine.myTimer.removeActionListener(al);
+		for(ActionListener al: theMachine.timer1.getActionListeners())
+			theMachine.timer1.removeActionListener(al);
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
 		theMachine.currentProgress = 0;
@@ -862,6 +866,19 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.controlRuningTime(85, "Soup");
 		
 	}
+
+	@Override
+	public void onDoAddCupRaised() {
+		// TODO Auto-generated method stub
+		BufferedImage myPicture = null;
+		try {
+			myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
+		} catch (IOException ee) {
+			ee.printStackTrace();
+		}
+		theMachine.isOwnCup=true;
+		theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+	}
 }
 
 
@@ -1419,17 +1436,11 @@ public class DrinkFactoryMachine extends JFrame {
 		addCupButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				BufferedImage myPicture = null;
-				try {
-					myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
-				} catch (IOException ee) {
-					ee.printStackTrace();
-				}
-				isOwnCup=true;
-				labelForPictures.setIcon(new ImageIcon(myPicture));
+				theFSM.raiseAddCup_Btn();
+				
 			}
 		});
-		theFSM.raiseAddCup_Btn();
+		
 			
 		
 		yesButton = new JButton("Yes");

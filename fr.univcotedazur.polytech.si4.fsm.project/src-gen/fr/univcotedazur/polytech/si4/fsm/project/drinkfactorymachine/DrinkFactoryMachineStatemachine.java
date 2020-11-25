@@ -1582,6 +1582,24 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
+		private boolean doAddCup;
+		
+		
+		public boolean isRaisedDoAddCup() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				return doAddCup;
+			}
+		}
+		
+		protected void raiseDoAddCup() {
+			synchronized(DrinkFactoryMachineStatemachine.this) {
+				doAddCup = true;
+				for (SCInterfaceListener listener : listeners) {
+					listener.onDoAddCupRaised();
+				}
+			}
+		}
+		
 		protected void clearEvents() {
 			type1_btn = false;
 			type2_btn = false;
@@ -1673,6 +1691,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doIfEnoughMoney2 = false;
 		doIfEnoughMoney3 = false;
 		doIfEnoughMoney4 = false;
+		doAddCup = false;
 		}
 		
 	}
@@ -1684,9 +1703,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	public enum State {
 		main_region_state_choose,
+		main_region_state_choose_addcup_state1,
 		main_region_state_choose_ty_state_type,
 		main_region_state_choose_ty_state_type2,
 		main_region_state_choose_ty_state_type3,
+		main_region_state_choose_ty_state_initial,
 		main_region_state_choose_r2_state_sli1,
 		main_region_state_choose_r3_state_sli2,
 		main_region_state_choose_r4_state_sli3,
@@ -1753,7 +1774,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		$NullState$
 	};
 	
-	private final State[] stateVector = new State[7];
+	private final State[] stateVector = new State[8];
 	
 	private int nextStateIndex;
 	
@@ -1772,7 +1793,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 8; i++) {
 			stateVector[i] = State.$NullState$;
 		}
 		clearEvents();
@@ -1820,6 +1841,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	protected synchronized void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
+			case main_region_state_choose_addcup_state1:
+				main_region_state_choose_addcup_state1_react(true);
+				break;
 			case main_region_state_choose_ty_state_type:
 				main_region_state_choose_ty_state_type_react(true);
 				break;
@@ -1828,6 +1852,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				break;
 			case main_region_state_choose_ty_state_type3:
 				main_region_state_choose_ty_state_type3_react(true);
+				break;
+			case main_region_state_choose_ty_state_initial:
+				main_region_state_choose_ty_state_initial_react(true);
 				break;
 			case main_region_state_choose_r2_state_sli1:
 				main_region_state_choose_r2_state_sli1_react(true);
@@ -2024,7 +2051,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	 * @see IStatemachine#isActive()
 	 */
 	public synchronized boolean isActive() {
-		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$||stateVector[3] != State.$NullState$||stateVector[4] != State.$NullState$||stateVector[5] != State.$NullState$||stateVector[6] != State.$NullState$;
+		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$||stateVector[2] != State.$NullState$||stateVector[3] != State.$NullState$||stateVector[4] != State.$NullState$||stateVector[5] != State.$NullState$||stateVector[6] != State.$NullState$||stateVector[7] != State.$NullState$;
 	}
 	
 	/** 
@@ -2061,28 +2088,32 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_choose:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_choose.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_choose_r7_state_timer.ordinal();
+		case main_region_state_choose_addcup_state1:
+			return stateVector[0] == State.main_region_state_choose_addcup_state1;
 		case main_region_state_choose_ty_state_type:
-			return stateVector[0] == State.main_region_state_choose_ty_state_type;
+			return stateVector[1] == State.main_region_state_choose_ty_state_type;
 		case main_region_state_choose_ty_state_type2:
-			return stateVector[0] == State.main_region_state_choose_ty_state_type2;
+			return stateVector[1] == State.main_region_state_choose_ty_state_type2;
 		case main_region_state_choose_ty_state_type3:
-			return stateVector[0] == State.main_region_state_choose_ty_state_type3;
+			return stateVector[1] == State.main_region_state_choose_ty_state_type3;
+		case main_region_state_choose_ty_state_initial:
+			return stateVector[1] == State.main_region_state_choose_ty_state_initial;
 		case main_region_state_choose_r2_state_sli1:
-			return stateVector[1] == State.main_region_state_choose_r2_state_sli1;
+			return stateVector[2] == State.main_region_state_choose_r2_state_sli1;
 		case main_region_state_choose_r3_state_sli2:
-			return stateVector[2] == State.main_region_state_choose_r3_state_sli2;
+			return stateVector[3] == State.main_region_state_choose_r3_state_sli2;
 		case main_region_state_choose_r4_state_sli3:
-			return stateVector[3] == State.main_region_state_choose_r4_state_sli3;
+			return stateVector[4] == State.main_region_state_choose_r4_state_sli3;
 		case main_region_state_choose_r5_state_nfc1:
-			return stateVector[4] == State.main_region_state_choose_r5_state_nfc1;
+			return stateVector[5] == State.main_region_state_choose_r5_state_nfc1;
 		case main_region_state_choose_r5_state_nfc2:
-			return stateVector[4] == State.main_region_state_choose_r5_state_nfc2;
+			return stateVector[5] == State.main_region_state_choose_r5_state_nfc2;
 		case main_region_state_choose_r6_state_caculate:
-			return stateVector[5] == State.main_region_state_choose_r6_state_caculate;
+			return stateVector[6] == State.main_region_state_choose_r6_state_caculate;
 		case main_region_state_choose_r7_state_resetTimer:
-			return stateVector[6] == State.main_region_state_choose_r7_state_resetTimer;
+			return stateVector[7] == State.main_region_state_choose_r7_state_resetTimer;
 		case main_region_state_choose_r7_state_timer:
-			return stateVector[6] == State.main_region_state_choose_r7_state_timer;
+			return stateVector[7] == State.main_region_state_choose_r7_state_timer;
 		case main_region_state_prepare:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_prepare.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_judgeMoney4.ordinal();
@@ -2589,6 +2620,10 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoIfEnoughMoney4();
 	}
 	
+	public synchronized boolean isRaisedDoAddCup() {
+		return sCInterface.isRaisedDoAddCup();
+	}
+	
 	/* Entry action for state 'state_type'. */
 	private void entryAction_main_region_state_choose_ty_state_type() {
 		sCInterface.raiseDoChangeType();
@@ -2892,7 +2927,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'clean_machine'. */
 	private void entryAction_main_region_clean_machine() {
-		timer.setTimer(this, 18, (5 * 1000), false);
+		timer.setTimer(this, 18, (3 * 1000), false);
 		
 		sCInterface.raiseDoClean();
 	}
@@ -2994,6 +3029,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* 'default' enter sequence for state state_choose */
 	private void enterSequence_main_region_state_choose_default() {
+		enterSequence_main_region_state_choose_addcup_default();
 		enterSequence_main_region_state_choose_ty_default();
 		enterSequence_main_region_state_choose_r2_default();
 		enterSequence_main_region_state_choose_r3_default();
@@ -3003,77 +3039,89 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		enterSequence_main_region_state_choose_r7_default();
 	}
 	
+	/* 'default' enter sequence for state state1 */
+	private void enterSequence_main_region_state_choose_addcup_state1_default() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_state_choose_addcup_state1;
+	}
+	
 	/* 'default' enter sequence for state state_type */
 	private void enterSequence_main_region_state_choose_ty_state_type_default() {
 		entryAction_main_region_state_choose_ty_state_type();
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_choose_ty_state_type;
+		nextStateIndex = 1;
+		stateVector[1] = State.main_region_state_choose_ty_state_type;
 	}
 	
 	/* 'default' enter sequence for state state_type2 */
 	private void enterSequence_main_region_state_choose_ty_state_type2_default() {
 		entryAction_main_region_state_choose_ty_state_type2();
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_choose_ty_state_type2;
+		nextStateIndex = 1;
+		stateVector[1] = State.main_region_state_choose_ty_state_type2;
 	}
 	
 	/* 'default' enter sequence for state state_type3 */
 	private void enterSequence_main_region_state_choose_ty_state_type3_default() {
 		entryAction_main_region_state_choose_ty_state_type3();
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_choose_ty_state_type3;
+		nextStateIndex = 1;
+		stateVector[1] = State.main_region_state_choose_ty_state_type3;
+	}
+	
+	/* 'default' enter sequence for state state_initial */
+	private void enterSequence_main_region_state_choose_ty_state_initial_default() {
+		nextStateIndex = 1;
+		stateVector[1] = State.main_region_state_choose_ty_state_initial;
 	}
 	
 	/* 'default' enter sequence for state state_sli1 */
 	private void enterSequence_main_region_state_choose_r2_state_sli1_default() {
-		nextStateIndex = 1;
-		stateVector[1] = State.main_region_state_choose_r2_state_sli1;
+		nextStateIndex = 2;
+		stateVector[2] = State.main_region_state_choose_r2_state_sli1;
 	}
 	
 	/* 'default' enter sequence for state state_sli2 */
 	private void enterSequence_main_region_state_choose_r3_state_sli2_default() {
-		nextStateIndex = 2;
-		stateVector[2] = State.main_region_state_choose_r3_state_sli2;
+		nextStateIndex = 3;
+		stateVector[3] = State.main_region_state_choose_r3_state_sli2;
 	}
 	
 	/* 'default' enter sequence for state state_sli3 */
 	private void enterSequence_main_region_state_choose_r4_state_sli3_default() {
-		nextStateIndex = 3;
-		stateVector[3] = State.main_region_state_choose_r4_state_sli3;
+		nextStateIndex = 4;
+		stateVector[4] = State.main_region_state_choose_r4_state_sli3;
 	}
 	
 	/* 'default' enter sequence for state state_nfc1 */
 	private void enterSequence_main_region_state_choose_r5_state_nfc1_default() {
 		entryAction_main_region_state_choose_r5_state_nfc1();
-		nextStateIndex = 4;
-		stateVector[4] = State.main_region_state_choose_r5_state_nfc1;
+		nextStateIndex = 5;
+		stateVector[5] = State.main_region_state_choose_r5_state_nfc1;
 	}
 	
 	/* 'default' enter sequence for state state_nfc2 */
 	private void enterSequence_main_region_state_choose_r5_state_nfc2_default() {
 		entryAction_main_region_state_choose_r5_state_nfc2();
-		nextStateIndex = 4;
-		stateVector[4] = State.main_region_state_choose_r5_state_nfc2;
+		nextStateIndex = 5;
+		stateVector[5] = State.main_region_state_choose_r5_state_nfc2;
 	}
 	
 	/* 'default' enter sequence for state state_caculate */
 	private void enterSequence_main_region_state_choose_r6_state_caculate_default() {
 		entryAction_main_region_state_choose_r6_state_caculate();
-		nextStateIndex = 5;
-		stateVector[5] = State.main_region_state_choose_r6_state_caculate;
+		nextStateIndex = 6;
+		stateVector[6] = State.main_region_state_choose_r6_state_caculate;
 	}
 	
 	/* 'default' enter sequence for state state_resetTimer */
 	private void enterSequence_main_region_state_choose_r7_state_resetTimer_default() {
 		entryAction_main_region_state_choose_r7_state_resetTimer();
-		nextStateIndex = 6;
-		stateVector[6] = State.main_region_state_choose_r7_state_resetTimer;
+		nextStateIndex = 7;
+		stateVector[7] = State.main_region_state_choose_r7_state_resetTimer;
 	}
 	
 	/* 'default' enter sequence for state state_timer */
 	private void enterSequence_main_region_state_choose_r7_state_timer_default() {
-		nextStateIndex = 6;
-		stateVector[6] = State.main_region_state_choose_r7_state_timer;
+		nextStateIndex = 7;
+		stateVector[7] = State.main_region_state_choose_r7_state_timer;
 	}
 	
 	/* 'default' enter sequence for state state_prepare */
@@ -3439,6 +3487,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		react_main_region__entry_Default();
 	}
 	
+	/* 'default' enter sequence for region addcup */
+	private void enterSequence_main_region_state_choose_addcup_default() {
+		react_main_region_state_choose_addcup__entry_Default();
+	}
+	
 	/* 'default' enter sequence for region ty */
 	private void enterSequence_main_region_state_choose_ty_default() {
 		react_main_region_state_choose_ty__entry_Default();
@@ -3536,6 +3589,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for state state_choose */
 	private void exitSequence_main_region_state_choose() {
+		exitSequence_main_region_state_choose_addcup();
 		exitSequence_main_region_state_choose_ty();
 		exitSequence_main_region_state_choose_r2();
 		exitSequence_main_region_state_choose_r3();
@@ -3545,72 +3599,84 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		exitSequence_main_region_state_choose_r7();
 	}
 	
+	/* Default exit sequence for state state1 */
+	private void exitSequence_main_region_state_choose_addcup_state1() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
 	/* Default exit sequence for state state_type */
 	private void exitSequence_main_region_state_choose_ty_state_type() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state state_type2 */
-	private void exitSequence_main_region_state_choose_ty_state_type2() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state state_type3 */
-	private void exitSequence_main_region_state_choose_ty_state_type3() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state state_sli1 */
-	private void exitSequence_main_region_state_choose_r2_state_sli1() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state state_sli2 */
-	private void exitSequence_main_region_state_choose_r3_state_sli2() {
+	/* Default exit sequence for state state_type2 */
+	private void exitSequence_main_region_state_choose_ty_state_type2() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_type3 */
+	private void exitSequence_main_region_state_choose_ty_state_type3() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_initial */
+	private void exitSequence_main_region_state_choose_ty_state_initial() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_sli1 */
+	private void exitSequence_main_region_state_choose_r2_state_sli1() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state state_sli3 */
-	private void exitSequence_main_region_state_choose_r4_state_sli3() {
+	/* Default exit sequence for state state_sli2 */
+	private void exitSequence_main_region_state_choose_r3_state_sli2() {
 		nextStateIndex = 3;
 		stateVector[3] = State.$NullState$;
 	}
 	
+	/* Default exit sequence for state state_sli3 */
+	private void exitSequence_main_region_state_choose_r4_state_sli3() {
+		nextStateIndex = 4;
+		stateVector[4] = State.$NullState$;
+	}
+	
 	/* Default exit sequence for state state_nfc1 */
 	private void exitSequence_main_region_state_choose_r5_state_nfc1() {
-		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state state_nfc2 */
-	private void exitSequence_main_region_state_choose_r5_state_nfc2() {
-		nextStateIndex = 4;
-		stateVector[4] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state state_caculate */
-	private void exitSequence_main_region_state_choose_r6_state_caculate() {
 		nextStateIndex = 5;
 		stateVector[5] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state state_resetTimer */
-	private void exitSequence_main_region_state_choose_r7_state_resetTimer() {
+	/* Default exit sequence for state state_nfc2 */
+	private void exitSequence_main_region_state_choose_r5_state_nfc2() {
+		nextStateIndex = 5;
+		stateVector[5] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_caculate */
+	private void exitSequence_main_region_state_choose_r6_state_caculate() {
 		nextStateIndex = 6;
 		stateVector[6] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state state_resetTimer */
+	private void exitSequence_main_region_state_choose_r7_state_resetTimer() {
+		nextStateIndex = 7;
+		stateVector[7] = State.$NullState$;
 		
 		exitAction_main_region_state_choose_r7_state_resetTimer();
 	}
 	
 	/* Default exit sequence for state state_timer */
 	private void exitSequence_main_region_state_choose_r7_state_timer() {
-		nextStateIndex = 6;
-		stateVector[6] = State.$NullState$;
+		nextStateIndex = 7;
+		stateVector[7] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state state_prepare */
@@ -3975,14 +4041,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
-		case main_region_state_choose_ty_state_type:
-			exitSequence_main_region_state_choose_ty_state_type();
-			break;
-		case main_region_state_choose_ty_state_type2:
-			exitSequence_main_region_state_choose_ty_state_type2();
-			break;
-		case main_region_state_choose_ty_state_type3:
-			exitSequence_main_region_state_choose_ty_state_type3();
+		case main_region_state_choose_addcup_state1:
+			exitSequence_main_region_state_choose_addcup_state1();
 			break;
 		case main_region_state_prepare_r1_state_judgeType:
 			exitSequence_main_region_state_prepare_r1_state_judgeType();
@@ -4103,8 +4163,17 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 		
 		switch (stateVector[1]) {
-		case main_region_state_choose_r2_state_sli1:
-			exitSequence_main_region_state_choose_r2_state_sli1();
+		case main_region_state_choose_ty_state_type:
+			exitSequence_main_region_state_choose_ty_state_type();
+			break;
+		case main_region_state_choose_ty_state_type2:
+			exitSequence_main_region_state_choose_ty_state_type2();
+			break;
+		case main_region_state_choose_ty_state_type3:
+			exitSequence_main_region_state_choose_ty_state_type3();
+			break;
+		case main_region_state_choose_ty_state_initial:
+			exitSequence_main_region_state_choose_ty_state_initial();
 			break;
 		case main_region_state_prepare_r1_prepare_1_r2_heat_water:
 			exitSequence_main_region_state_prepare_r1_prepare_1_r2_heat_water();
@@ -4129,8 +4198,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 		
 		switch (stateVector[2]) {
-		case main_region_state_choose_r3_state_sli2:
-			exitSequence_main_region_state_choose_r3_state_sli2();
+		case main_region_state_choose_r2_state_sli1:
+			exitSequence_main_region_state_choose_r2_state_sli1();
 			break;
 		case main_region_state_prepare_r1_perpare_2_r2_state_1_r2_judge_cup:
 			exitSequence_main_region_state_prepare_r1_perpare_2_r2_state_1_r2_judge_cup();
@@ -4146,6 +4215,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 		
 		switch (stateVector[3]) {
+		case main_region_state_choose_r3_state_sli2:
+			exitSequence_main_region_state_choose_r3_state_sli2();
+			break;
+		default:
+			break;
+		}
+		
+		switch (stateVector[4]) {
 		case main_region_state_choose_r4_state_sli3:
 			exitSequence_main_region_state_choose_r4_state_sli3();
 			break;
@@ -4153,7 +4230,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			break;
 		}
 		
-		switch (stateVector[4]) {
+		switch (stateVector[5]) {
 		case main_region_state_choose_r5_state_nfc1:
 			exitSequence_main_region_state_choose_r5_state_nfc1();
 			break;
@@ -4164,7 +4241,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			break;
 		}
 		
-		switch (stateVector[5]) {
+		switch (stateVector[6]) {
 		case main_region_state_choose_r6_state_caculate:
 			exitSequence_main_region_state_choose_r6_state_caculate();
 			break;
@@ -4172,7 +4249,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			break;
 		}
 		
-		switch (stateVector[6]) {
+		switch (stateVector[7]) {
 		case main_region_state_choose_r7_state_resetTimer:
 			exitSequence_main_region_state_choose_r7_state_resetTimer();
 			break;
@@ -4184,9 +4261,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		}
 	}
 	
+	/* Default exit sequence for region addcup */
+	private void exitSequence_main_region_state_choose_addcup() {
+		switch (stateVector[0]) {
+		case main_region_state_choose_addcup_state1:
+			exitSequence_main_region_state_choose_addcup_state1();
+			break;
+		default:
+			break;
+		}
+	}
+	
 	/* Default exit sequence for region ty */
 	private void exitSequence_main_region_state_choose_ty() {
-		switch (stateVector[0]) {
+		switch (stateVector[1]) {
 		case main_region_state_choose_ty_state_type:
 			exitSequence_main_region_state_choose_ty_state_type();
 			break;
@@ -4196,6 +4284,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_choose_ty_state_type3:
 			exitSequence_main_region_state_choose_ty_state_type3();
 			break;
+		case main_region_state_choose_ty_state_initial:
+			exitSequence_main_region_state_choose_ty_state_initial();
+			break;
 		default:
 			break;
 		}
@@ -4203,7 +4294,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r2 */
 	private void exitSequence_main_region_state_choose_r2() {
-		switch (stateVector[1]) {
+		switch (stateVector[2]) {
 		case main_region_state_choose_r2_state_sli1:
 			exitSequence_main_region_state_choose_r2_state_sli1();
 			break;
@@ -4214,7 +4305,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r3 */
 	private void exitSequence_main_region_state_choose_r3() {
-		switch (stateVector[2]) {
+		switch (stateVector[3]) {
 		case main_region_state_choose_r3_state_sli2:
 			exitSequence_main_region_state_choose_r3_state_sli2();
 			break;
@@ -4225,7 +4316,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r4 */
 	private void exitSequence_main_region_state_choose_r4() {
-		switch (stateVector[3]) {
+		switch (stateVector[4]) {
 		case main_region_state_choose_r4_state_sli3:
 			exitSequence_main_region_state_choose_r4_state_sli3();
 			break;
@@ -4236,7 +4327,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r5 */
 	private void exitSequence_main_region_state_choose_r5() {
-		switch (stateVector[4]) {
+		switch (stateVector[5]) {
 		case main_region_state_choose_r5_state_nfc1:
 			exitSequence_main_region_state_choose_r5_state_nfc1();
 			break;
@@ -4250,7 +4341,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r6 */
 	private void exitSequence_main_region_state_choose_r6() {
-		switch (stateVector[5]) {
+		switch (stateVector[6]) {
 		case main_region_state_choose_r6_state_caculate:
 			exitSequence_main_region_state_choose_r6_state_caculate();
 			break;
@@ -4261,7 +4352,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Default exit sequence for region r7 */
 	private void exitSequence_main_region_state_choose_r7() {
-		switch (stateVector[6]) {
+		switch (stateVector[7]) {
 		case main_region_state_choose_r7_state_resetTimer:
 			exitSequence_main_region_state_choose_r7_state_resetTimer();
 			break;
@@ -4590,8 +4681,13 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	}
 	
 	/* Default react sequence for initial entry  */
+	private void react_main_region_state_choose_addcup__entry_Default() {
+		enterSequence_main_region_state_choose_addcup_state1_default();
+	}
+	
+	/* Default react sequence for initial entry  */
 	private void react_main_region_state_choose_ty__entry_Default() {
-		enterSequence_main_region_state_choose_ty_state_type_default();
+		enterSequence_main_region_state_choose_ty_state_initial_default();
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -4706,6 +4802,22 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
+	private boolean main_region_state_choose_addcup_state1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.addCup_Btn) {
+				exitSequence_main_region_state_choose_addcup_state1();
+				sCInterface.raiseDoAddCup();
+				
+				enterSequence_main_region_state_choose_addcup_state1_default();
+			} else {
+				did_transition = false;
+			}
+		}
+		return did_transition;
+	}
+	
 	private boolean main_region_state_choose_ty_state_type_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
@@ -4774,6 +4886,34 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					enterSequence_main_region_state_choose_ty_state_type_default();
 				} else {
 					did_transition = false;
+				}
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_state_choose_ty_state_initial_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.type2_btn) {
+				exitSequence_main_region_state_choose_ty_state_initial();
+				sCInterface.raiseDoChangeSliderToSoup();
+				
+				enterSequence_main_region_state_choose_ty_state_type2_default();
+			} else {
+				if (sCInterface.type3_btn) {
+					exitSequence_main_region_state_choose_ty_state_initial();
+					sCInterface.raiseDoChangeSliderToIcedTea();
+					
+					enterSequence_main_region_state_choose_ty_state_type3_default();
+				} else {
+					if (sCInterface.type1_btn) {
+						exitSequence_main_region_state_choose_ty_state_initial();
+						enterSequence_main_region_state_choose_ty_state_type_default();
+					} else {
+						did_transition = false;
+					}
 				}
 			}
 		}
