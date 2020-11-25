@@ -585,6 +585,42 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onDoIfAddCroutonsRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddCroutonsRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoIfAddSiropRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddSiropRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoIfAddIceCreamRaised() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDoAddIceCreamRaised() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 
