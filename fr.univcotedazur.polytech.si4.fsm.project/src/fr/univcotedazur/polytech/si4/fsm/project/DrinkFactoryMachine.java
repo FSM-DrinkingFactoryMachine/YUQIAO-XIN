@@ -81,13 +81,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
 			theMachine.theFSM.raisePrepare();
 		}
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 	}
 
 	@Override
@@ -208,7 +204,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		if(theMachine.currentProgress!=100)
 		{
 			theMachine.currentProgress=100;//神奇？？？？
-			theMachine.progressBar.setValue(100);
+			theMachine.progressBar.setValue(theMachine.currentProgress);
 			
 		}
 		
