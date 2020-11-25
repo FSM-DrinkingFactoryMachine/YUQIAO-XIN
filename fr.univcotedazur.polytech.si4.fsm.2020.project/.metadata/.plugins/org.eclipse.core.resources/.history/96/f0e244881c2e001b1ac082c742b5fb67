@@ -38,7 +38,7 @@ import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFacto
 
 class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	DrinkFactoryMachine theMachine;
-	String text = "<html>Hello Sir/Lady<br>Please choose the drink", text1 = "",text2="";
+	String text = "<html>Hello Sir/Lady<br>Please choose the drink", text1 = "";
 	boolean isBiip = false;
 	public DrinkFactoryMachineImplementation(DrinkFactoryMachine dfm) {
     	theMachine = dfm; 
@@ -49,24 +49,21 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		text = "<html>Hello Sir/Lady<br>Please choose the drink";
 		text1 = "";
-		text2="";
 		isBiip = false;
 		theMachine.drinkType = "";
 		theMachine.nfcInfo = "";
 		theMachine.timer1.stop();
-		theMachine.myTimer.stop();
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
-		theMachine.currentProgress = 0;
 		theMachine.sugarSlider.setValue(0);
 		theMachine.sizeSlider.setValue(0);
 		theMachine.temperatureSlider.setValue(0);
 		theMachine.progressBar.setValue(0);
+		theMachine.currentProgress = 0;
 		theMachine.isOwnCup = false;
 		theMachine.messagesToUser.setText(text);
 		theMachine.messagesToUser1.setText(text1);
-		theMachine.messagesToUser2.setText(text2);
-//		System.out.println("死了");
+		theMachine.messagesToUser2.setText(text1);
 //		theMachine.timeValue.setText("");
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
@@ -79,13 +76,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
 			theMachine.theFSM.raisePrepare();
 		}
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 	}
 
 	@Override
@@ -176,18 +169,16 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoRefundRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("");
 		theMachine.messagesToUser1.setText("");
 		if(theMachine.curpay < theMachine.curprice) {
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your refund is <br>" + theMachine.curpay);
-		}
-		else if(theMachine.curpay > theMachine.curprice){
+		}else if(theMachine.curpay > theMachine.curprice){
 			double refund = theMachine.curpay - theMachine.curprice;
 			BigDecimal b = new BigDecimal(refund);
 			refund = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your refund is <br>" + refund);
 		}
-		theMachine.theFSM.raiseReset();
-		System.out.println("No");
 	}
 
 
@@ -201,37 +192,29 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	}
 
 	@Override
-	public void onDoWaitTakeRaised() {
+	public void onDoWaitRecoverRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>waiting for the<br>container to be recovered.");
 		theMachine.timer1.stop();
-		if(theMachine.currentProgress!=100)
-		{
-			theMachine.currentProgress=100;//神奇？？？？
-			theMachine.progressBar.setValue(100);
+		BufferedImage myPicture = null;
+		if(theMachine.isOwnCup==false) {
+			try {
+				myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+		}
 			
+		else {
+			try {
+				myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+			}
 		}
-		
-			theMachine.messagesToUser.setText("<html>waiting for the<br>drink to be taken.");
-			BufferedImage myPicture = null;
-			if(theMachine.isOwnCup==false) {
-				try {
-					myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
-				} catch (IOException ee) {
-					ee.printStackTrace();
-				}
-				theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-			  }
-				
-			else {
-				try {
-					myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
-				} catch (IOException ee) {
-					ee.printStackTrace();
-				}
-				theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-				}
-		}
-
 
 	@Override
 	public void onDoInitialNfcInfoRaised() {
@@ -270,13 +253,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 //		theMachine.messagesToUser.setText("<html>recovery and<br>positioning of a pod");
 //		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Coffee")) {
-			theMachine.messagesToUser1.setText("<html>waiting for setting dosette.");
+			theMachine.messagesToUser1.setText("<html>waiting for <br>setting dosette.");
 			theMachine.controlProgressBar(250, 20);
 			theMachine.controlRuningTime(20, "Coffee");
 //			theMachine.theFSM.raisePr_coffee();
 		}
 		else if(theMachine.drinkType.equals("Iced Tea")) {
-			theMachine.messagesToUser1.setText("<html>waiting for setting dosette.");
+			theMachine.messagesToUser1.setText("<html>waiting for <br>setting dosette.");
 			theMachine.controlProgressBar(350, 15);
 			theMachine.controlRuningTime(15, "Iced Tea");
 			
@@ -289,11 +272,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.drinkType.equals("Soup"))
 		{
-		theMachine.messagesToUser.setText("<html>the water starts heating ");
+		theMachine.messagesToUser.setText("<html>start of<br>water heating");
 		theMachine.messagesToUser1.setText("");
 		}
 		else 
-			theMachine.messagesToUser.setText("<html>the water starts heating");
+			theMachine.messagesToUser.setText("<html>start of<br>water heating");
 	}
 
 	@Override
@@ -301,10 +284,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.drinkType.equals("Tea")||theMachine.drinkType.equals("Coffee")) {
 		theMachine.messagesToUser1.setText("");
-		theMachine.messagesToUser.setText("<html>please wait for the right temperature");
+		theMachine.messagesToUser.setText("<html>waiting for<br>the right temperature");
 		}
 		else
-			theMachine.messagesToUser.setText("<html> please wait for the right temperature");
+			theMachine.messagesToUser.setText("<html>waiting for<br>the right temperature");
 	}
 
 	@Override
@@ -346,33 +329,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>adding sugar");
 		if(theMachine.drinkType.equals("Coffee"))
-		{
-			theMachine.controlProgressBar(250, 70);
-			theMachine.controlRuningTime(70, "Coffee");
-		}
-		else if(theMachine.drinkType.equals("Expresso"))
-		{
-			theMachine.controlProgressBar(250, 70);
-			theMachine.controlRuningTime(70, "Expresso");
-		}
-		else if(theMachine.drinkType.equals("Tea"))
-		{
-			theMachine.controlProgressBar(250, 60);
-			theMachine.controlRuningTime(60, "Tea");
-		}
-		else if(theMachine.drinkType.equals("Iced Tea"))
-		{
-			theMachine.controlProgressBar(350, 55);
-			theMachine.controlRuningTime(55, "Iced Tea");
-		}
-		theMachine.messagesToUser.setText("<html>please wait for adding sugar ");
-		theMachine.messagesToUser1.setText("<html>adding water according to the size of drink");
-	}	
+			theMachine.controlProgressBar(250, 100);
+	}
 
 	@Override
 	public void onDoAddWaterRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser1.setText("<html>add water<br>according to the size of drink");
+//		theMachine.messagesToUser.setText("<html>flow of water<br>according to correct size");
 	}
 
 	@Override
@@ -386,13 +349,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 	@Override
 	public void onDoTampGrainRaised() {
-		theMachine.messagesToUser1.setText("<html>tamping of the grains");
+		theMachine.messagesToUser1.setText("<html>tamping of the grains<br>");
 	}
 
 	@Override
 	public void onDoSetSachetRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser1.setText("<html>recovery and positioning of a sachet");
+		theMachine.messagesToUser1.setText("<html>recovery and<br>positioning of a sachet");
 		theMachine.controlProgressBar(300, 20);
 		theMachine.controlRuningTime(20, "Tea");
 	}
@@ -400,17 +363,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoWaitInfusionRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>waiting for the infusion");
-		theMachine.messagesToUser1.setText("");
-		if(theMachine.drinkType.equals("Tea")) {
-			theMachine.controlProgressBar(250, 80);
-			theMachine.controlRuningTime(80, "Tea");
-		}
-		else {
-			theMachine.controlProgressBar(350, 70);
-			theMachine.controlRuningTime(70, "Iced Tea");
-		}
-
+		theMachine.controlProgressBar(250, 25);
+//		theMachine.messagesToUser.setText("<html>waiting for the infusion");
 	}
 
 	@Override
@@ -456,13 +410,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoSetSoupRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser1.setText("<html>recovery and pouring of a dose of soup");
+		theMachine.messagesToUser1.setText("<html>recovery and<br>pouring of a dose of soup");
 	}
 
 	@Override
 	public void onDoAddSpiceRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser2.setText("<html>add spices according to the desired dose");
+		theMachine.messagesToUser2.setText("<html>add spices<br>according to the desired dose");
 		theMachine.controlProgressBar(200, 70);
 		theMachine.controlRuningTime(70, "Next");
 	}
@@ -471,7 +425,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoWaitHeatToHotRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser1.setText("");
-		theMachine.messagesToUser.setText("<html>please wait for the water to the hot temperature");
+		theMachine.messagesToUser.setText("<html>waiting for<br>the water to the hot temperature");
 	}
 
 	@Override
@@ -494,8 +448,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoCleanRaised() {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
-		theMachine.messagesToUser.setText("the machine is cleaning");
-		theMachine.messagesToUser1.setText("");	
+		theMachine.messagesToUser.setText("Preparing");
+		theMachine.messagesToUser1.setText("");
+		theMachine.controlProgressBar(500, 10);
+		
 	}
 
 	@Override
@@ -527,9 +483,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.curpay > theMachine.curprice) {
 			theMachine.theFSM.raiseReturnCoins();
-//			System.out.print("yes");
-		}
-		else {
+		}else {
 			theMachine.theFSM.raiseReset();
 		}
 		
@@ -657,212 +611,12 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoIfAddMilkRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add milk to your drink?<br>it will cost 0.1 ");
 		
 	}
 
 	@Override
 	public void onDoAddMilkRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>please wating for adding milk");
-		if(theMachine.drinkType.equals("Coffee"))
-		{
-			theMachine.controlProgressBar(250, 100);
-			theMachine.controlRuningTime(100, "Coffee");
-		}
-		else if(theMachine.drinkType.equals("Expresso"))
-		{
-			theMachine.controlProgressBar(250, 100);
-			theMachine.controlRuningTime(100, "Expresso");
-		}
-		
-	}
-
-	@Override
-	public void onDoIfAddCroutonsRaised() {
-		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add croutons to your drink?<br>it will cost 0.3 ");
-		
-	}
-
-	@Override
-	public void onDoAddCroutonsRaised() {
-		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>adding croutons");
-		theMachine.controlProgressBar(200, 100);
-		theMachine.controlRuningTime(100, "Soup");
-		
-	}
-
-	@Override
-	public void onDoIfAddSiropRaised() {
-		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add sirop<br> but sugar to your drink?<br>it will cost 0.1 ");
-		theMachine.messagesToUser1.setText("");
-		theMachine.messagesToUser2.setText("");
-		
-	}
-
-	@Override
-	public void onDoAddSiropRaised() {
-		// TODO Auto-generated method stub
-		if(theMachine.drinkType.equals("Coffee"))
-		{
-			theMachine.controlProgressBar(250, 70);
-			theMachine.controlRuningTime(70, "Coffee");
-		}
-		else if(theMachine.drinkType.equals("Expresso"))
-		{
-			theMachine.controlProgressBar(250, 70);
-			theMachine.controlRuningTime(70, "Expresso");
-		}
-		else if(theMachine.drinkType.equals("Tea"))
-		{
-			theMachine.controlProgressBar(250, 60);
-			theMachine.controlRuningTime(60, "Tea");
-		}
-		else if(theMachine.drinkType.equals("Iced Tea")) {
-			theMachine.controlProgressBar(350, 55);
-			theMachine.controlRuningTime(55, "Iced Tea");
-		}
-		theMachine.messagesToUser.setText("<html>please wating for adding sirop ");
-		theMachine.messagesToUser1.setText("<html>adding water according to the size of drink");
-	}
-	
-
-	@Override
-	public void onDoIfAddIceCreamRaised() {
-		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add ice-cream to your drink?<br>it will cost 0.6 ");
-		theMachine.messagesToUser1.setText("");
-	}
-
-	@Override
-	public void onDoAddIceCreamRaised() {
-		// TODO Auto-generated method stub
-		
-		if(theMachine.drinkType.equals("Coffee"))
-		{
-			theMachine.controlProgressBar(250, 85);
-			theMachine.controlRuningTime(85, "Coffee");
-		}
-		else if(theMachine.drinkType.equals("Expresso"))
-		{
-			theMachine.controlProgressBar(250, 85);
-			theMachine.controlRuningTime(85, "Expresso");
-		}
-		theMachine.messagesToUser.setText("<html>please wating for adding ice-cream");
-	}
-
-
-
-	@Override
-	public void onDoIfEnoughMoney1Raised() {
-		// TODO Auto-generated method stub
-		if(isBiip) {
-			theMachine.curprice+=0.1;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.1;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
-				theMachine.curprice+=0.1;
-				theMachine.theFSM.raiseEnough();
-			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
-		}	
-	}
-
-	@Override
-	public void onDoIfEnoughMoney2Raised() {
-		// TODO Auto-generated method stub
-		if(isBiip) {
-			theMachine.curprice+=0.6;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.6;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
-				theMachine.curprice+=0.6;
-				theMachine.theFSM.raiseEnough();
-			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
-		}	
-		
-	}
-
-	@Override
-	public void onDoIfEnoughMoney3Raised() {
-		// TODO Auto-generated method stub
-		if(isBiip) {
-			theMachine.curprice+=0.1;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.1;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
-				theMachine.curprice+=0.1;
-				theMachine.theFSM.raiseEnough();
-			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
-		}	
-		
-	}
-
-	@Override
-	public void onDoIfEnoughMoney4Raised() {
-		// TODO Auto-generated method stub
-		if(isBiip) {
-			theMachine.curprice+=0.3;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.3;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
-				theMachine.curprice+=0.3;
-				theMachine.theFSM.raiseEnough();
-			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
-		}	
-		
-	}
-
-	@Override
-	public void onDoAddWater1Raised() {
-		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>add water according to the size of drink");
-		theMachine.messagesToUser1.setText("");
-		theMachine.messagesToUser2.setText("");
-		theMachine.controlProgressBar(200, 85);
-		theMachine.controlRuningTime(85, "Soup");
 		
 	}
 
@@ -1036,37 +790,37 @@ public class DrinkFactoryMachine extends JFrame {
 		//contentPane.setLayout(null);
 
 		messagesToUser = new JLabel("<html>Hello Sir/Lady<br>Please choose the drink");
-		messagesToUser.setFont(new Font("Arial",Font.BOLD,22));
+		messagesToUser.setFont(new Font("Arial",Font.BOLD,20));
 		messagesToUser.setForeground(Color.white);
 		messagesToUser.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser.setToolTipText("message to the user");
 		messagesToUser.setBackground(Color.white);
-		messagesToUser.setBounds(200, 50, 250, 100);
+		messagesToUser.setBounds(200, 50, 250, 80);
 		contentPane.add(messagesToUser);
 		
 
 		messagesToUser1 = new JLabel("");
-		messagesToUser1.setFont(new Font("Arial",Font.BOLD,22));
+		messagesToUser1.setFont(new Font("Arial",Font.BOLD,20));
 		messagesToUser1.setForeground(Color.white);
 		messagesToUser1.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser1.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser1.setToolTipText("message to the user");
 		messagesToUser1.setBackground(Color.white);
-		messagesToUser1.setBounds(200, 160, 250, 80);
+		messagesToUser1.setBounds(200, 150, 250, 80);
 		contentPane.add(messagesToUser1);
 		
 		
 		
 		messagesToUser2 = new JLabel("");
-		messagesToUser2.setFont(new Font("Arial",Font.BOLD,22));
+		messagesToUser2.setFont(new Font("Arial",Font.BOLD,20));
 		messagesToUser2.setForeground(Color.white);
 		messagesToUser2.setHorizontalAlignment(SwingConstants.LEFT);
 		messagesToUser2.setVerticalAlignment(SwingConstants.TOP);
 		messagesToUser2.setToolTipText("message to the user");
 		messagesToUser2.setBackground(Color.white);
 		messagesToUser2.setBounds(200, 250, 250, 80);
-		contentPane.add(messagesToUser2);
+		contentPane.add(messagesToUser1);
 
 //		timeValue = new JLabel("");
 //		timeValue.setFont(new Font("Arial",Font.BOLD,20));
