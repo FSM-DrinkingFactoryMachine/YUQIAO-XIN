@@ -64,6 +64,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public void raiseN();
 		
+		public void raiseEnough();
+		
 		public boolean isRaisedDoReset();
 		
 		public boolean isRaisedDoCaculate();
@@ -101,6 +103,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public boolean isRaisedDoAddSugar();
 		
 		public boolean isRaisedDoAddWater();
+		
+		public boolean isRaisedDoAddWater1();
 		
 		public boolean isRaisedDoCrushGrain();
 		
@@ -174,6 +178,14 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoAddIceCream();
 		
+		public boolean isRaisedDoIfEnoughMoney1();
+		
+		public boolean isRaisedDoIfEnoughMoney2();
+		
+		public boolean isRaisedDoIfEnoughMoney3();
+		
+		public boolean isRaisedDoIfEnoughMoney4();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -198,6 +210,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoPutCupRaised();
 		public void onDoAddSugarRaised();
 		public void onDoAddWaterRaised();
+		public void onDoAddWater1Raised();
 		public void onDoCrushGrainRaised();
 		public void onDoTampGrainRaised();
 		public void onDoSetSachetRaised();
@@ -234,6 +247,10 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoAddSiropRaised();
 		public void onDoIfAddIceCreamRaised();
 		public void onDoAddIceCreamRaised();
+		public void onDoIfEnoughMoney1Raised();
+		public void onDoIfEnoughMoney2Raised();
+		public void onDoIfEnoughMoney3Raised();
+		public void onDoIfEnoughMoney4Raised();
 		}
 	
 	public SCInterface getSCInterface();
