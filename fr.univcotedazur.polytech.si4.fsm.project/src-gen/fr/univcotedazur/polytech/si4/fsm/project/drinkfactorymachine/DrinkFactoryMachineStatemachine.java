@@ -1759,7 +1759,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	private ITimer timer;
 	
-	private final boolean[] timeEvents = new boolean[18];
+	private final boolean[] timeEvents = new boolean[19];
 	
 	private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
 	private boolean isRunningCycle = false;
@@ -2863,6 +2863,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'state_refund'. */
 	private void entryAction_main_region_state_refund() {
+		timer.setTimer(this, 16, (3 * 1000), false);
+		
 		sCInterface.raiseDoRefund();
 	}
 	
@@ -2878,7 +2880,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'cancleOrder'. */
 	private void entryAction_main_region_cancleOrder() {
-		timer.setTimer(this, 16, (2 * 1000), false);
+		timer.setTimer(this, 17, (2 * 1000), false);
 		
 		sCInterface.raiseDoCancleOrder();
 	}
@@ -2890,7 +2892,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'clean_machine'. */
 	private void entryAction_main_region_clean_machine() {
-		timer.setTimer(this, 17, (5 * 1000), false);
+		timer.setTimer(this, 18, (5 * 1000), false);
 		
 		sCInterface.raiseDoClean();
 	}
@@ -2975,14 +2977,19 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.unsetTimer(this, 15);
 	}
 	
+	/* Exit action for state 'state_refund'. */
+	private void exitAction_main_region_state_refund() {
+		timer.unsetTimer(this, 16);
+	}
+	
 	/* Exit action for state 'cancleOrder'. */
 	private void exitAction_main_region_cancleOrder() {
-		timer.unsetTimer(this, 16);
+		timer.unsetTimer(this, 17);
 	}
 	
 	/* Exit action for state 'clean_machine'. */
 	private void exitAction_main_region_clean_machine() {
-		timer.unsetTimer(this, 17);
+		timer.unsetTimer(this, 18);
 	}
 	
 	/* 'default' enter sequence for state state_choose */
@@ -3927,6 +3934,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	private void exitSequence_main_region_state_refund() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
+		
+		exitAction_main_region_state_refund();
 	}
 	
 	/* Default exit sequence for state judge_returnCoinsOrCancleBank */
@@ -5844,7 +5853,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.reset) {
+			if (timeEvents[16]) {
 				exitSequence_main_region_state_refund();
 				enterSequence_main_region_state_reset_default();
 				react();
@@ -5904,7 +5913,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[16]) {
+			if (timeEvents[17]) {
 				exitSequence_main_region_cancleOrder();
 				enterSequence_main_region_judge_returnCoinsOrCancleBank_default();
 				react();
@@ -5946,7 +5955,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[17]) {
+			if (timeEvents[18]) {
 				exitSequence_main_region_clean_machine();
 				enterSequence_main_region_judge_ifReturnCoins_default();
 				react();

@@ -54,18 +54,18 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.drinkType = "";
 		theMachine.nfcInfo = "";
 		theMachine.timer1.stop();
+		theMachine.myTimer.stop();
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
+		theMachine.currentProgress = 0;
 		theMachine.sugarSlider.setValue(0);
 		theMachine.sizeSlider.setValue(0);
 		theMachine.temperatureSlider.setValue(0);
 		theMachine.progressBar.setValue(0);
-		theMachine.currentProgress = 0;
 		theMachine.isOwnCup = false;
 		theMachine.messagesToUser.setText(text);
 		theMachine.messagesToUser1.setText(text1);
 		theMachine.messagesToUser2.setText(text2);
-//		theMachine.timeValue.setText("");
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
 	}
@@ -77,9 +77,13 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
+		System.out.println(theMachine.curpay);
+		System.out.println(theMachine.curprice);
 		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
 			theMachine.theFSM.raisePrepare();
 		}
+		System.out.println(theMachine.curpay);
+		System.out.println(theMachine.curprice);
 	}
 
 	@Override
@@ -170,11 +174,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoRefundRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("");
 		theMachine.messagesToUser1.setText("");
 		if(theMachine.curpay < theMachine.curprice) {
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your refund is <br>" + theMachine.curpay);
-		}else if(theMachine.curpay > theMachine.curprice){
+		}
+		else if(theMachine.curpay > theMachine.curprice){
 			double refund = theMachine.curpay - theMachine.curprice;
 			BigDecimal b = new BigDecimal(refund);
 			refund = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -196,10 +200,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoWaitTakeRaised() {
 		// TODO Auto-generated method stub
 		theMachine.timer1.stop();
+		theMachine.myTimer.stop();
 		if(theMachine.currentProgress!=100)
 		{
 			theMachine.currentProgress=100;//神奇？？？？
-			theMachine.progressBar.setValue(theMachine.currentProgress);
+			theMachine.progressBar.setValue(100);
 			
 		}
 		
@@ -486,10 +491,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoCleanRaised() {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
-		theMachine.messagesToUser.setText("Preparing");
-		theMachine.messagesToUser1.setText("");
-		theMachine.controlProgressBar(500, 10);
-		
+		theMachine.messagesToUser.setText("the machine is cleaning");
+		theMachine.messagesToUser1.setText("");	
 	}
 
 	@Override
@@ -521,7 +524,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.curpay > theMachine.curprice) {
 			theMachine.theFSM.raiseReturnCoins();
-		}else {
+//			System.out.print("yes");
+		}
+		else {
 			theMachine.theFSM.raiseReset();
 		}
 		
@@ -649,12 +654,24 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoIfAddMilkRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add milk to your drink?<br>it will cost 0.1 ");
 		
 	}
 
 	@Override
 	public void onDoAddMilkRaised() {
 		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>please wating for adding milk");
+		if(theMachine.drinkType.equals("Coffee"))
+		{
+			theMachine.controlProgressBar(250, 100);
+			theMachine.controlRuningTime(100, "Coffee");
+		}
+		else if(theMachine.drinkType.equals("Expresso"))
+		{
+			theMachine.controlProgressBar(250, 100);
+			theMachine.controlRuningTime(100, "Expresso");
+		}
 		
 	}
 
@@ -713,13 +730,25 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoIfAddIceCreamRaised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add ice-cream to your drink?<br>it will cost 0.6 ");
+		theMachine.messagesToUser1.setText("");
 	}
 
 	@Override
 	public void onDoAddIceCreamRaised() {
 		// TODO Auto-generated method stub
 		
+		if(theMachine.drinkType.equals("Coffee"))
+		{
+			theMachine.controlProgressBar(250, 85);
+			theMachine.controlRuningTime(85, "Coffee");
+		}
+		else if(theMachine.drinkType.equals("Expresso"))
+		{
+			theMachine.controlProgressBar(250, 85);
+			theMachine.controlRuningTime(85, "Expresso");
+		}
+		theMachine.messagesToUser.setText("<html>please wating for adding ice-cream");
 	}
 
 
@@ -833,42 +862,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.controlRuningTime(85, "Soup");
 		
 	}
-
-	@Override
-	public void onDoIfAddCroutonsRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoAddCroutonsRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoIfAddSiropRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoAddSiropRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoIfAddIceCreamRaised() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDoAddIceCreamRaised() {
-		// TODO Auto-generated method stub
-		
-	}
 }
 
 
@@ -892,7 +885,7 @@ public class DrinkFactoryMachine extends JFrame {
 	protected int currentProgress=0, nfcPri = 0;//secs=45;
 	protected JProgressBar progressBar;
 	protected double curpay = 0.0,curprice = 0.0;
-	protected Timer timer1,myTimer;
+	protected Timer timer1 = new Timer(0, null),myTimer = new Timer(0, null);
 	protected boolean isOwnCup=false;
 	protected boolean spiceExist=false,timeExist=false;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
@@ -929,7 +922,8 @@ public class DrinkFactoryMachine extends JFrame {
 	            progressBar.setValue(currentProgress);
 	        }
 	    };
-	    timer1=new Timer(delay,every10);
+	    timer1.setDelay(delay);
+	    timer1.addActionListener(every10);
 	    timer1.start();
 	}
 	
@@ -963,7 +957,8 @@ public class DrinkFactoryMachine extends JFrame {
 	            }
 	        }
 	    };
-	    myTimer=new Timer(10,every10);
+	    myTimer.setDelay(10);
+	    myTimer.addActionListener(every10);
 	    myTimer.start();
 	}
 	
