@@ -2760,7 +2760,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'withdraw_sachet'. */
 	private void entryAction_main_region_state_prepare_r1_withdraw_sachet() {
-		timer.setTimer(this, 2, (2 * 1000), false);
+		timer.setTimer(this, 2, (3 * 1000), false);
 		
 		sCInterface.raiseDoWithdrawSachet();
 	}
@@ -5045,7 +5045,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 									
 									enterSequence_main_region_state_choose_r6_state_caculate_default();
 								} else {
-									did_transition = false;
+									if (sCInterface.sli3_btn) {
+										exitSequence_main_region_state_choose_r6_state_caculate();
+										sCInterface.raiseDoChangePrice();
+										
+										enterSequence_main_region_state_choose_r6_state_caculate_default();
+									} else {
+										did_transition = false;
+									}
 								}
 							}
 						}

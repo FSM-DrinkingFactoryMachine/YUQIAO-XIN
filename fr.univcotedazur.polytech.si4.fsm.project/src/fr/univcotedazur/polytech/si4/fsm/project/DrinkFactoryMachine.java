@@ -148,26 +148,23 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
 		double discount = theMachine.isOwnCup? -0.1 : 0;
+		double price;
 		if(!theMachine.drinkType.equals("")) {
 			if(theMachine.sizeSlider.getValue()==0) {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
-			} else if(theMachine.sizeSlider.getValue()==1) {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
-			} else {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
-			}
+				price = theMachine.getPrice(theMachine.drinkType)+discount;	
+				}
+			else if(theMachine.sizeSlider.getValue()==1) {
+				 price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
+				}
+			else {
+				price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
+				}
+			if(theMachine.drinkType.equals("Iced Tea")&&theMachine.timeSlider.getValue()==1)
+				price=price+0.25;
+			BigDecimal b = new BigDecimal(price);
+			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			theMachine.curprice = price;
+			theMachine.messagesToUser1.setText("the price is "+price);
 		}
 	}
 
@@ -274,7 +271,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		}
 		else if(theMachine.drinkType.equals("Iced Tea")) {
 			theMachine.messagesToUser1.setText("<html>waiting for setting dosette.");
-			theMachine.controlProgressBar(350, 15);
+			theMachine.controlProgressBar(300, 15);
 			theMachine.controlRuningTime(15, "Iced Tea");
 			
 		}
@@ -321,7 +318,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.controlRuningTime(45, "Next");
 			break;
 		case "Iced Tea":
-			theMachine.controlProgressBar(350, 35);
+			theMachine.controlProgressBar(300, 35);
 			theMachine.controlRuningTime(35, "Next");
 			break;
 		case "Soup":
@@ -359,7 +356,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		}
 		else if(theMachine.drinkType.equals("Iced Tea"))
 		{
-			theMachine.controlProgressBar(350, 55);
+			theMachine.controlProgressBar(300, 55);
 			theMachine.controlRuningTime(55, "Iced Tea");
 		}
 		theMachine.messagesToUser.setText("<html>please wait for adding sugar ");
@@ -398,22 +395,25 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoWaitInfusionRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>waiting for the infusion");
-		theMachine.messagesToUser1.setText("");
 		if(theMachine.drinkType.equals("Tea")) {
-			theMachine.controlProgressBar(250, 80);
-			theMachine.controlRuningTime(80, "Tea");
+			theMachine.controlProgressBar(250, 75);
+			theMachine.controlRuningTime(75, "Tea");
+//			System.out.print("死了");
 		}
-		else {
-			theMachine.controlProgressBar(350, 70);
+		else if (theMachine.drinkType.equals("Iced Tea")) {
+			theMachine.controlProgressBar(300, 70);
 			theMachine.controlRuningTime(70, "Iced Tea");
 		}
+		theMachine.messagesToUser1.setText("");
 
 	}
 
 	@Override
 	public void onDoWithdrawSachetRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>withdrawal of the sachet");
+		theMachine.messagesToUser.setText("<html>withdrawal of the sachet");
+		theMachine.controlProgressBar(250, 85);
+		theMachine.controlRuningTime(85, "Tea");
 	}
 
 	@Override
@@ -433,7 +433,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.controlRuningTime(45, "Next");
 			break;
 		case "Iced Tea":
-			theMachine.controlProgressBar(350, 35);
+			theMachine.controlProgressBar(300, 35);
 			theMachine.controlRuningTime(35, "Next");
 			break;
 		case "Soup":
@@ -474,7 +474,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoLockDoorRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>manual door<br>locking in closed position");
+		theMachine.messagesToUser.setText("<html>manual door is locking");
+		theMachine.controlProgressBar(300, 75);
+		theMachine.controlRuningTime(75, "Iced Tea");
 	}
 
 
@@ -482,7 +484,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoOpenDoorRaised() {
 		// TODO Auto-generated method stub
-//		theMachine.messagesToUser.setText("<html>manual door<br>locking in copen position");
+		theMachine.messagesToUser.setText("<html>manual door is opening");
+		theMachine.controlProgressBar(200, 100);
+		theMachine.controlRuningTime(100, "Iced Tea");
 	}
 
 	
@@ -551,13 +555,17 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoInjectSN2Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.controlProgressBar(200, 95);
+		theMachine.controlRuningTime(95, "Iced Tea");
+		theMachine.messagesToUser.setText("<html>Please wait for the refrigerating");
 	}
 
 	@Override
 	public void onDoInjectLN2Raised() {
 		// TODO Auto-generated method stub
-		
+		theMachine.controlProgressBar(400, 95);
+		theMachine.controlRuningTime(95, "Iced Tea");
+		theMachine.messagesToUser.setText("<html>Please wait for the refrigerating");
 	}
 
 
@@ -641,7 +649,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoJudgeN2TimeRaised() {
 		// TODO Auto-generated method stub
-		
+		if(theMachine.timeSlider.getValue()==0)
+			theMachine.theFSM.raiseShort();
+		else 
+			theMachine.theFSM.raiseLong();
 	}
 
 
@@ -671,6 +682,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		{
 			theMachine.controlProgressBar(250, 100);
 			theMachine.controlRuningTime(100, "Expresso");
+		}
+		else if(theMachine.drinkType.equals("Tea"))
+		{
+			theMachine.controlProgressBar(250, 100);
+			theMachine.controlRuningTime(100, "Tea");
 		}
 		
 	}
@@ -719,7 +735,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.controlRuningTime(60, "Tea");
 		}
 		else if(theMachine.drinkType.equals("Iced Tea")) {
-			theMachine.controlProgressBar(350, 55);
+			theMachine.controlProgressBar(300, 55);
 			theMachine.controlRuningTime(55, "Iced Tea");
 		}
 		theMachine.messagesToUser.setText("<html>please wating for adding sirop ");
