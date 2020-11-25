@@ -132,7 +132,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoOpenDoor();
 		
-		public boolean isRaisedDoWaitRecover();
+		public boolean isRaisedDoWaitTake();
 		
 		public boolean isRaisedDoJudgeN2Time();
 		
@@ -224,7 +224,7 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoInjectSN2Raised();
 		public void onDoInjectLN2Raised();
 		public void onDoOpenDoorRaised();
-		public void onDoWaitRecoverRaised();
+		public void onDoWaitTakeRaised();
 		public void onDoJudgeN2TimeRaised();
 		public void onDoCleanRaised();
 		public void onDoAddCoinRaised();

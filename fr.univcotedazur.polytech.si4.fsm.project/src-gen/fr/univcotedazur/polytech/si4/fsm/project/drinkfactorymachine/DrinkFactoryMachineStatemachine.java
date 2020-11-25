@@ -1096,20 +1096,20 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			}
 		}
 		
-		private boolean doWaitRecover;
+		private boolean doWaitTake;
 		
 		
-		public boolean isRaisedDoWaitRecover() {
+		public boolean isRaisedDoWaitTake() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				return doWaitRecover;
+				return doWaitTake;
 			}
 		}
 		
-		protected void raiseDoWaitRecover() {
+		protected void raiseDoWaitTake() {
 			synchronized(DrinkFactoryMachineStatemachine.this) {
-				doWaitRecover = true;
+				doWaitTake = true;
 				for (SCInterfaceListener listener : listeners) {
-					listener.onDoWaitRecoverRaised();
+					listener.onDoWaitTakeRaised();
 				}
 			}
 		}
@@ -1646,7 +1646,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		doInjectSN2 = false;
 		doInjectLN2 = false;
 		doOpenDoor = false;
-		doWaitRecover = false;
+		doWaitTake = false;
 		doJudgeN2Time = false;
 		doClean = false;
 		doAddCoin = false;
@@ -1697,7 +1697,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_choose_r7_state_timer,
 		main_region_state_prepare,
 		main_region_state_prepare_r1_state_judgeType,
-		main_region_state_prepare_r1_wait_recover,
+		main_region_state_prepare_r1_wait_take,
 		main_region_state_prepare_r1_prepare_1,
 		main_region_state_prepare_r1_prepare_1_r1_set_dosette,
 		main_region_state_prepare_r1_prepare_1_r1_crush_grain,
@@ -1856,8 +1856,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			case main_region_state_prepare_r1_state_judgeType:
 				main_region_state_prepare_r1_state_judgeType_react(true);
 				break;
-			case main_region_state_prepare_r1_wait_recover:
-				main_region_state_prepare_r1_wait_recover_react(true);
+			case main_region_state_prepare_r1_wait_take:
+				main_region_state_prepare_r1_wait_take_react(true);
 				break;
 			case main_region_state_prepare_r1_prepare_1_r1_set_dosette:
 				main_region_state_prepare_r1_prepare_1_r1_set_dosette_react(true);
@@ -2088,8 +2088,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 					main_region_state_prepare.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_judgeMoney4.ordinal();
 		case main_region_state_prepare_r1_state_judgeType:
 			return stateVector[0] == State.main_region_state_prepare_r1_state_judgeType;
-		case main_region_state_prepare_r1_wait_recover:
-			return stateVector[0] == State.main_region_state_prepare_r1_wait_recover;
+		case main_region_state_prepare_r1_wait_take:
+			return stateVector[0] == State.main_region_state_prepare_r1_wait_take;
 		case main_region_state_prepare_r1_prepare_1:
 			return stateVector[0].ordinal() >= State.
 					main_region_state_prepare_r1_prepare_1.ordinal()&& stateVector[0].ordinal() <= State.main_region_state_prepare_r1_prepare_1_r2_heat_water.ordinal();
@@ -2481,8 +2481,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return sCInterface.isRaisedDoOpenDoor();
 	}
 	
-	public synchronized boolean isRaisedDoWaitRecover() {
-		return sCInterface.isRaisedDoWaitRecover();
+	public synchronized boolean isRaisedDoWaitTake() {
+		return sCInterface.isRaisedDoWaitTake();
 	}
 	
 	public synchronized boolean isRaisedDoJudgeN2Time() {
@@ -2631,11 +2631,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseDoJudgeType();
 	}
 	
-	/* Entry action for state 'wait_recover'. */
-	private void entryAction_main_region_state_prepare_r1_wait_recover() {
+	/* Entry action for state 'wait_take'. */
+	private void entryAction_main_region_state_prepare_r1_wait_take() {
 		timer.setTimer(this, 1, (10 * 1000), false);
 		
-		sCInterface.raiseDoWaitRecover();
+		sCInterface.raiseDoWaitTake();
 	}
 	
 	/* Entry action for state 'set_dosette'. */
@@ -2732,7 +2732,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'lock_door'. */
 	private void entryAction_main_region_state_prepare_r1_lock_door() {
-		timer.setTimer(this, 3, (1 * 1000), false);
+		timer.setTimer(this, 3, (2 * 1000), false);
 		
 		sCInterface.raiseDoLockDoor();
 	}
@@ -2816,7 +2816,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'add_Croutons'. */
 	private void entryAction_main_region_state_prepare_r1_add_Croutons() {
-		timer.setTimer(this, 10, (2 * 1000), false);
+		timer.setTimer(this, 10, (4 * 1000), false);
 		
 		sCInterface.raiseDoAddCroutons();
 	}
@@ -2900,8 +2900,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.unsetTimer(this, 0);
 	}
 	
-	/* Exit action for state 'wait_recover'. */
-	private void exitAction_main_region_state_prepare_r1_wait_recover() {
+	/* Exit action for state 'wait_take'. */
+	private void exitAction_main_region_state_prepare_r1_wait_take() {
 		timer.unsetTimer(this, 1);
 	}
 	
@@ -3081,11 +3081,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.main_region_state_prepare_r1_state_judgeType;
 	}
 	
-	/* 'default' enter sequence for state wait_recover */
-	private void enterSequence_main_region_state_prepare_r1_wait_recover_default() {
-		entryAction_main_region_state_prepare_r1_wait_recover();
+	/* 'default' enter sequence for state wait_take */
+	private void enterSequence_main_region_state_prepare_r1_wait_take_default() {
+		entryAction_main_region_state_prepare_r1_wait_take();
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_state_prepare_r1_wait_recover;
+		stateVector[0] = State.main_region_state_prepare_r1_wait_take;
 	}
 	
 	/* 'default' enter sequence for state set_dosette */
@@ -3617,12 +3617,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[0] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state wait_recover */
-	private void exitSequence_main_region_state_prepare_r1_wait_recover() {
+	/* Default exit sequence for state wait_take */
+	private void exitSequence_main_region_state_prepare_r1_wait_take() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		exitAction_main_region_state_prepare_r1_wait_recover();
+		exitAction_main_region_state_prepare_r1_wait_take();
 	}
 	
 	/* Default exit sequence for state prepare_1 */
@@ -3978,8 +3978,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_state_judgeType:
 			exitSequence_main_region_state_prepare_r1_state_judgeType();
 			break;
-		case main_region_state_prepare_r1_wait_recover:
-			exitSequence_main_region_state_prepare_r1_wait_recover();
+		case main_region_state_prepare_r1_wait_take:
+			exitSequence_main_region_state_prepare_r1_wait_take();
 			break;
 		case main_region_state_prepare_r1_prepare_1_r1_set_dosette:
 			exitSequence_main_region_state_prepare_r1_prepare_1_r1_set_dosette();
@@ -4270,8 +4270,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_prepare_r1_state_judgeType:
 			exitSequence_main_region_state_prepare_r1_state_judgeType();
 			break;
-		case main_region_state_prepare_r1_wait_recover:
-			exitSequence_main_region_state_prepare_r1_wait_recover();
+		case main_region_state_prepare_r1_wait_take:
+			exitSequence_main_region_state_prepare_r1_wait_take();
 			break;
 		case main_region_state_prepare_r1_prepare_1_r1_set_dosette:
 			exitSequence_main_region_state_prepare_r1_prepare_1_r1_set_dosette();
@@ -5008,7 +5008,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
-	private boolean main_region_state_prepare_r1_wait_recover_react(boolean try_transition) {
+	private boolean main_region_state_prepare_r1_wait_take_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
@@ -5467,7 +5467,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (timeEvents[6]) {
 				exitSequence_main_region_state_prepare_r1_open_door();
-				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				enterSequence_main_region_state_prepare_r1_wait_take_default();
 				main_region_state_prepare_react(false);
 			} else {
 				did_transition = false;
@@ -5599,7 +5599,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			} else {
 				if (sCInterface.n) {
 					exitSequence_main_region_state_prepare_r1_if_add_milk();
-					enterSequence_main_region_state_prepare_r1_wait_recover_default();
+					enterSequence_main_region_state_prepare_r1_wait_take_default();
 					main_region_state_prepare_react(false);
 				} else {
 					did_transition = false;
@@ -5618,7 +5618,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (timeEvents[8]) {
 				exitSequence_main_region_state_prepare_r1_add_milk();
-				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				enterSequence_main_region_state_prepare_r1_wait_take_default();
 				main_region_state_prepare_react(false);
 			} else {
 				did_transition = false;
@@ -5654,7 +5654,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.n) {
 				exitSequence_main_region_state_prepare_r1_if_add_croutons();
-				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				enterSequence_main_region_state_prepare_r1_wait_take_default();
 				main_region_state_prepare_react(false);
 			} else {
 				if (sCInterface.y) {
@@ -5678,7 +5678,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (timeEvents[10]) {
 				exitSequence_main_region_state_prepare_r1_add_Croutons();
-				enterSequence_main_region_state_prepare_r1_wait_recover_default();
+				enterSequence_main_region_state_prepare_r1_wait_take_default();
 				main_region_state_prepare_react(false);
 			} else {
 				did_transition = false;
@@ -5773,7 +5773,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			} else {
 				if (timeEvents[13]) {
 					exitSequence_main_region_state_prepare_r1_judgeMoney3();
-					enterSequence_main_region_state_prepare_r1_wait_recover_default();
+					enterSequence_main_region_state_prepare_r1_wait_take_default();
 					main_region_state_prepare_react(false);
 				} else {
 					if (sCInterface.pay_coins) {
@@ -5808,7 +5808,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				} else {
 					if (timeEvents[14]) {
 						exitSequence_main_region_state_prepare_r1_judgeMoney4();
-						enterSequence_main_region_state_prepare_r1_wait_recover_default();
+						enterSequence_main_region_state_prepare_r1_wait_take_default();
 						main_region_state_prepare_react(false);
 					} else {
 						did_transition = false;
