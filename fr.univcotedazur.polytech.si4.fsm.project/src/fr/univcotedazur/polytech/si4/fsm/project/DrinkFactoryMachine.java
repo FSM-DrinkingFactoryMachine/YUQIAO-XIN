@@ -38,8 +38,8 @@ import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFacto
 
 class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	DrinkFactoryMachine theMachine;
-	String text = "<html>Hello Sir/Lady<br>Please choose the drink", text1 = "",text2="";
-	InfoNFC info;
+	String text = "<html>Hello Sir/Lady<br>Please choose the drink";
+	InfoNFC info = new InfoNFC();
 	boolean isBiip = false;
 	public DrinkFactoryMachineImplementation(DrinkFactoryMachine dfm) {
     	theMachine = dfm; 
@@ -49,8 +49,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoResetRaised() {
 		// TODO Auto-generated method stub
 		text = "<html>Hello Sir/Lady<br>Please choose the drink";
-		text1 = "";
-		text2="";
 		isBiip = false;
 		info = new InfoNFC();
 		theMachine.drinkType = "";
@@ -61,6 +59,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.myTimer.removeActionListener(al);
 		for(ActionListener al: theMachine.timer1.getActionListeners())
 			theMachine.timer1.removeActionListener(al);
+		theMachine.textField.setText("");
 		theMachine.curpay = 0.0;
 		theMachine.curprice = 0.0;
 		theMachine.currentProgress = 0;
@@ -70,8 +69,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.progressBar.setValue(0);
 		theMachine.isOwnCup = false;
 		theMachine.messagesToUser.setText(text);
-		theMachine.messagesToUser1.setText(text1);
-		theMachine.messagesToUser2.setText(text2);
+		theMachine.messagesToUser1.setText("");
+		theMachine.messagesToUser2.setText("");
 		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		
 	}
@@ -155,17 +154,20 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
-		if(theMachine.textField.toString().equals(""))
+		if(theMachine.textField.getText().equals("")) {
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>please input your CB Number");
+			theMachine.theFSM.raiseN();
+		}
 		else if(!isBiip){
 			isBiip = true;
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
-			info.setNumber(theMachine.textField.toString());
+			info.setNumber(theMachine.textField.getText());
 			if(theMachine.infos.containsKey(info.Number)) {
 				info = theMachine.infos.get(info.Number);
 			}else {
 				theMachine.infos.put(info.Number,info);
 			}
+			theMachine.theFSM.raiseY();
 		}
 	}
 
@@ -521,6 +523,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoCleanRaised() {
 		// TODO Auto-generated method stub
 //		theMachine.messagesToUser.setText("<html>the internal<br>mechanism of the machine is cleaning");
+		theMachine.labelForPictures.setIcon(new ImageIcon("./picts/vide2.jpg"));
 		theMachine.messagesToUser.setText("the machine is cleaning");
 		theMachine.messagesToUser1.setText("");	
 	}
@@ -573,8 +576,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 		if(theMachine.curprice > 0) {
-			
-			theMachine.theFSM.raisePrepare();
+			if(isEnoughIngredients())
+				theMachine.theFSM.raisePrepare();
 		}
 		
 	}
@@ -694,7 +697,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoIfAddMilkRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady,do you wanna add milk to your drink?<br>it will cost 0.1 ");
-		
 	}
 
 	@Override
@@ -799,23 +801,36 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoIfEnoughMoney1Raised() {
 		// TODO Auto-generated method stub
 		if(isBiip) {
-			theMachine.curprice+=0.1;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.1;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
+			if(theMachine.numSirop > 0) {
 				theMachine.curprice+=0.1;
+				theMachine.numSirop--;
 				theMachine.theFSM.raiseEnough();
 			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Sirop is sold out ");
+				theMachine.theFSM.raiseN();
+			}
+		}
+		else{
+			if(theMachine.numSirop > 0) {
+				double price=theMachine.curpay-theMachine.curprice-0.1;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				if(price>=0) {
+					theMachine.curprice+=0.1;
+					theMachine.theFSM.raiseEnough();
+					theMachine.numSirop--;
+				}
+				else
+				{
+					theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
+					theMachine.messagesToUser1.setText("");
+					theMachine.messagesToUser2.setText("");
+				}
+			}
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Sirop is sold out ");
+			}
 		}	
 	}
 
@@ -823,23 +838,36 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoIfEnoughMoney2Raised() {
 		// TODO Auto-generated method stub
 		if(isBiip) {
-			theMachine.curprice+=0.6;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.6;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
+			if(theMachine.numIceCream > 0) {
 				theMachine.curprice+=0.6;
 				theMachine.theFSM.raiseEnough();
+				theMachine.numIceCream--;
 			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>IceCream is sold out ");
+				theMachine.theFSM.raiseN();
+			}
+		}
+		else{
+			if(theMachine.numIceCream > 0) {
+				double price=theMachine.curpay-theMachine.curprice-0.6;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				if(price>=0) {
+					theMachine.curprice+=0.6;
+					theMachine.theFSM.raiseEnough();
+					theMachine.numIceCream--;
+				}
+				else
+				{
+					theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
+					theMachine.messagesToUser1.setText("");
+					theMachine.messagesToUser2.setText("");
+				}
+			}
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>IceCream is sold out ");
+			}
 		}	
 		
 	}
@@ -848,23 +876,36 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoIfEnoughMoney3Raised() {
 		// TODO Auto-generated method stub
 		if(isBiip) {
-			theMachine.curprice+=0.1;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.1;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
+			if(theMachine.numMilk > 0) {
 				theMachine.curprice+=0.1;
 				theMachine.theFSM.raiseEnough();
+				theMachine.numMilk--;
 			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Milk is sold out ");
+				theMachine.theFSM.raiseN();
+			}
+		}
+		else{
+			if(theMachine.numMilk > 0) {
+				double price=theMachine.curpay-theMachine.curprice-0.1;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				if(price>=0) {
+					theMachine.curprice+=0.1;
+					theMachine.theFSM.raiseEnough();
+					theMachine.numMilk--;
+				}
+				else
+				{
+					theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
+					theMachine.messagesToUser1.setText("");
+					theMachine.messagesToUser2.setText("");
+				}
+			}
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Milk is sold out ");
+			}
 		}	
 		
 	}
@@ -873,23 +914,36 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoIfEnoughMoney4Raised() {
 		// TODO Auto-generated method stub
 		if(isBiip) {
-			theMachine.curprice+=0.3;
-			theMachine.theFSM.raiseEnough();
-		}
-		else{
-			double price=theMachine.curpay-theMachine.curprice-0.3;
-			BigDecimal b = new BigDecimal(price);
-			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			if(price>=0) {
+			if(theMachine.numCrouton > 0) {
 				theMachine.curprice+=0.3;
 				theMachine.theFSM.raiseEnough();
+				theMachine.numCrouton--;
 			}
-			else
-			{
-				theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
-				theMachine.messagesToUser1.setText("");
-				theMachine.messagesToUser2.setText("");
-			}	
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Crouton is sold out ");
+				theMachine.theFSM.raiseN();
+			}
+		}
+		else{
+			if(theMachine.numCrouton > 0) {
+				double price=theMachine.curpay-theMachine.curprice-0.3;
+				BigDecimal b = new BigDecimal(price);
+				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				if(price>=0) {
+					theMachine.curprice+=0.3;
+					theMachine.theFSM.raiseEnough();
+					theMachine.numCrouton--;
+				}
+				else
+				{
+					theMachine.messagesToUser.setText("<html>Dear Sir/Lady,your money is not enough,you should pay "+ (-price));
+					theMachine.messagesToUser1.setText("");
+					theMachine.messagesToUser2.setText("");
+				}
+			}
+			else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Crouton is sold out ");
+			}
 		}	
 		
 	}
@@ -931,7 +985,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDo11TimesRaised() {
 		// TODO Auto-generated method stub
-		theMachine.messagesToUser.setText("<html>this is the 11 times<br>you can buy the drink for free<br>which is cheaper than "+info.getAvgPrice()+"euros");
+		theMachine.messagesToUser.setText("<html>this is the 11 times<br>the drink is free<br>cheaper than "+info.getAvgPrice()+"euros");
 		
 	}
 	
@@ -1010,18 +1064,18 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 
 class InfoNFC{
-	public Double[] prices = new Double[10];
+	public Double[] prices = new Double[2];
 	public double avgPrice = 0;
 	public String Number;
 	public InfoNFC() {
 		Number = "";
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 2; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
 	public void reset() {
 		Number = "";
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 2; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
@@ -1034,13 +1088,13 @@ class InfoNFC{
 	}
 	
 	public void addPrice(double price) {
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 2; i++) {
 			if(prices[i] == 0.0) {
 				prices[i] = price;
 				break;
 			}
-			if(i == 9) {
-				for(int j = 0; j < 11; j++) 
+			if(i == 1) {
+				for(int j = 0; j < 2; j++) 
 					prices[j] = 0.0;
 				prices[0] = price;
 				break;
@@ -1048,7 +1102,7 @@ class InfoNFC{
 		}
 	}
 	public boolean is11times() {
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 2; i++) {
 			if(prices[i] == 0.0) {
 				return false;
 			}
@@ -1057,10 +1111,10 @@ class InfoNFC{
 	}
 	public double getAvgPrice() {
 		double sum = 0;
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 2; i++) {
 			sum += prices[i];
 		}
-		avgPrice = sum/10;
+		avgPrice = sum/2;
 		BigDecimal b = new BigDecimal(avgPrice);
 		avgPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return avgPrice;
@@ -1092,8 +1146,8 @@ public class DrinkFactoryMachine extends JFrame {
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	protected HashMap<String,InfoNFC> infos = new HashMap<String,InfoNFC>();
-	protected int numCoffee = 10, numTea = 10, numIcedTea = 10, numExpresso = 10,
-			numMilk = 10, numIceCream = 10, numSirop = 10, numCrouton = 10,numSalt = 10, numBasil = 10, numOnion = 10;
+	protected int numCoffee = 1, numTea = 1, numIcedTea = 1, numExpresso = 1,
+			numMilk = 1, numIceCream = 1, numSirop = 1, numCrouton = 1,numSalt = 1, numBasil = 1, numOnion = 1;
 	
 	/**
 	 * @wbp.nonvisual location=311,47

@@ -1753,6 +1753,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		main_region_state_choose_r5_state_nfc2,
 		main_region_state_choose_r5_if_11_times,
 		main_region_state_choose_r5__11times,
+		main_region_state_choose_r5_storeInfo,
 		main_region_state_choose_r6_state_caculate,
 		main_region_state_choose_r7_state_resetTimer,
 		main_region_state_choose_r7_state_timer,
@@ -1916,6 +1917,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 				break;
 			case main_region_state_choose_r5__11times:
 				main_region_state_choose_r5__11times_react(true);
+				break;
+			case main_region_state_choose_r5_storeInfo:
+				main_region_state_choose_r5_storeInfo_react(true);
 				break;
 			case main_region_state_choose_r6_state_caculate:
 				main_region_state_choose_r6_state_caculate_react(true);
@@ -2158,6 +2162,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			return stateVector[5] == State.main_region_state_choose_r5_if_11_times;
 		case main_region_state_choose_r5__11times:
 			return stateVector[5] == State.main_region_state_choose_r5__11times;
+		case main_region_state_choose_r5_storeInfo:
+			return stateVector[5] == State.main_region_state_choose_r5_storeInfo;
 		case main_region_state_choose_r6_state_caculate:
 			return stateVector[6] == State.main_region_state_choose_r6_state_caculate;
 		case main_region_state_choose_r7_state_resetTimer:
@@ -2697,11 +2703,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		sCInterface.raiseDoChangeType();
 	}
 	
-	/* Entry action for state 'state_nfc1'. */
-	private void entryAction_main_region_state_choose_r5_state_nfc1() {
-		sCInterface.raiseDoInitialNfcInfo();
-	}
-	
 	/* Entry action for state 'state_nfc2'. */
 	private void entryAction_main_region_state_choose_r5_state_nfc2() {
 		sCInterface.raiseDoNfcCaculate();
@@ -2717,6 +2718,11 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.setTimer(this, 0, (1 * 1000), false);
 		
 		sCInterface.raiseDo11Times();
+	}
+	
+	/* Entry action for state 'storeInfo'. */
+	private void entryAction_main_region_state_choose_r5_storeInfo() {
+		sCInterface.raiseDoStoreInfo();
 	}
 	
 	/* Entry action for state 'state_caculate'. */
@@ -2738,7 +2744,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'wait_take'. */
 	private void entryAction_main_region_state_prepare_r1_wait_take() {
-		timer.setTimer(this, 2, (10 * 1000), false);
+		timer.setTimer(this, 2, (5 * 1000), false);
 		
 		sCInterface.raiseDoWaitTake();
 	}
@@ -2885,7 +2891,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'judgeMoney1'. */
 	private void entryAction_main_region_state_prepare_r1_prepare_3_r1_judgeMoney1() {
-		timer.setTimer(this, 8, (10 * 1000), false);
+		timer.setTimer(this, 8, (5 * 1000), false);
 		
 		sCInterface.raiseDoIfEnoughMoney1();
 	}
@@ -2902,7 +2908,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'add_milk'. */
 	private void entryAction_main_region_state_prepare_r1_add_milk() {
-		timer.setTimer(this, 9, (3 * 1000), false);
+		timer.setTimer(this, 9, (5 * 1000), false);
 		
 		sCInterface.raiseDoAddMilk();
 	}
@@ -2940,21 +2946,21 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'judgeMoney2'. */
 	private void entryAction_main_region_state_prepare_r1_judgeMoney2() {
-		timer.setTimer(this, 13, (10 * 1000), false);
+		timer.setTimer(this, 13, (5 * 1000), false);
 		
 		sCInterface.raiseDoIfEnoughMoney2();
 	}
 	
 	/* Entry action for state 'judgeMoney3'. */
 	private void entryAction_main_region_state_prepare_r1_judgeMoney3() {
-		timer.setTimer(this, 14, (10 * 1000), false);
+		timer.setTimer(this, 14, (3 * 1000), false);
 		
 		sCInterface.raiseDoIfEnoughMoney3();
 	}
 	
 	/* Entry action for state 'judgeMoney4'. */
 	private void entryAction_main_region_state_prepare_r1_judgeMoney4() {
-		timer.setTimer(this, 15, (10 * 1000), false);
+		timer.setTimer(this, 15, (5 * 1000), false);
 		
 		sCInterface.raiseDoIfEnoughMoney4();
 	}
@@ -3167,7 +3173,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* 'default' enter sequence for state state_nfc1 */
 	private void enterSequence_main_region_state_choose_r5_state_nfc1_default() {
-		entryAction_main_region_state_choose_r5_state_nfc1();
 		nextStateIndex = 5;
 		stateVector[5] = State.main_region_state_choose_r5_state_nfc1;
 	}
@@ -3191,6 +3196,13 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		entryAction_main_region_state_choose_r5__11times();
 		nextStateIndex = 5;
 		stateVector[5] = State.main_region_state_choose_r5__11times;
+	}
+	
+	/* 'default' enter sequence for state storeInfo */
+	private void enterSequence_main_region_state_choose_r5_storeInfo_default() {
+		entryAction_main_region_state_choose_r5_storeInfo();
+		nextStateIndex = 5;
+		stateVector[5] = State.main_region_state_choose_r5_storeInfo;
 	}
 	
 	/* 'default' enter sequence for state state_caculate */
@@ -3760,6 +3772,12 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		stateVector[5] = State.$NullState$;
 		
 		exitAction_main_region_state_choose_r5__11times();
+	}
+	
+	/* Default exit sequence for state storeInfo */
+	private void exitSequence_main_region_state_choose_r5_storeInfo() {
+		nextStateIndex = 5;
+		stateVector[5] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state state_caculate */
@@ -4346,6 +4364,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		case main_region_state_choose_r5__11times:
 			exitSequence_main_region_state_choose_r5__11times();
 			break;
+		case main_region_state_choose_r5_storeInfo:
+			exitSequence_main_region_state_choose_r5_storeInfo();
+			break;
 		default:
 			break;
 		}
@@ -4448,6 +4469,9 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 			break;
 		case main_region_state_choose_r5__11times:
 			exitSequence_main_region_state_choose_r5__11times();
+			break;
+		case main_region_state_choose_r5_storeInfo:
+			exitSequence_main_region_state_choose_r5_storeInfo();
 			break;
 		default:
 			break;
@@ -5089,9 +5113,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.nfc_btn) {
 				exitSequence_main_region_state_choose_r5_state_nfc1();
-				sCInterface.raiseDoStoreInfo();
-				
-				enterSequence_main_region_state_choose_r5_if_11_times_default();
+				enterSequence_main_region_state_choose_r5_storeInfo_default();
 			} else {
 				did_transition = false;
 			}
@@ -5152,6 +5174,25 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		return did_transition;
 	}
 	
+	private boolean main_region_state_choose_r5_storeInfo_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.y) {
+				exitSequence_main_region_state_choose_r5_storeInfo();
+				enterSequence_main_region_state_choose_r5_if_11_times_default();
+			} else {
+				if (sCInterface.n) {
+					exitSequence_main_region_state_choose_r5_storeInfo();
+					enterSequence_main_region_state_choose_r5_state_nfc1_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		return did_transition;
+	}
+	
 	private boolean main_region_state_choose_r6_state_caculate_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
@@ -5197,7 +5238,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 										
 										enterSequence_main_region_state_choose_r6_state_caculate_default();
 									} else {
-										did_transition = false;
+										if (sCInterface.addCup_Btn) {
+											exitSequence_main_region_state_choose_r6_state_caculate();
+											sCInterface.raiseDoChangePrice();
+											
+											enterSequence_main_region_state_choose_r6_state_caculate_default();
+										} else {
+											did_transition = false;
+										}
 									}
 								}
 							}
