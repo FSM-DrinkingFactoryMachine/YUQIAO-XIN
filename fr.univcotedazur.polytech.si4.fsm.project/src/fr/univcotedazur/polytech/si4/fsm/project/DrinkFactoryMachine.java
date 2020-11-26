@@ -86,7 +86,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		System.out.println(theMachine.curpay);
 		System.out.println(theMachine.curprice);
 		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
-			theMachine.theFSM.raisePrepare();
+			if(isEnoughIngredients())
+				theMachine.theFSM.raisePrepare();
 		}
 		System.out.println(theMachine.curpay);
 		System.out.println(theMachine.curprice);
@@ -932,6 +933,78 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>this is the 11 times<br>you can buy the drink for free<br>which is cheaper than "+info.getAvgPrice()+"euros");
 		
+	}
+	
+	public boolean isEnoughIngredients() {
+		switch(theMachine.drinkType) {
+		case "Coffee":
+			if(theMachine.numCoffee > 0) {
+				theMachine.numCoffee--;
+				break;
+			}else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Coffee is sold out ");
+				return false;
+			}
+		case "Expresso":
+			if(theMachine.numExpresso > 0) {
+				theMachine.numExpresso--;
+				break;
+			}else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Expresso is sold out ");
+				return false;
+			}
+		case "Iced Tea":
+			if(theMachine.numIcedTea > 0) {
+				theMachine.numIcedTea--;
+				break;
+			}else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Iced Tea is sold out ");
+				return false;
+			}
+		case "Soup":{
+			switch(theMachine.spiceSlider.getValue()){
+			case 0:
+				if(theMachine.numSalt > 0) {
+					theMachine.numSalt--;
+					break;
+				}else {
+					theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Salt is sold out ");
+					return false;
+				}
+			case 1:
+				if(theMachine.numBasil > 0) {
+					theMachine.numBasil--;
+					break;
+				}else {
+					theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Basil is sold out ");
+					return false;
+				}
+			case 2:
+				if(theMachine.numOnion > 0) {
+					theMachine.numOnion--;
+					break;
+				}else {
+					theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Onion is sold out ");
+					return false;
+				}
+			default:
+				break;
+			}
+			break;
+		}
+		case "Tea":
+			if(theMachine.numTea > 0) {
+				theMachine.numTea--;
+				break;
+			}else {
+				theMachine.messagesToUser.setText("<html>Hello Sir/Lady<br>Tea is sold out ");
+				return false;
+			}
+		default:
+			break;
+		}
+		
+		return true;
 	}
 }
 
