@@ -82,14 +82,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoCaculateRaised() {
 		// TODO Auto-generated method stub
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 		if(theMachine.curpay >= theMachine.curprice && theMachine.curprice != 0.0) {
 			if(isEnoughIngredients())
 				theMachine.theFSM.raisePrepare();
 		}
-		System.out.println(theMachine.curpay);
-		System.out.println(theMachine.curprice);
 	}
 
 	@Override
@@ -432,7 +428,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		{
 			theMachine.controlProgressBar(350, 70);
 			theMachine.controlRuningTime(70, "Iced Tea");
-			System.out.print("fuck1");
+			
 		}
 
 	}
@@ -546,6 +542,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoCancleTransactionRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>canceled bank transaction");
+		
 	}
 
 	@Override

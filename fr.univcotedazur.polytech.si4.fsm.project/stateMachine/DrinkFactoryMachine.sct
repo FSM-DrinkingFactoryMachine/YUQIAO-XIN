@@ -331,7 +331,7 @@
         <outgoingTransitions xmi:id="_G5y2cCR5EeuvzIMMxdd5dw" specification="cancleTransaction" target="_BGolACR5EeuvzIMMxdd5dw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_BGolACR5EeuvzIMMxdd5dw" specification="entry/raise&#xA;doCancleTransaction" name="CancleBankTransaction" incomingTransitions="_G5y2cCR5EeuvzIMMxdd5dw">
-        <outgoingTransitions xmi:id="_Wu3RsCR5EeuvzIMMxdd5dw" specification="reset" target="_UERdIBT2Eeuhf6sncyleXQ"/>
+        <outgoingTransitions xmi:id="_Wu3RsCR5EeuvzIMMxdd5dw" specification="after 3s" target="_UERdIBT2Eeuhf6sncyleXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_dwT7MCR5EeuvzIMMxdd5dw" specification="entry/raise&#xA;doCancleOrder" name="cancleOrder" incomingTransitions="_WnPbAyReEeuvzIMMxdd5dw _WSd5YBT-EeuRZ9CkzOJKCg">
         <outgoingTransitions xmi:id="_s4fbQCR5EeuvzIMMxdd5dw" specification="after 2s" target="_AHA34CR1EeuvzIMMxdd5dw"/>

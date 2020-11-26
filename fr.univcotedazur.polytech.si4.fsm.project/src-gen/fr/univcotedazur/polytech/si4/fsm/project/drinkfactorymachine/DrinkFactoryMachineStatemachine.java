@@ -1821,7 +1821,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	private ITimer timer;
 	
-	private final boolean[] timeEvents = new boolean[20];
+	private final boolean[] timeEvents = new boolean[21];
 	
 	private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
 	private boolean isRunningCycle = false;
@@ -2986,12 +2986,14 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'CancleBankTransaction'. */
 	private void entryAction_main_region_CancleBankTransaction() {
+		timer.setTimer(this, 18, (3 * 1000), false);
+		
 		sCInterface.raiseDoCancleTransaction();
 	}
 	
 	/* Entry action for state 'cancleOrder'. */
 	private void entryAction_main_region_cancleOrder() {
-		timer.setTimer(this, 18, (2 * 1000), false);
+		timer.setTimer(this, 19, (2 * 1000), false);
 		
 		sCInterface.raiseDoCancleOrder();
 	}
@@ -3003,7 +3005,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'clean_machine'. */
 	private void entryAction_main_region_clean_machine() {
-		timer.setTimer(this, 19, (3 * 1000), false);
+		timer.setTimer(this, 20, (3 * 1000), false);
 		
 		sCInterface.raiseDoClean();
 	}
@@ -3098,14 +3100,19 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		timer.unsetTimer(this, 17);
 	}
 	
+	/* Exit action for state 'CancleBankTransaction'. */
+	private void exitAction_main_region_CancleBankTransaction() {
+		timer.unsetTimer(this, 18);
+	}
+	
 	/* Exit action for state 'cancleOrder'. */
 	private void exitAction_main_region_cancleOrder() {
-		timer.unsetTimer(this, 18);
+		timer.unsetTimer(this, 19);
 	}
 	
 	/* Exit action for state 'clean_machine'. */
 	private void exitAction_main_region_clean_machine() {
-		timer.unsetTimer(this, 19);
+		timer.unsetTimer(this, 20);
 	}
 	
 	/* 'default' enter sequence for state state_choose */
@@ -4135,6 +4142,8 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	private void exitSequence_main_region_CancleBankTransaction() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
+		
+		exitAction_main_region_CancleBankTransaction();
 	}
 	
 	/* Default exit sequence for state cancleOrder */
@@ -6236,7 +6245,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.reset) {
+			if (timeEvents[18]) {
 				exitSequence_main_region_CancleBankTransaction();
 				enterSequence_main_region_state_reset_default();
 				react();
@@ -6254,7 +6263,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[18]) {
+			if (timeEvents[19]) {
 				exitSequence_main_region_cancleOrder();
 				enterSequence_main_region_judge_returnCoinsOrCancleBank_default();
 				react();
@@ -6296,7 +6305,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (timeEvents[19]) {
+			if (timeEvents[20]) {
 				exitSequence_main_region_clean_machine();
 				enterSequence_main_region_judge_ifReturnCoins_default();
 				react();
