@@ -188,6 +188,10 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		
 		public boolean isRaisedDoAddCup();
 		
+		public boolean isRaisedDoIf11Times();
+		
+		public boolean isRaisedDo11Times();
+		
 	public List<SCInterfaceListener> getListeners();
 	}
 	
@@ -254,6 +258,8 @@ public interface IDrinkFactoryMachineStatemachine extends ITimerCallback,IStatem
 		public void onDoIfEnoughMoney3Raised();
 		public void onDoIfEnoughMoney4Raised();
 		public void onDoAddCupRaised();
+		public void onDoIf11TimesRaised();
+		public void onDo11TimesRaised();
 		}
 	
 	public SCInterface getSCInterface();

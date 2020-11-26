@@ -104,8 +104,16 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		if(theMachine.drinkType!="Soup")
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the grade sweetness of your drink is "+theMachine.sugarSlider.getValue());
-		else
-			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the amount of spices of your drink is "+theMachine.spiceSlider.getValue());	
+		else {
+			if(theMachine.spiceSlider.getValue()==0)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the amount of spices of your drink is salt");
+			else if(theMachine.spiceSlider.getValue()==1)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the amount of spices of your drink is basil");
+			else if(theMachine.spiceSlider.getValue()==2)
+				theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>the amount of spices of your drink is onion");
+		
+		}
+			
 	}
 
 	@Override
@@ -152,8 +160,11 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			isBiip = true;
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
 			info.setNumber(theMachine.textField.toString());
-			theMachine.infos.add(info);
-			
+			if(theMachine.infos.containsKey(info.Number)) {
+				info = theMachine.infos.get(info.Number);
+			}else {
+				theMachine.infos.put(info.Number,info);
+			}
 		}
 	}
 
@@ -214,32 +225,35 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.timer1.stop();
 		theMachine.myTimer.stop();
+		if(isBiip) {
+			info.addPrice(theMachine.curprice);
+			theMachine.infos.put(info.Number, info);
+		}
 		if(theMachine.currentProgress!=100)
 		{
-			theMachine.currentProgress=100;//神奇？？？？
+			theMachine.currentProgress=100;
 			theMachine.progressBar.setValue(100);
-			
 		}
-		
-			theMachine.messagesToUser.setText("<html>waiting for the<br>drink to be taken.");
-			BufferedImage myPicture = null;
-			if(theMachine.isOwnCup==false) {
-				try {
-					myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
-				} catch (IOException ee) {
-					ee.printStackTrace();
-				}
-				theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-			  }
-				
-			else {
-				try {
-					myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
-				} catch (IOException ee) {
-					ee.printStackTrace();
-				}
-				theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
-				}
+	
+		theMachine.messagesToUser.setText("<html>waiting for the<br>drink to be taken.");
+		BufferedImage myPicture = null;
+		if(theMachine.isOwnCup==false) {
+			try {
+				myPicture = ImageIO.read(new File("./picts/gobeletPolluant.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+		  }
+			
+		else {
+			try {
+				myPicture = ImageIO.read(new File("./picts/ownCup.jpg"));
+			} catch (IOException ee) {
+				ee.printStackTrace();
+			}
+			theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
+			}
 		}
 
 
@@ -289,7 +303,6 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 			theMachine.messagesToUser1.setText("<html>waiting for setting dosette.");
 			theMachine.controlProgressBar(350, 15);
 			theMachine.controlRuningTime(15, "Iced Tea");
-			
 		}
 		
 	}
@@ -557,10 +570,9 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoNfcCaculateRaised() {
 		// TODO Auto-generated method stub
-		if(info.is11times()) {
-			theMachine.messagesToUser.setText("<html>this is the 11 times<br>you can buy the drink for free<br>which is cheaper than "+info.getAvgPrice()+"euros");
-		}
+		
 		if(theMachine.curprice > 0) {
+			
 			theMachine.theFSM.raisePrepare();
 		}
 		
@@ -904,6 +916,23 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		theMachine.isOwnCup=true;
 		theMachine.labelForPictures.setIcon(new ImageIcon(myPicture));
 	}
+
+	@Override
+	public void onDoIf11TimesRaised() {
+		// TODO Auto-generated method stub
+		if(info.is11times()) {
+			theMachine.theFSM.raiseY();
+		}else {
+			theMachine.theFSM.raiseN();
+		}
+	}
+
+	@Override
+	public void onDo11TimesRaised() {
+		// TODO Auto-generated method stub
+		theMachine.messagesToUser.setText("<html>this is the 11 times<br>you can buy the drink for free<br>which is cheaper than "+info.getAvgPrice()+"euros");
+		
+	}
 }
 
 
@@ -989,7 +1018,9 @@ public class DrinkFactoryMachine extends JFrame {
 	protected boolean spiceExist=false,timeExist=false;
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
-	protected HashSet<InfoNFC> infos = new HashSet<InfoNFC>();
+	protected HashMap<String,InfoNFC> infos = new HashMap<String,InfoNFC>();
+	protected int numCoffee = 10, numTea = 10, numIcedTea = 10, numExpresso = 10,
+			numMilk = 10, numIceCream = 10, numSirop = 10, numCrouton = 10,numSalt = 10, numBasil = 10, numOnion = 10;
 	
 	/**
 	 * @wbp.nonvisual location=311,47
@@ -1259,16 +1290,15 @@ public class DrinkFactoryMachine extends JFrame {
 		});
 		
 		spiceSlider = new JSlider();
+		spiceSlider.setPaintLabels(true);
 		spiceSlider.setValue(0);
 		spiceSlider.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		spiceSlider.setBackground(Color.DARK_GRAY);
 		spiceSlider.setForeground(Color.white);
 		spiceSlider.setPaintTicks(true);
-		spiceSlider.setMinorTickSpacing(1);
 		spiceSlider.setMajorTickSpacing(1);
-		spiceSlider.setMaximum(4);
-		spiceSlider.setBounds(480, 80, 320, 55);
-//		contentPane.add(spiceSlider);
+		spiceSlider.setMaximum(2);
+		spiceSlider.setBounds(480, 80, 320, 85);
 		spiceSlider.addChangeListener(new ChangeListener() {
 		      public void stateChanged(ChangeEvent event) {
 		    	  theFSM.raiseSli1_btn();
@@ -1276,6 +1306,14 @@ public class DrinkFactoryMachine extends JFrame {
 		      }
 		});
 		
+		Hashtable<Integer, JLabel> spiceTable = new Hashtable<Integer, JLabel>();
+		spiceTable.put(0, new JLabel("salt"));
+		spiceTable.put(1, new JLabel("basil"));
+		spiceTable.put(2, new JLabel("onion"));
+		for (JLabel l : spiceTable.values()) {
+			l.setForeground(Color.white);
+		}
+		spiceSlider.setLabelTable(spiceTable);
 		
 		
 		
