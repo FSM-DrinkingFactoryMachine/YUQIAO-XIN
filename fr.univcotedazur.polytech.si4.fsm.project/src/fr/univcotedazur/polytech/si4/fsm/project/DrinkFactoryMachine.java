@@ -174,28 +174,24 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoChangePriceRaised() {
 		// TODO Auto-generated method stub
-		double discount = theMachine.isOwnCup? -0.1 : 0;
+		double discount = theMachine.isOwnCup? -0.1 : 0,price;
 		if(!theMachine.drinkType.equals("")) {
 			if(theMachine.sizeSlider.getValue()==0) {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
+				price = theMachine.getPrice(theMachine.drinkType)+discount;
+
 			} else if(theMachine.sizeSlider.getValue()==1) {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
+				price = theMachine.getPrice(theMachine.drinkType)+discount+0.1;
 			} else {
-				double price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
-				BigDecimal b = new BigDecimal(price);
-				price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				theMachine.curprice = price;
-				theMachine.messagesToUser1.setText("the price is "+price);
+				price = theMachine.getPrice(theMachine.drinkType)+discount+0.3;
 			}
+			if(theMachine.drinkType.equals("Iced Tea")&&theMachine.timeSlider.getValue()==1)
+				price+=0.25;
+			BigDecimal b = new BigDecimal(price);
+			price = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			theMachine.curprice = price;
+			theMachine.messagesToUser1.setText("the price is "+price);
 		}
+		
 	}
 
 	@Override
