@@ -2767,7 +2767,7 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 	
 	/* Entry action for state 'lock_door'. */
 	private void entryAction_main_region_state_prepare_r1_lock_door() {
-		timer.setTimer(this, 3, (2 * 1000), false);
+		timer.setTimer(this, 3, (1 * 1000), false);
 		
 		sCInterface.raiseDoLockDoor();
 	}
@@ -4990,8 +4990,6 @@ public class DrinkFactoryMachineStatemachine implements IDrinkFactoryMachineStat
 		if (try_transition) {
 			if (sCInterface.prepare) {
 				exitSequence_main_region_state_choose();
-				sCInterface.raiseDoDeleteInfo();
-				
 				enterSequence_main_region_state_prepare_default();
 				react();
 			} else {
