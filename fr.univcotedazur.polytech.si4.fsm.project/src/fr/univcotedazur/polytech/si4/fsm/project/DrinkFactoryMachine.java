@@ -51,6 +51,7 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		text = "<html>Hello Sir/Lady<br>Please choose the drink";
 		isBiip = false;
 		info = new InfoNFC();
+		resetSlider();
 		theMachine.drinkType = "";
 		theMachine.nfcInfo = "";
 		theMachine.timer1.stop();
@@ -532,7 +533,12 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		
 		if(theMachine.curpay > 0) {
 			theMachine.theFSM.raiseReturnCoins();
-		}else if(isBiip) {
+		}
+		else if(isBiip) {
+			theMachine.theFSM.raiseCancleTransaction();
+		}
+		else
+		{
 			theMachine.theFSM.raiseCancleTransaction();
 		}
 	}
@@ -980,6 +986,27 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>this is the 11 times<br>the drink is free<br>cheaper than "+info.getAvgPrice()+"euros");
 		
+	}
+	
+	public void resetSlider() {
+		if(theMachine.drinkType.equals("soup"))
+		{
+			theMachine.getContentPane().remove(theMachine.lblSpice);
+			theMachine.getContentPane().remove(theMachine.spiceSlider);
+			theMachine.getContentPane().repaint();
+			theMachine.getContentPane().add(theMachine.lblSugar);
+			theMachine.getContentPane().add(theMachine.sugarSlider);
+			
+		}
+		else if
+			(theMachine.drinkType.equals("Iced Tea"))
+		{
+			theMachine.getContentPane().remove(theMachine.lblTime);
+			theMachine.getContentPane().remove(theMachine.timeSlider);
+			theMachine.getContentPane().repaint();
+			theMachine.getContentPane().add(theMachine.lblTemperature);
+			theMachine.getContentPane().add(theMachine.temperatureSlider);
+		}
 	}
 	
 	public boolean isEnoughIngredients() {

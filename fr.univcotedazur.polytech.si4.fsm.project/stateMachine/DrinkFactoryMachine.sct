@@ -2042,7 +2042,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgHcQoNEeuSTL6gNVglBA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_GtEpoQoNEeuSTL6gNVglBA" fontName="Verdana" fillColor="16448250" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgugAoNEeuSTL6gNVglBA" x="444" y="414" width="3763" height="4062"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GtgugAoNEeuSTL6gNVglBA" x="570" y="584" width="3763" height="4062"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_GtzpcwoNEeuSTL6gNVglBA" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_Gt0QgAoNEeuSTL6gNVglBA" type="StatechartName">
