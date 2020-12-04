@@ -3,6 +3,7 @@ package fr.univcotedazur.polytech.si4.fsm.project;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -28,6 +29,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import javax.swing.*;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.DrinkFactoryMachineStatemachine;
 import fr.univcotedazur.polytech.si4.fsm.project.drinkfactorymachine.IDrinkFactoryMachineStatemachine.SCInterfaceListener;
@@ -151,14 +155,20 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	@Override
 	public void onDoStoreInfoRaised() {
 		// TODO Auto-generated method stub
-		if(theMachine.textField.getText().equals("")) {
+		if(theMachine.textField.getText().length()==0) {
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>please input your CB Number");
+			theMachine.theFSM.raiseN();
+		}else if(theMachine.textField.getText().length()!=16) {
+			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>please input the correct CB Number");
 			theMachine.theFSM.raiseN();
 		}
 		else if(!isBiip){
 			isBiip = true;
 			theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your bank card is successfully recogniezd");
 			info.setNumber(theMachine.textField.getText());
+			theMachine.money50centsButton.setEnabled(false);
+			theMachine.money10centsButton.setEnabled(false);
+			theMachine.money25centsButton.setEnabled(false);
 			if(theMachine.infos.containsKey(info.Number)) {
 				info = theMachine.infos.get(info.Number);
 			}else {
@@ -525,6 +535,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 	public void onDoAddCoinRaised() {
 		// TODO Auto-generated method stub
 		theMachine.messagesToUser.setText("<html>Dear Sir/Lady<br>your have paid "+theMachine.curpay);
+		theMachine.textField.setEditable(false);
+		theMachine.nfcBiiiipButton.setEnabled(false);
 	}
 
 	@Override
@@ -575,8 +587,10 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 		if(theMachine.curprice > 0) {
-			if(isEnoughIngredients())
+			if(isEnoughIngredients()) {
 				theMachine.theFSM.raisePrepare();
+				theMachine.textField.setText("");
+			}
 		}
 		
 	}
@@ -1084,18 +1098,18 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 
 class InfoNFC{
-	public Double[] prices = new Double[2];
+	public Double[] prices = new Double[10];
 	public double avgPrice = 0;
 	public String Number;
 	public InfoNFC() {
 		Number = "";
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 10; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
 	public void reset() {
 		Number = "";
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 10; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
@@ -1108,13 +1122,13 @@ class InfoNFC{
 	}
 	
 	public void addPrice(double price) {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			if(prices[i] == 0.0) {
 				prices[i] = price;
 				break;
 			}
 			if(i == 1) {
-				for(int j = 0; j < 2; j++) 
+				for(int j = 0; j < 10; j++) 
 					prices[j] = 0.0;
 				prices[0] = price;
 				break;
@@ -1122,7 +1136,7 @@ class InfoNFC{
 		}
 	}
 	public boolean is11times() {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			if(prices[i] == 0.0) {
 				return false;
 			}
@@ -1131,17 +1145,38 @@ class InfoNFC{
 	}
 	public double getAvgPrice() {
 		double sum = 0;
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			sum += prices[i];
 		}
-		avgPrice = sum/2;
+		avgPrice = sum/10;
 		BigDecimal b = new BigDecimal(avgPrice);
 		avgPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return avgPrice;
 	}
 }
 	
+class NumberDocument extends PlainDocument {
+    public NumberDocument() {
+    }
 
+    public void insertString(int var1, String var2, AttributeSet var3) throws BadLocationException {
+        if (this.isNumeric(var2)) {
+            super.insertString(var1, var2, var3);
+        } else {
+            Toolkit.getDefaultToolkit().beep();
+        }
+
+    }
+
+    private boolean isNumeric(String var1) {
+        try {
+            Long.valueOf(var1);
+            return true;
+        } catch (NumberFormatException var3) {
+            return false;
+        }
+    }
+}
 
 public class DrinkFactoryMachine extends JFrame {
 
@@ -1166,8 +1201,9 @@ public class DrinkFactoryMachine extends JFrame {
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	protected HashMap<String,InfoNFC> infos = new HashMap<String,InfoNFC>();
-	protected int numCoffee = 1, numTea = 1, numIcedTea = 1, numExpresso = 1,
-			numMilk = 1, numIceCream = 1, numSirop = 1, numCrouton = 1,numSalt = 1, numBasil = 1, numOnion = 1;
+	protected int numCoffee = 1000, numTea = 1000, numIcedTea = 1000, numExpresso = 1000,
+			numMilk = 1000, numIceCream = 1000, numSirop = 1000, numCrouton = 1000,numSalt = 1000, numBasil = 1000, numOnion = 1000;
+	
 	
 	/**
 	 * @wbp.nonvisual location=311,47
@@ -1656,7 +1692,7 @@ public class DrinkFactoryMachine extends JFrame {
 				theFSM.raiseAny_btn();
 			}
 		});
-
+		textField.setDocument(new NumberDocument());
 		textField.setEditable(true); // 设置输入框允许编辑
 		textField.setColumns(11); // 设置输入框的长度为11个字符
 		textField.setForeground(Color.DARK_GRAY);
