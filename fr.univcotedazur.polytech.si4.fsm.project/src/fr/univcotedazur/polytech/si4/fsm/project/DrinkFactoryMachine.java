@@ -1086,18 +1086,18 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 
 
 class InfoNFC{
-	public Double[] prices = new Double[2];
+	public Double[] prices = new Double[10];
 	public double avgPrice = 0;
 	public String Number;
 	public InfoNFC() {
 		Number = "";
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 10; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
 	public void reset() {
 		Number = "";
-		for(int i = 0; i < 2; i++)
+		for(int i = 0; i < 10; i++)
 			prices[i] = 0.0;
 		avgPrice = 0;
 	}
@@ -1110,13 +1110,13 @@ class InfoNFC{
 	}
 	
 	public void addPrice(double price) {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			if(prices[i] == 0.0) {
 				prices[i] = price;
 				break;
 			}
 			if(i == 1) {
-				for(int j = 0; j < 2; j++) 
+				for(int j = 0; j < 10; j++) 
 					prices[j] = 0.0;
 				prices[0] = price;
 				break;
@@ -1124,7 +1124,7 @@ class InfoNFC{
 		}
 	}
 	public boolean is11times() {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			if(prices[i] == 0.0) {
 				return false;
 			}
@@ -1133,10 +1133,10 @@ class InfoNFC{
 	}
 	public double getAvgPrice() {
 		double sum = 0;
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 10; i++) {
 			sum += prices[i];
 		}
-		avgPrice = sum/2;
+		avgPrice = sum/10;
 		BigDecimal b = new BigDecimal(avgPrice);
 		avgPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return avgPrice;
@@ -1168,8 +1168,8 @@ public class DrinkFactoryMachine extends JFrame {
 	private HashMap<String,Double> prices = new HashMap<String,Double>();
 	protected DrinkFactoryMachineStatemachine theFSM;
 	protected HashMap<String,InfoNFC> infos = new HashMap<String,InfoNFC>();
-	protected int numCoffee = 1, numTea = 1, numIcedTea = 1, numExpresso = 1,
-			numMilk = 1, numIceCream = 1, numSirop = 1, numCrouton = 1,numSalt = 1, numBasil = 1, numOnion = 1;
+	protected int numCoffee = 1000, numTea = 1000, numIcedTea = 1000, numExpresso = 1000,
+			numMilk = 1000, numIceCream = 1000, numSirop = 1000, numCrouton = 1000,numSalt = 1000, numBasil = 1000, numOnion = 1000;
 	
 	/**
 	 * @wbp.nonvisual location=311,47
