@@ -575,10 +575,8 @@ class DrinkFactoryMachineImplementation implements SCInterfaceListener {
 		// TODO Auto-generated method stub
 		
 		if(theMachine.curprice > 0) {
-			if(isEnoughIngredients()) {
+			if(isEnoughIngredients())
 				theMachine.theFSM.raisePrepare();
-				theMachine.textField.setText("");
-			}
 		}
 		
 	}
