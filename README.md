@@ -9,3 +9,4 @@ The FSM project "DringkingFactoryMachine" of team YUQIAO_XIN
 
 ## Report
 ### the report is in the dirctory "report"
+https://github.com/FSM-DrinkingFactoryMachine/YUQIAO-XIN/blob/master/report/fsm-rapport.pdf
